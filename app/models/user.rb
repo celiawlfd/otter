@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, uniqueness: true
-  validates :username, true
+  validates :username, presence: true
   validates :username, length: { minimum: 3 }
 end
