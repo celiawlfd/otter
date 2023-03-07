@@ -7,6 +7,8 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @list = List.last
+    @list_movie = ListMovie.new
   end
 
   def new

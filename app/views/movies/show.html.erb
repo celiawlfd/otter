@@ -2,8 +2,18 @@
 <a href="/movies">Back to movies</a>
   <h1> <%= @movie.title %> - <%= @movie.year %> </h1>
   <p> <%= @movie.description %> </p>
- 
+
 
 <%= link_to "Add a movie", new_movie_path(@movie)%>
   <%= image_tag @movie.photo_url, width: 350  %>
+</div>
+
+<div>
+<h2>Add this movie to a list</h2>
+  <%= simple_form_for [@list, @list_movie] do |f| %>
+    <%= f.hidden_field :movie_id, value: params[:id] %>
+    <%= f.association :list, as: :select %>
+    <%= f.input :comment %>
+    <%= f.submit %>
+  <% end %>
 </div>
