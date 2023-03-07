@@ -1,0 +1,11 @@
+<h1>Your library</h1>
+
+<%= link_to "New list", new_list_path %>
+
+<div>
+  <% @lists.each do |list| %>
+    <div style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path list.photo.key, height: 300, crop: :fill %>')">
+      <h3>list.name</h3>
+    </div>
+  <% end %>
+</div>
