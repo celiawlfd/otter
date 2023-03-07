@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   end
   resources :list_movies, only: [:destroy]
 
-  resources :movies, expect: [:destroy, :edit, :update]
+  resources :movies, expect: [:destroy, :edit, :update] do
+    resources :reviews, expect:[:index, :show]
+  end
   # Defines the root path route ("/")
   # root "articles#index"
 end
