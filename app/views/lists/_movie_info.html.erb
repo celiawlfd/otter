@@ -1,0 +1,8 @@
+  <div data-edit-list-target="infos">
+      <%= link_to list_path(list) do %>
+        <div  style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path list.photo.key, height: 180, width: 180, crop: :fill %>')">
+          <h3><%= list.name%></h3>
+        </div>
+      <% end %>
+      <i class="fa-solid fa-pencil" data-action="click->edit-list#displayForm"></i>
+  </div>

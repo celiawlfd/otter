@@ -6,9 +6,14 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+
     @movie_review = MovieReview.new
     @reviews = @movie.movie_reviews
     @rating_av = rating_average(@reviews)
+
+    @list = List.last
+    @list_movie = ListMovie.new
+
   end
 
   def new
