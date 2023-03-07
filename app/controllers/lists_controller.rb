@@ -1,7 +1,8 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
   def index
-    @lists = List.all
+    @lists = List.order(created_at: :desc)
+
   end
 
   def show
@@ -26,6 +27,10 @@ class ListsController < ApplicationController
 
   def update
     @list.update(list_params)
+    respond_to do |format|
+      format.html { redirect_to lists_path }
+      format.text { render partial: "movie_info", locals: { list: @list}, formats: :html }
+    end
   end
 
   def destroy
