@@ -14,19 +14,18 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
+    @list.user = current_user
     if @list.save
-      redirect list_path
+      redirect_to list_path(@list.id)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-
   end
 
   def update
-
     @list.update(list_params)
   end
 
@@ -38,7 +37,7 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, :photo)
   end
 
   def set_list
