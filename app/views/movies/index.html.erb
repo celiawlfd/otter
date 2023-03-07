@@ -1,0 +1,10 @@
+<ul>
+<% @movies.each do |movie| %>
+<li> <%= link_to movie.title, movie_path(movie) %> </li>
+  <%= link_to "Delete",
+        movie_path(movie),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+      %>
+<hr>
+<% end %>
+</ul>
