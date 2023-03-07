@@ -5,7 +5,6 @@ class ListsController < ApplicationController
   end
 
   def show
-
   end
 
   def new
@@ -13,7 +12,7 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = list.new(list_params)
+    @list = List.new(list_params)
     if @list.save
       redirect list_path
     else
@@ -22,11 +21,9 @@ class ListsController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
-
     @list.update(list_params)
   end
 
