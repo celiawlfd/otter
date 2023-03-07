@@ -1,4 +1,6 @@
 class List < ApplicationRecord
+  has_one_attached :photo
+
   belongs_to :user
   has_many :list_movies
   has_many :movies, through: :list_movie
