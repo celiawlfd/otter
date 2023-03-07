@@ -1,0 +1,9 @@
+<div class="container">
+<a href="/movies">Back to movies</a>
+  <h1> <%= @movie.title %> - <%= @movie.year %> </h1>
+  <p> <%= @movie.description %> </p>
+ 
+
+<%= link_to "Add a movie", new_movie_path(@movie)%>
+  <%= image_tag @movie.photo_url, width: 350  %>
+</div>
