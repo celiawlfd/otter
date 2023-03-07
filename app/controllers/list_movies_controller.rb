@@ -1,13 +1,10 @@
 class ListMoviesController < ApplicationController
   def create
     @list_movie = ListMovie.new(list_movie_params)
-    @list = List.find(params[:list_id])
-    @list_movie.list = @list
-    @movie = Movie.find(params[:movie_id])
+    @movie = Movie.find(params[:list_movie][:movie_id])
     @list_movie.movie = @movie
-
     if @list_movie.save
-      redirect_to list_path(@list)
+      redirect_to movie_path(@movie)
     else
       render :new, status: :unprocessable_entity
     end
@@ -22,6 +19,6 @@ class ListMoviesController < ApplicationController
   private
 
   def list_movie_params
-    params.require(:list_movie).permit(:comment, :movie_id, :list_id)
+    params.require(:list_movie).permit(:comment, :list_id)
   end
 end
