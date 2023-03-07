@@ -2,11 +2,8 @@
 <a href="/movies">Back to movies</a>
   <h1> <%= @movie.title %> - <%= @movie.year %> </h1>
   <p> <%= @movie.description %> </p>
-  <%= link_to "Delete",
-  movie_path(@movie),
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-%>
-<%= link_to "Edit", edit_movie_path(@movie)%>
+ 
+
 <%= link_to "Add a movie", new_movie_path(@movie)%>
   <%= image_tag @movie.photo_url, width: 350  %>
 </div>

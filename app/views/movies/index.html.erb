@@ -1,10 +1,10 @@
-<ul>
+<div class="container">
 <% @movies.each do |movie| %>
-<li> <%= link_to movie.title, movie_path(movie) %> </li>
-  <%= link_to "Delete",
-        movie_path(movie),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-      %>
+<div class="card">
+<%= link_to movie.title, movie_path(movie) %>
+<%= image_tag movie.photo_url, width: 100 %>
+ 
+      </div>
 <hr>
 <% end %>
-</ul>
+</div>
