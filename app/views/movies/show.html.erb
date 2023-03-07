@@ -1,12 +1,10 @@
-<div class="container">
 <a href="/movies">Back to movies</a>
-  <h1> <%= @movie.title %> - <%= @movie.year %> </h1>
-  <p> <%= @movie.description %> </p>
 
 
-<%= link_to "Add a movie", new_movie_path(@movie)%>
-  <%= image_tag @movie.photo_url, width: 350  %>
-</div>
+<h1> <%= @movie.title %> - <%= @movie.year %> </h1>
+<p> <%= @movie.description %> </p>
+<%= image_tag @movie.photo_url, width: 350  %>
+
 
 <div>
 <h2>Add this movie to a list</h2>
@@ -17,3 +15,31 @@
     <%= f.submit %>
   <% end %>
 </div>
+
+
+<h2>Add a review</h2>
+
+
+<%= simple_form_for [@movie, @movie_review] do |f| %>
+  <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}, aria_label: false} %>
+  <%= f.input :content %>
+  <%= f.submit "Send your review" %>
+<% end %>
+
+<h2>Reviews</h2>
+<%= render "stars_average", rating: @rating_av %>
+<small><%= @rating_av %> (<%= pluralize @reviews.size, "review" %>)</small>
+
+<hr>
+<% @reviews.each do |review| %>
+  <%# ++ sort first the review of your friends %>
+  <% if !review.content.empty? %>
+    <div>
+      <strong><%= review.user.username %></strong>
+      <%= render "stars_average", rating: review.rating %>
+      <p><%= review.content %></p>
+    </div>
+  <% end %>
+<% end %>
+
+

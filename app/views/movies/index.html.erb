@@ -1,8 +1,14 @@
 <div class="container">
-  <% @movies.each do |movie| %>
-  <div class="card" style="height: 300px; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path movie.photo_url, crop: :fill %>')">
-    <%= link_to movie.title, movie_path(movie) %>
-  </div>
-  <hr>
-  <% end %>
+
+
+<%= link_to "Add a movie", new_movie_path(@movie)%>
+
+<% @movies.each do |movie| %>
+<div class="card" style="height: 300px; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path movie.photo_url, crop: :fill %>')">
+<%= link_to movie.title, movie_path(movie) %>
+
+      </div>
+<hr>
+<% end %>
+
 </div>
