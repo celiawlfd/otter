@@ -1,0 +1,11 @@
+<p><%= link_to "", lists_path, :class => "fa-solid fa-angles-left"%></p>
+<h1> <%= @list.name %> </h1>
+  <% @list.movies.each do |movie| %>
+    <%= image_tag movie.photo_url, alt: "poster", width: 200 %>
+    <h2><%= movie.title %></h2>
+    <p>Directed by : <%= movie.director %></p>
+    <p>Year of release : <%= movie.year %></p>
+    <p>Duration : <%= movie.duration %></p>
+    <p><i class="fa-solid fa-quote-left"></i> <%= ListMovie.find_by(list: @list, movie: movie).comment %></p>
+    <hr>
+  <% end %>

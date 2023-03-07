@@ -1,8 +1,7 @@
 <div class="container">
 <% @movies.each do |movie| %>
-<div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path @movie.photo_url.key, height: 300, crop: :fill %>')">
+<div class="card" style="height: 300px; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path movie.photo_url, crop: :fill %>')">
 <%= link_to movie.title, movie_path(movie) %>
-<%= image_tag movie.photo_url, width: 100 %>
 
       </div>
 <hr>
