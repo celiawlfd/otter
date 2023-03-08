@@ -25,13 +25,13 @@ class MoviesController < ApplicationController
       redirect_to movie_path(@movie)
     else
       render :new, status: :unprocessable_entity
-    end 
+    end
   end
 
   private
 
   def movie_params
-    params.require(:movie).permit(:title, :description, :photo_url, :year, :director, :duration, :photo)
+    params.require(:movie).permit(:title, :description, :photo_url, :year, :director, :duration)
   end
 
   def rating_average(reviews)
