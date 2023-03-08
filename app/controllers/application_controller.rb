@@ -10,4 +10,13 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :photo])
   end
 
+  def after_update_path_for
+    lists_path
+    puts "------------------------------------------update----------------"
+  end
+
+  def user_root_path
+    lists_path
+  end
+
 end

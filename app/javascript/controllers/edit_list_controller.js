@@ -5,8 +5,6 @@ export default class extends Controller {
 
   static targets = ["form", "infos"]
   connect() {
-    console.log(this.formTarget);
-    console.log(this.infosTarget);
     }
 
   displayForm() {
