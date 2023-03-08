@@ -10,7 +10,7 @@
 <h2>Add this movie to a list</h2>
 <%= simple_form_for [@list, @list_movie] do |f| %>
   <%= f.hidden_field :movie_id, value: params[:id] %>
-  <%= f.association :list, as: :select %>
+  <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true } %>
   <%= f.input :comment %>
   <%= f.submit %>
 <% end %>
@@ -18,7 +18,6 @@
 
 
 <h2>Add a review</h2>
-
 
 <%= render "movies/form_review", movie: @movie, movie_review: @movie_review %>
 
