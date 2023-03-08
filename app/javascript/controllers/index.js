@@ -13,8 +13,5 @@ application.register("hello", HelloController)
 import InsertReviewController from "./insert_review_controller"
 application.register("insert-review", InsertReviewController)
 
-import NavbarFocusController from "./navbar_focus_controller"
-application.register("navbar-focus", NavbarFocusController)
-
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)
