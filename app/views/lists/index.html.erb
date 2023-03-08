@@ -19,14 +19,14 @@
 
 <p><%= pluralize @lists.size, "list" %></p>
 <div class="display-lists">
-  <% @lists.each do |list| %>
-  <div data-controller="edit-list">
-   <%= render "movie_info", list: list %>
-    <%= simple_form_for list, data: { edit_list_target: "form", action: "submit->edit_list#update" }, html: { class: 'd-none' } do |f| %>
-      <%= f.input :name %>
-      <%= f.input :photo, as: :file %>
-      <%= f.submit %>
+    <% @lists.each do |list| %>
+    <div data-controller="edit-list">
+    <%= render "movie_info", list: list %>
+      <%= simple_form_for list, data: { edit_list_target: "form", action: "submit->edit_list#update" }, html: { class: 'd-none' } do |f| %>
+        <%= f.input :name %>
+        <%= f.input :photo, as: :file %>
+        <%= f.submit %>
+      <% end %>
+    </div>
     <% end %>
-  </div>
-  <% end %>
 </div>
