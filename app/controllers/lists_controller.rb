@@ -1,7 +1,8 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
   def index
-    @lists = List.order(created_at: :desc)
+    @lists = List.where(user: current_user).order(created_at: :desc)
+    # @lists = List.order(created_at: :desc)
 
   end
 
