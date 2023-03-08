@@ -6,7 +6,7 @@ class ListMoviesController < ApplicationController
     if @list_movie.save
       redirect_to movie_path(@movie)
     else
-      render :new, status: :unprocessable_entity
+      render "movies/show", status: :unprocessable_entity
     end
   end
 
