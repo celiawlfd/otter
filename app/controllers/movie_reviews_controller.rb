@@ -7,8 +7,8 @@ class MovieReviewsController < ApplicationController
     if @movie_review.save
       redirect_to movie_path(@movie)
     else
-      # @movie = Movie.find(params[:movie_id])
-      # render "movies/show", status: :unprocessable_entity
+       @movie = Movie.find(params[:movie_id])
+       render "movies/show", status: :unprocessable_entity
     end
   end
 
