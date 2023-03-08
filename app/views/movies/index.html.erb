@@ -1,14 +1,14 @@
 <div class="container">
+  <%= link_to "Add a movie", new_movie_path(@movie)%>
 
-
-<%= link_to "Add a movie", new_movie_path(@movie)%>
-
-<% @movies.each do |movie| %>
-<div class="card" style="height: 300px; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path movie.photo_url, crop: :fill %>')">
-<%= link_to movie.title, movie_path(movie) %>
-
+  <h1 class="text-center mb-5 mt-3">Movies</h1>
+  <div class="movie-cards">
+    <% @movies.each do |movie| %>
+      <div class="row text-center">
+        <div class="card movie-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path movie.photo_url, crop: :fill %>')">
+          <%= link_to movie.title, movie_path(movie) %>
+        </div>
       </div>
-<hr>
-<% end %>
-
+    <% end %>
+  </div>
 </div>
