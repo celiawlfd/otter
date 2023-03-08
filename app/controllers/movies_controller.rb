@@ -13,7 +13,6 @@ class MoviesController < ApplicationController
 
     @list = List.last
     @list_movie = ListMovie.new
-
   end
 
   def new
@@ -22,8 +21,11 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.new(movie_params)
-    @movie.save
-    redirect_to movie_path(@movie)
+    if @movie.save
+      redirect_to movie_path(@movie)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
@@ -40,5 +42,4 @@ class MoviesController < ApplicationController
 
     ratings.sum.fdiv(ratings.size).round(2)
   end
-
 end
