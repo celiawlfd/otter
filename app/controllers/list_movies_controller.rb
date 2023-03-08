@@ -1,4 +1,5 @@
 class ListMoviesController < ApplicationController
+
   def create
     @list_movie = ListMovie.new(list_movie_params)
     @movie = Movie.find(params[:list_movie][:movie_id])
@@ -6,7 +7,7 @@ class ListMoviesController < ApplicationController
     if @list_movie.save
       redirect_to movie_path(@movie)
     else
-      render "movies/show", status: :unprocessable_entity
+      # render "movies/show", status: :unprocessable_entity
     end
   end
 
