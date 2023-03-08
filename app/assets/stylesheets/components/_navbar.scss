@@ -1,6 +1,14 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: $two-o-70;
+  position: fixed;
+  bottom: 24px;
+  right: 0;
+  left: 0;
+  width: 75%;
+  height: 60px;
+  margin: 0 auto;
+  border-radius: 18px;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -9,4 +17,14 @@
 
 .navbar-lewagon .navbar-brand img {
   width: 40px;
+
+}
+
+.navbar-brand {
+  h3 {
+    margin: 0;
+    text-align: center;
+  }
+
+  margin-right: 0;
 }
