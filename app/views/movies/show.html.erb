@@ -1,27 +1,33 @@
+
 <a href="/movies"><i class="fa-solid fa-angles-left"></i></a>
 
+<div class="pictures">
   <%= image_tag @movie.photo_url, width: 350, class:"cover"  %>
-  <%= image_tag @movie.photo_url, width: 350, class:"poster position-absolute top-50 start-50 translate-middle"  %>
+  <%= image_tag @movie.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x"  %>
+</div>
   <div class="info">
     <h1> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h1>
     <p> <%= @movie.description %> </p>
   </div>
 
 <div class="title">
-  <h5>Add this movie to a list</h5>
+<hr>
+  <h4>Add this movie to a list</h4>
   <%= simple_form_for [@list, @list_movie] do |f| %>
     <%= f.hidden_field :movie_id, value: params[:id] %>
-    <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true } %>
+    <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true },  :class => "border border-primary" %>
     <%= f.input :comment %>
-    <%= f.submit %>
+    <%= f.submit 'Add', :class => "button-full" %>
   <% end %>
+  <hr>
 
   <div data-controller="insert-review">
-    <h5>Add a review</h5>
+    <h4>Add a review</h4>
     <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
+<hr>
 
     <div>
-      <h5>Reviews</h5>
+      <h4>Reviews</h4>
       <%= render "movies/stars_average", rating: @rating_av , data: {insert_review_target: "stars"}%>
       <%= render "movies/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
       <hr>

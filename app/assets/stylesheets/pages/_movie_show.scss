@@ -1,6 +1,7 @@
 i {
   padding-top: 7px;
-  size: 14px
+  size: 14px;
+  color: #044A42
 }
 
 .cover {
@@ -14,10 +15,10 @@ i {
 }
 
 .poster {
-  margin-top: -155px;
+  position: absolute;
+  top: 150px;
   width: auto;
   height: 140px;
-  object-fit: contain;
   border: 2px solid white;
   border-radius: 8px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
@@ -25,7 +26,7 @@ i {
 
 .info {
   margin-top: 60px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   border: 1px solid black;
   padding: 10px;
   border-radius: 8px;
@@ -33,13 +34,17 @@ i {
   p {
     margin-bottom: 0px;
   }
+  h1 {
+    color: $secondary;
+  }
 }
 
-.title h5 {
-  border: 1px solid black;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 6px;
-  margin: 15px 0;
+.title h4 {
+  margin-top: 20px;
   text-align: center;
+  color: $secondary;
+}
+
+hr {
+  margin: 3px 0;
 }
