@@ -1,0 +1,12 @@
+.infos-top{
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0px;
+}
+
+.display-lists{
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: masonry;
+}

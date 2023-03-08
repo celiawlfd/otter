@@ -3,5 +3,5 @@ class MovieReview < ApplicationRecord
   belongs_to :user
 
   validates :rating, presence: true
-  validates :content, length: { minimum: 3 }
+  validates :movie, uniqueness: { scope: :user }
 end
