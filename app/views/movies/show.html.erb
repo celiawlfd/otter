@@ -17,23 +17,22 @@
 </div>
 
 
-<h2>Add a review</h2>
+<div data-controller="insert-review">
+  <h2>Add a review</h2>
+  <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
 
-
-<%= render "movies/form_review", movie: @movie, movie_review: @movie_review %>
-
-<h2>Reviews</h2>
-<%= render "movies/stars_average", rating: @rating_av %>
-<small><%= @rating_av %> (<%= pluralize @reviews.size, "review" %>)</small>
-
-<hr>
-<% @reviews.each do |review| %>
-  <%# ++ sort first the review of your friends %>
-  <% if !review.content.empty? %>
-    <div>
-      <strong><%= review.user.username %></strong>
-      <%= render "stars_average", rating: review.rating %>
-      <p><%= review.content %></p>
-    </div>
-  <% end %>
-<% end %>
+  <div>
+    <h2>Reviews</h2>
+    <%= render "movies/stars_average", rating: @rating_av , data: {insert_review_target: "stars"}%>
+    <%= render "movies/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
+    <hr>
+  </div>
+  <div data-insert-review-target="reviews">
+    <% @reviews.each do |review| %>
+      <%# ++ sort first the review of your friends %>
+      <% if !review.content.empty? %>
+        <%= render "movies/review", review:review %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
