@@ -4,6 +4,12 @@
   grid-gap: 16px;
 }
 
+.index-rating {
+  position: absolute;
+  top: 0;
+  right: 3px;
+}
+
 .movie-card a {
   color: white;
   text-decoration: none;
@@ -26,9 +32,10 @@ a {
   justify-content: center;
   align-items: center;
   padding: 10px;
+  position:relative;
 }
 
-@media(max-width: 1300px) {
+@media(max-width: 1280px) {
   .movie-cards {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
