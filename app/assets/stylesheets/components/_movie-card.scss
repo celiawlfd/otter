@@ -1,0 +1,29 @@
+.movie-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+}
+
+.movie-card a {
+  color: white;
+  text-decoration: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+.movie-card {
+  width:170px;
+  height: 220px;
+  margin: auto;
+  border-radius: 20px;
+  display:flex;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
