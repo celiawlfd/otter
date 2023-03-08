@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :list_movies, only: [:destroy]
 
   resources :movies, except: [:destroy, :edit, :update] do
-    resources :movie_reviews, except: [:index, :show]
+    resources :movie_reviews, except: [:index, :show, :new]
   end
 
   resources :movies_reviews, only: [:destroy]
