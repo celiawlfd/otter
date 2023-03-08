@@ -11,6 +11,7 @@ class MoviesController < ApplicationController
     @reviews = @movie.movie_reviews
     @rating_av = rating_average(@reviews)
 
+
     @list = List.last
     @list_movie = ListMovie.new
 
