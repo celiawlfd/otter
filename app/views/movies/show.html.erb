@@ -34,7 +34,7 @@
   <div data-controller="insert-review">
       <% unless MovieReview.find_by(movie: @movie, user: current_user) %>
         <h4>Add a review</h4>
-        <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
+          <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
         <hr>
       <% end %>
 
@@ -48,7 +48,7 @@
       <% @reviews.each do |review| %>
         <%# ++ sort first the review of your friends %>
         <% if !review.content.empty? %>
-          <%= render "movies/review", review:review %>
+            <%= render "movies/review", review:review %>
         <% end %>
       <% end %>
     </div>

@@ -23,6 +23,12 @@ class MovieReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    @movie_review = MovieReview.find(params[:id])
+    @movie_review.destroy
+    redirect_to movie_review_path(@movie_review), status: :see_other
+  end
+
   private
 
   def review_params
