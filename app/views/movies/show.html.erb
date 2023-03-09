@@ -10,6 +10,14 @@
   <div class="info">
     <h1> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h1>
     <p> <%= @movie.description %> </p>
+    <% if ListMovie.find_by(list: params[:format], movie: @movie) %>
+      <h5>Your comment</h5>
+      <p><%= ListMovie.find_by(list: params[:format], movie: @movie).comment %></p>
+      <p class="text-end"><%= link_to "Delete movie from list",
+      list_movie_path(ListMovie.find_by(list: params[:format], movie: @movie)),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+      %></p>
+    <% end  %>
   </div>
 
 <div class="title">
@@ -24,15 +32,17 @@
   <hr>
 
   <div data-controller="insert-review">
-    <h4>Add a review</h4>
-    <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
-<hr>
+      <% unless MovieReview.find_by(movie: @movie, user: current_user) %>
+        <h4>Add a review</h4>
+        <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
+        <hr>
+      <% end %>
 
     <div>
       <h4>Reviews</h4>
-      <%= render "movies/stars_average", rating: @rating_av , data: {insert_review_target: "stars"}%>
-      <%= render "movies/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
-      <hr>
+        <%= render "movies/stars_average", rating: @rating_av , data: {insert_review_target: "stars"}%>
+        <%= render "movies/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
+        <hr>
     </div>
     <div data-insert-review-target="reviews">
       <% @reviews.each do |review| %>
