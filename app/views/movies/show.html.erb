@@ -34,7 +34,7 @@
   <div data-controller="insert-review">
       <% unless MovieReview.find_by(movie: @movie, user: current_user) %>
         <h4>Add a review</h4>
-          <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
+        <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
         <hr>
       <% end %>
 
@@ -44,7 +44,22 @@
         <%= render "movies/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
         <hr>
     </div>
+
     <div data-insert-review-target="reviews">
+
+
+    <% @myreview = MovieReview.find_by(movie: @movie, user: current_user) %>
+    <% if @myreview %>
+      <h5>Your review</h5>
+      <p><%= @myreview.content %></p>
+      <p><%= render "movies/stars_average", rating:  @myreview.rating %></p>
+      <p><%= link_to "Delete my comment",
+      movie_review_path(@myreview),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></p>
+      <hr>
+    <% end %>
+
+      <h5>What other people think about it</h5>
       <% @reviews.each do |review| %>
         <%# ++ sort first the review of your friends %>
         <% if !review.content.empty? %>

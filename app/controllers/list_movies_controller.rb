@@ -5,6 +5,8 @@ class ListMoviesController < ApplicationController
     @list_movie.movie = @movie
     if @list_movie.save
       redirect_to movie_path(@movie), notice: "Added to #{@list_movie.list.name}"
+    elsif @list_movie.list.nil?
+      redirect_to movie_path(@movie), alert: "You need to select a list"
     elsif @list_movie.list.movies.include?(@movie)
       redirect_to movie_path(@movie), alert: "This movie is already in this list"
     else
