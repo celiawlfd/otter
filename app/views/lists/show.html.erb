@@ -11,7 +11,7 @@
     </div>
   </div>
     <% if @list.movies.empty? && @list.books.empty? %>
-      <p><%= link_to "Find inspo", root_path%></p>
+      <%= link_to "Find inspo", root_path, class: "button-full"%>
     <% else %>
       <h1 class="text-center mb-5 mt-3"> <%= @list.name %> </h1>
       <div class="movie-cards">
