@@ -4,15 +4,24 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :lists do
     resources :list_movies, only: [:create]
+    resources :list_books, only: [:create]
   end
+
   resources :list_movies, only: [:destroy]
+  resources :list_books, only: [:destroy]
+
 
   resources :movies, except: [:destroy, :edit, :update] do
     resources :movie_reviews, only: [:create]
   end
-  resources :books
+
 
   resources :movie_reviews, only: [:destroy]
-  # Defines the root path route ("/")
-  # root "articles#index"
+ 
+  resources :books, except: [:destroy, :edit, :update] do
+    resources :book_reviews, only: [:create]
+  end
+  
+  resources :book_reviews, only: [:destroy]
+
 end

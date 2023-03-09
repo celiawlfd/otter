@@ -4,7 +4,9 @@ class ListMoviesController < ApplicationController
     @movie = Movie.find(params[:list_movie][:movie_id])
     @list_movie.movie = @movie
     if @list_movie.save
-      redirect_to movie_path(@movie)
+      redirect_to movie_path(@movie), notice: "Added to #{@list_movie.list.name}"
+    elsif @list_movie.list.movies.include?(@movie)
+      redirect_to movie_path(@movie), alert: "This movie is already in this list"
     else
       # render "movies/show", status: :unprocessable_entity
     end
