@@ -10,6 +10,9 @@ application.register("edit-list", EditListController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import FormController from "./form_controller"
+application.register("form", FormController)
+
 import InsertReviewController from "./insert_review_controller"
 application.register("insert-review", InsertReviewController)
 
