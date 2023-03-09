@@ -4,7 +4,7 @@ class ListMoviesController < ApplicationController
     @movie = Movie.find(params[:list_movie][:movie_id])
     @list_movie.movie = @movie
     if @list_movie.save
-      redirect_to movie_path(@movie)
+      redirect_to movie_path(@movie), notice: "Added to #{List.find(params[:list_id]).name}"
     else
       # render "movies/show", status: :unprocessable_entity
     end
