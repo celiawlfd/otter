@@ -9,8 +9,8 @@
 require "json"
 require "open-uri" # GEM to parse data from web
 
-url = "https://tmdb.lewagon.com/movie/top_rated"
-movies = JSON.parse(URI.open(url).read)
+url_movies = "https://tmdb.lewagon.com/movie/top_rated"
+movies = JSON.parse(URI.open(url_movies).read)
 
 Movie.destroy_all
 puts "creating movies"
@@ -28,5 +28,25 @@ movies["results"].each do |movie|
 
   puts "creating movie #{movie.id}, #{movie.title}"
 end
+
+url_books = "https://www.googleapis.com/books/v1/volumes?q=amour"
+books = JSON.parse(URI.open(url_books).read)
+
+Book.destroy_all
+puts "Creating Books"
+
+books["items"].each do |book|
+  book = Book.new(
+    title: book['title'],
+    author: book['authors'],
+    description: book['description'],
+    photo_url: book["imageLinks"]["thumbnail"],
+    year: book['publishedDate'],
+    pages_number: book['pageCount']
+  )
+
+  puts "creating book #{book.id}, #{book.title}"
+end
+
 
 puts "done"
