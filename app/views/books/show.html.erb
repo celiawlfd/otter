@@ -42,6 +42,20 @@
       <%= render "books/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
       <hr>
     </div>
+
+
+    <% if @myreview %>
+      <h5>Your review</h5>
+      <p><%= render "movies/stars_average", rating:  @myreview.rating %></p>
+      <p><%= @myreview.content %></p>
+      <p class="text-end"><%= link_to "Delete my review",
+      book_review_path(@myreview),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></p>
+      <hr>
+    <% end %>
+
+
+    <h5>What other people think about</h5>
     <div>
       <% @reviews.each do |review| %>
       <% if !review.content.empty? %>

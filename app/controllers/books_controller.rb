@@ -5,7 +5,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-
+    @myreview = BookReview.find_by(book: @book, user: current_user)
     @book_review = BookReview.new
     @reviews = @book.book_reviews
     @rating_av = rating_average(@reviews)

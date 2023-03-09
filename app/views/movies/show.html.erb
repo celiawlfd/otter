@@ -47,19 +47,17 @@
 
     <div data-insert-review-target="reviews">
 
-
-    <% @myreview = MovieReview.find_by(movie: @movie, user: current_user) %>
     <% if @myreview %>
       <h5>Your review</h5>
-      <p><%= @myreview.content %></p>
       <p><%= render "movies/stars_average", rating:  @myreview.rating %></p>
-      <p><%= link_to "Delete my comment",
+      <p><%= @myreview.content %></p>
+      <p class="text-end"><%= link_to "Delete my review",
       movie_review_path(@myreview),
       data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></p>
       <hr>
     <% end %>
 
-      <h5>What other people think about it</h5>
+      <h5>What other people think about</h5>
       <% @reviews.each do |review| %>
         <%# ++ sort first the review of your friends %>
         <% if !review.content.empty? %>
