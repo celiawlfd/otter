@@ -9,4 +9,6 @@ class List < ApplicationRecord
   has_many :books, through: :list_books
 
   validates :name, presence: true
+  validates :photo, presence: true
+
 end
