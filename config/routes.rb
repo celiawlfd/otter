@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :movies, except: [:destroy, :edit, :update] do
     resources :movie_reviews, except: [:index, :show, :new]
   end
+  resources :books
 
   resources :movies_reviews, only: [:destroy]
   # Defines the root path route ("/")

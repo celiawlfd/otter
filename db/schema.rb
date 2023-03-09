@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_135409) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_102138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_135409) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "year"
+    t.integer "pages_number"
+    t.string "author"
+    t.string "photo_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "list_books", force: :cascade do |t|
+    t.string "comment"
+    t.bigint "list_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_list_books_on_book_id"
+    t.index ["list_id"], name: "index_list_books_on_list_id"
   end
 
   create_table "list_movies", force: :cascade do |t|
@@ -97,6 +118,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_135409) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "list_books", "books"
+  add_foreign_key "list_books", "lists"
   add_foreign_key "list_movies", "lists"
   add_foreign_key "list_movies", "movies"
   add_foreign_key "lists", "users"
