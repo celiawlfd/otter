@@ -9,8 +9,8 @@
 require "json"
 require "open-uri" # GEM to parse data from web
 
-url = "https://tmdb.lewagon.com/movie/top_rated"
-movies = JSON.parse(URI.open(url).read)
+url_movies = "https://tmdb.lewagon.com/movie/top_rated"
+movies = JSON.parse(URI.open(url_movies).read)
 
 Movie.destroy_all
 puts "creating movies"
@@ -29,6 +29,55 @@ movies["results"].each do |movie|
   puts "creating movie #{movie.id}, #{movie.title}"
 end
 
+Book.destroy_all
+puts "Creating Books"
+
+url_books = "https://www.googleapis.com/books/v1/volumes?q=war"
+books = JSON.parse(URI.open(url_books).read)
+
+books["items"].each do |book|
+  book = Book.new(
+    title: book["volumeInfo"]['title'],
+    author: book["volumeInfo"]['authors'],
+    description: book["volumeInfo"]['description'],
+    photo_url: book["volumeInfo"]["imageLinks"]["thumbnail"],
+    year: book["volumeInfo"]['publishedDate'],
+    pages_number: book["volumeInfo"]['pageCount']
+  )
+  book.save
+  puts "creating book #{book.id}, #{book.title}"
+end
+
+
+url_books = "https://www.googleapis.com/books/v1/volumes?q=cats"
+books = JSON.parse(URI.open(url_books).read)
+
+books["items"].each do |book|
+  book = Book.new(
+    title: book["volumeInfo"]['title'],
+    author: book["volumeInfo"]['authors'],
+    description: book["volumeInfo"]['description'],
+    photo_url: book["volumeInfo"]["imageLinks"]["thumbnail"],
+    year: book["volumeInfo"]['publishedDate'],
+    pages_number: book["volumeInfo"]['pageCount']
+  )
+  book.save
+  puts "creating book #{book.id}, #{book.title}"
+end
+
+  url_books = "https://www.googleapis.com/books/v1/volumes?q=seals"
+books = JSON.parse(URI.open(url_books).read)
+
+books["items"].take(3).each do |book|
+  book = Book.new(
+    title: book["volumeInfo"]['title'],
+    author: book["volumeInfo"]['authors'],
+    description: book["volumeInfo"]['description'],
+    photo_url: book["volumeInfo"]["imageLinks"]["thumbnail"],
+    year: book["volumeInfo"]['publishedDate'],
+    pages_number: book["volumeInfo"]['pageCount']
+  )
+  book.save
+  puts "creating book #{book.id}, #{book.title}"
+end
 puts "done"
-
-
