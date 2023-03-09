@@ -12,13 +12,16 @@ Rails.application.routes.draw do
 
 
   resources :movies, except: [:destroy, :edit, :update] do
-    resources :movie_reviews, except: [:index, :show, :new]
+    resources :movie_reviews, only: [:create]
   end
 
-  resources :movies_reviews, only: [:destroy]
 
+  resources :movie_reviews, only: [:destroy]
+ 
   resources :books, except: [:destroy, :edit, :update] do
-    resources :book_reviews, except: [:index, :show, :new]
+    resources :book_reviews, only: [:create]
   end
+  
+  resources :book_reviews, only: [:destroy]
 
 end
