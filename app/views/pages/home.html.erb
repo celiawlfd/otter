@@ -3,7 +3,7 @@
     <% sum = 0 %>
     <% @culturales.each do |culturale| %>
       <% sum +=1  %>
-      <% sum = 1 if sum > 10 %>
+      <% sum = 1 if sum > 20%>
       <div class="div<%= sum %>">
         <div class="row text-center">
           <% if culturale.is_a?(Movie) %>
