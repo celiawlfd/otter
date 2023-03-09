@@ -32,7 +32,7 @@ end
 Book.destroy_all
 puts "Creating Books"
 
-url_books = "https://www.googleapis.com/books/v1/volumes?q=war"
+url_books = "https://www.googleapis.com/books/v1/volumes?q=programming"
 books = JSON.parse(URI.open(url_books).read)
 
 books["items"].each do |book|
@@ -49,7 +49,7 @@ books["items"].each do |book|
 end
 
 
-url_books = "https://www.googleapis.com/books/v1/volumes?q=cats"
+url_books = "https://www.googleapis.com/books/v1/volumes?q=ruby"
 books = JSON.parse(URI.open(url_books).read)
 
 books["items"].each do |book|
