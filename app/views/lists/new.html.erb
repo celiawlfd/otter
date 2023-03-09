@@ -1,18 +1,7 @@
-<div class="container px-3">
-<div class="row mb-5 mt-2 border-bottom border-white">
-  <div class="col-12 text-center">
-    <h1>New library</h1>
-  </div>
-</div>
+<h1>New list</h1>
 
-
-<div class="center">
-  <div class="form-input">
-    <div class="preview">
-      <img id="file-ip-1-preview">
-    </div>
-    <label for="file-ip-1">Upload Image</label>
-    <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
-  </div>
-</div>
-</div>
+<%= simple_form_for(@list) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :photo, as: :file %>
+  <%= f.submit class: "btn btn-outline-dark" %>
+<% end %>
