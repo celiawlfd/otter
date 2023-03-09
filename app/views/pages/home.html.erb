@@ -1,2 +1,22 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1 class="text-center mb-5 mt-3">Otter</h1>
+  <div class="feed-cards">
+    <% sum = 0 %>
+    <% @culturales.each do |culturale| %>
+      <% sum +=1  %>
+      <% sum = 1 if sum > 10 %>
+      <div class="div<%= sum %>">
+        <div class="row text-center">
+          <div class="card feed-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path culturale.photo_url, crop: :fill %>')">
+            <% if culturale.is_a?(Movie) %>
+              <%= link_to culturale.title, movie_path(culturale) %>
+            <% elsif culturale.is_a?(Book) %>
+              <%= link_to culturale.title, book_path(culturale) %>
+            <% end %>
+            <div class="index-rating">
+              <%= render "shared/average", culturale: culturale %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
