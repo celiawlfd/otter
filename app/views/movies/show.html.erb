@@ -1,6 +1,6 @@
-<a href="/movies">Back to movies</a>
-
-
+<%= link_to :back do %>
+  <i class="fa-solid fa-angles-left"></i>
+<% end %>
 <h1> <%= @movie.title %> - <%= @movie.year %> </h1>
 <p> <%= @movie.description %> </p>
 <%= image_tag @movie.photo_url, width: 350  %>
@@ -36,4 +36,3 @@
     <% end %>
   </div>
 </div>
-
