@@ -1,5 +1,7 @@
 
-<a href="/movies"><i class="fa-solid fa-angles-left"></i></a>
+<%= link_to :back do %>
+  <i class="fa-solid fa-angles-left"></i>
+<% end %>
 
 <div class="pictures">
   <%= image_tag @movie.photo_url, width: 350, class:"cover"  %>
