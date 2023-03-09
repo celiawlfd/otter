@@ -1,13 +1,15 @@
+
+
 <div class="infos-top">
   <%= link_to :back do %>
   <i class="fa-solid fa-angles-left"></i>
   <% end %>
   <h1>Your library</h1>
-  <div class="nav-item dropdown">
+  <div class="nav-item-dropdown">
     <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
       <%= link_to "Action", "#", class: "dropdown-item" %>
-      <%= link_to "Another action", "#", class: "dropdown-item" %>
+      <%= link_to "Edit your profil", edit_user_registration_path, class: "dropdown-item" %>
       <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
     </div>
   </div>
@@ -18,15 +20,13 @@
 <hr>
 
 <p><%= pluralize @lists.size, "list" %></p>
-<div class="display-lists">
+<div class="display-lists" data-controller="edit-list">
     <% @lists.each do |list| %>
-    <div data-controller="edit-list">
     <%= render "movie_info", list: list %>
       <%= simple_form_for list, data: { edit_list_target: "form", action: "submit->edit_list#update" }, html: { class: 'd-none' } do |f| %>
         <%= f.input :name %>
         <%= f.input :photo, as: :file %>
         <%= f.submit %>
       <% end %>
-    </div>
     <% end %>
 </div>

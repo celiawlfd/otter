@@ -5,6 +5,11 @@
   grid-gap: 10px;
 }
 
+.index-rating {
+  position: absolute;
+  top: 0;
+  right: 3px;
+}
 
 
 .movie-card a {
@@ -29,6 +34,7 @@ a {
   justify-content: center;
   align-items: center;
   padding: 10px;
+  position:relative;
 }
 
 .div1 {
@@ -83,11 +89,13 @@ grid-column: 1/2;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 }
+
 @media(max-width: 1000px) {
   .movie-cards {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
+
 @media(max-width: 950px) {
   .movie-cards {
     grid-template-columns: 1fr 1fr 1fr;

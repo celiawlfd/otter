@@ -42,5 +42,4 @@ class MoviesController < ApplicationController
 
     ratings.sum.fdiv(ratings.size).round(2)
   end
-
 end
