@@ -29,26 +29,55 @@ movies["results"].each do |movie|
   puts "creating movie #{movie.id}, #{movie.title}"
 end
 
-url_books = "https://www.googleapis.com/books/v1/volumes?q=amour"
-books = JSON.parse(URI.open(url_books).read)
-
 Book.destroy_all
 puts "Creating Books"
 
+url_books = "https://www.googleapis.com/books/v1/volumes?q=war"
+books = JSON.parse(URI.open(url_books).read)
+
 books["items"].each do |book|
   book = Book.new(
-    title: book['title'],
-    author: book['authors'],
-    description: book['description'],
-    photo_url: book["imageLinks"]["thumbnail"],
-    year: book['publishedDate'],
-    pages_number: book['pageCount']
+    title: book["volumeInfo"]['title'],
+    author: book["volumeInfo"]['authors'],
+    description: book["volumeInfo"]['description'],
+    photo_url: book["volumeInfo"]["imageLinks"]["thumbnail"],
+    year: book["volumeInfo"]['publishedDate'],
+    pages_number: book["volumeInfo"]['pageCount']
   )
-
+  book.save
   puts "creating book #{book.id}, #{book.title}"
 end
 
 
+url_books = "https://www.googleapis.com/books/v1/volumes?q=cats"
+books = JSON.parse(URI.open(url_books).read)
+
+books["items"].each do |book|
+  book = Book.new(
+    title: book["volumeInfo"]['title'],
+    author: book["volumeInfo"]['authors'],
+    description: book["volumeInfo"]['description'],
+    photo_url: book["volumeInfo"]["imageLinks"]["thumbnail"],
+    year: book["volumeInfo"]['publishedDate'],
+    pages_number: book["volumeInfo"]['pageCount']
+  )
+  book.save
+  puts "creating book #{book.id}, #{book.title}"
+end
+
+  url_books = "https://www.googleapis.com/books/v1/volumes?q=seals"
+books = JSON.parse(URI.open(url_books).read)
+
+books["items"].take(3).each do |book|
+  book = Book.new(
+    title: book["volumeInfo"]['title'],
+    author: book["volumeInfo"]['authors'],
+    description: book["volumeInfo"]['description'],
+    photo_url: book["volumeInfo"]["imageLinks"]["thumbnail"],
+    year: book["volumeInfo"]['publishedDate'],
+    pages_number: book["volumeInfo"]['pageCount']
+  )
+  book.save
+  puts "creating book #{book.id}, #{book.title}"
+end
 puts "done"
-
-
