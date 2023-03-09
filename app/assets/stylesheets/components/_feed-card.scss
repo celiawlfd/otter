@@ -41,11 +41,11 @@
 }
 
 ////// display ///////
-
+ // remember to change repeat for less scroll ///
 .feed-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(100, 1fr);
+  grid-template-rows: repeat(40, 1fr);
   grid-gap: 10px;
 }
 
@@ -93,6 +93,56 @@ grid-column: 1/2;
 
 .div10{
   grid-row: 10 / 12;
+  grid-column: 1/2;
+}
+
+.div11{
+  grid-row: 11 / 13;
+  grid-column: 2/3;
+}
+
+.div12{
+  grid-row: 12 / 14;
+  grid-column: 1/2;
+}
+
+.div13{
+  grid-row: 13 / 15;
+  grid-column: 2/3;
+}
+
+.div14{
+  grid-row: 14 / 16;
+  grid-column: 1/2;
+}
+
+.div15{
+  grid-row: 15 / 17;
+  grid-column: 2/3;
+}
+
+.div16{
+  grid-row: 16 / 18;
+  grid-column: 1/2;
+}
+
+.div17{
+  grid-row: 17 / 19;
+  grid-column: 2/3;
+}
+
+.div18{
+  grid-row: 18 / 20;
+  grid-column: 1/2;
+}
+
+.div19{
+  grid-row: 19 / 21;
+  grid-column: 2/3;
+}
+
+.div20{
+  grid-row: 20 / 22;
   grid-column: 1/2;
 }
 
