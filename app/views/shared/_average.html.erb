@@ -1,0 +1,14 @@
+<% ratings = [] %>
+<% if culturale.is_a?(Movie) %>
+  <% culturale.movie_reviews.each do |review| %>
+    <% ratings << review.rating %>
+  <% end %>
+<% elsif culturale.is_a?(Book) %>
+  <% culturale.book_reviews.each do |review| %>
+    <% ratings << review.rating %>
+  <% end %>
+<% end %>
+
+<% if ratings.length > 0 %>
+  <p><%= ratings.sum.fdiv(ratings.size).round(2) %> <i class="fa-regular fa-star"></i></p>
+<% end %>
