@@ -1,7 +1,7 @@
 class BookReviewsController < ApplicationController
   def create
     @book_review = BookReview.new(review_params)
-    book_review.user = current_user
+    @book_review.user = current_user
     @book = Book.find(params[:book_id])
     @book_review.book = @book
     @list = List.last
@@ -29,7 +29,7 @@ class BookReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:movie_review).permit(:content, :rating)
+    params.require(:book_review).permit(:content, :rating)
   end
 
   def rating_average(reviews)

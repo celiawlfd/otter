@@ -1,0 +1,8 @@
+<% ratings = [] %>
+  <% book.book_reviews.each do |review| %>
+    <% ratings << review.rating %>
+<% end %>
+
+<% if ratings.length > 0 %>
+  <p><%= ratings.sum.fdiv(ratings.size).round(2) %> <i class="fa-regular fa-star"></i></p>
+<% end %>

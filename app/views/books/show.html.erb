@@ -29,7 +29,6 @@
     <%= f.submit 'Add', :class => "button-full" %>
   <% end %>
   <hr>
-
   <div data-controller="insert-review">
     <% unless BookReview.find_by(book: @book, user: current_user) %>
       <h4>Add a review</h4>
@@ -40,7 +39,7 @@
     <div>
       <h4>Reviews</h4>
       <%= render "books/stars_average", rating: @rating_av, data: {insert_review_target: "stars"} %>
-      <%= render "books/average_rating", rating_av: rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
+      <%= render "books/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
       <hr>
     </div>
     <div data-insert-review-target="reviews">
