@@ -10,7 +10,9 @@ class User < ApplicationRecord
   validates :username, presence: true
   validates :username, length: { minimum: 3 }
   has_many :lists, dependent: :destroy
-  has_many :reviews, dependent: :destroy
+  has_many :book_reviews, dependent: :destroy
+  has_many :movie_reviews, dependent: :destroy
+
   after_create :default_lists
 
   def default_lists
