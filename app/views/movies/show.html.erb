@@ -1,38 +1,46 @@
+
 <%= link_to :back do %>
   <i class="fa-solid fa-angles-left"></i>
 <% end %>
-<h1> <%= @movie.title %> - <%= @movie.year %> </h1>
-<p> <%= @movie.description %> </p>
-<%= image_tag @movie.photo_url, width: 350  %>
 
-
-<div>
-<h2>Add this movie to a list</h2>
-<%= simple_form_for [@list, @list_movie] do |f| %>
-  <%= f.hidden_field :movie_id, value: params[:id] %>
-  <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true } %>
-  <%= f.input :comment %>
-  <%= f.submit %>
-<% end %>
+<div class="pictures">
+  <%= image_tag @movie.photo_url, width: 350, class:"cover"  %>
+  <%= image_tag @movie.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x"  %>
 </div>
-
-
-<div data-controller="insert-review">
-  <h2>Add a review</h2>
-  <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
-
-  <div>
-    <h2>Reviews</h2>
-    <%= render "movies/stars_average", rating: @rating_av , data: {insert_review_target: "stars"}%>
-    <%= render "movies/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
-    <hr>
+  <div class="info">
+    <h1> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h1>
+    <p> <%= @movie.description %> </p>
   </div>
-  <div data-insert-review-target="reviews">
-    <% @reviews.each do |review| %>
-      <%# ++ sort first the review of your friends %>
-      <% if !review.content.empty? %>
-        <%= render "movies/review", review:review %>
+
+<div class="title">
+<hr>
+  <h4>Add this movie to a list</h4>
+  <%= simple_form_for [@list, @list_movie] do |f| %>
+    <%= f.hidden_field :movie_id, value: params[:id] %>
+    <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true },  :class => "border border-primary" %>
+    <%= f.input :comment %>
+    <%= f.submit 'Add', :class => "button-full" %>
+  <% end %>
+  <hr>
+
+  <div data-controller="insert-review">
+    <h4>Add a review</h4>
+    <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
+<hr>
+
+    <div>
+      <h4>Reviews</h4>
+      <%= render "movies/stars_average", rating: @rating_av , data: {insert_review_target: "stars"}%>
+      <%= render "movies/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
+      <hr>
+    </div>
+    <div data-insert-review-target="reviews">
+      <% @reviews.each do |review| %>
+        <%# ++ sort first the review of your friends %>
+        <% if !review.content.empty? %>
+          <%= render "movies/review", review:review %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>
