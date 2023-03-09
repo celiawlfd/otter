@@ -16,12 +16,17 @@ class User < ApplicationRecord
   after_create :default_lists
 
   def default_lists
+    require "open-uri"
+    
+    file = URI.open("https://www.colorhexa.com/b8e1dd.png")
     to_discover = List.new(name: "To discover")
     to_discover.user = self
+    to_discover.photo.attach(io: file, filename: "color.png", content_type: "image/png")
     to_discover.save
 
     to_recommand = List.new(name: "To recommand")
     to_recommand.user = self
+    to_recommand.photo.attach(io: file, filename: "color.png", content_type: "image/png")
     to_recommand.save
   end
 end
