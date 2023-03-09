@@ -1,0 +1,13 @@
+<div>
+  <strong><%= review.user.username %></strong>
+  <%= render "books/stars_average", rating: review.rating %>
+  <p><%= review.content %></p>
+
+  <% if BookReview.find_by(book: @book, user: current_user) %>
+      <%= link_to "Delete my comment",
+      book_review_path(review),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+      %>
+  <% end %>
+
+</div>

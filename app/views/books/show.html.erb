@@ -29,5 +29,25 @@
     <%= f.submit 'Add', :class => "button-full" %>
   <% end %>
   <hr>
+  <div>
+    <% unless BookReview.find_by(book: @book, user: current_user) %>
+      <h4>Add a review</h4>
+      <%= render "books/form_review", book: @book, book_review: @book_review %>
+      <hr>
+    <% end %>
+
+    <div>
+      <h4>Reviews</h4>
+      <%= render "books/stars_average", rating: @rating_av, data: {insert_review_target: "stars"} %>
+      <%= render "books/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
+      <hr>
+    </div>
+    <div>
+      <% @reviews.each do |review| %>
+      <% if !review.content.empty? %>
+        <%= render "books/review", review: review %>
+      <% end %>
+    <% end %>
+    </div>
   </div>
 </div>
