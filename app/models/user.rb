@@ -11,5 +11,15 @@ class User < ApplicationRecord
   validates :username, length: { minimum: 3 }
   has_many :lists, dependent: :destroy
   has_many :reviews, dependent: :destroy
-  
+  after_create :default_lists
+
+  def default_lists
+    to_discover = List.new(name: "To discover")
+    to_discover.user = self
+    to_discover.save
+
+    to_recommand = List.new(name: "To recommand")
+    to_recommand.user = self
+    to_recommand.save
+  end
 end

@@ -1,0 +1,28 @@
+#new_list {
+  color: black;
+}
+
+.simple_form {
+  color: black;
+}
+
+.new_list {
+  color: black;
+}
+
+.form-control {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid black;
+}
+
+.btn-outline-dark {
+  width: 300px;
+  border-radius: 10px;
+  padding-left: 20px;
+  margin-left: 35px;
+}
+::file-selector-button {
+  display: none;
+}
