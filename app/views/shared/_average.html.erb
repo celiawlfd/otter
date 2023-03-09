@@ -10,5 +10,5 @@
 <% end %>
 
 <% if ratings.length > 0 %>
-  <p><%= ratings.sum.fdiv(ratings.size).round(2) %> <i class="fa-regular fa-star"></i></p>
+  <small class="card-rating"><%= ratings.sum.fdiv(ratings.size).round(2) %> <i class="fa-regular fa-star"></i></small>
 <% end %>
