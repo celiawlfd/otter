@@ -1,7 +1,6 @@
 i {
   padding-top: 7px;
   size: 14px;
-  color: #044A42;
 }
 
 .cover {
@@ -31,10 +30,12 @@ i {
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-  p {
-    margin-bottom: 0px;
-  }
+
   h1 {
+    color: $secondary;
+  }
+  h5 {
+    margin-top: 15px;
     color: $secondary;
   }
 }
@@ -45,11 +46,10 @@ i {
   color: $secondary;
 }
 
-.info h5 {
-  margin-top: 15px;
-  color: $secondary;
+hr {
+  margin: 5px 0;
 }
 
-hr {
-  margin: 3px 0;
+p {
+  margin-bottom: 0px;
 }
