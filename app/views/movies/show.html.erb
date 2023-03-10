@@ -40,8 +40,12 @@
 
     <div>
       <h4>Reviews</h4>
-        <%= render "movies/stars_average", rating: @rating_av , data: {insert_review_target: "stars"}%>
-        <%= render "movies/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
+        <% if @reviews.size >= 1 %>
+          <%= render "movies/stars_average", rating: @rating_av , data: {insert_review_target: "stars"}%>
+          <%= render "movies/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
+        <% else %>
+          <%= "Be the first one to review this movie !"%>
+        <% end %>
         <hr>
     </div>
 
