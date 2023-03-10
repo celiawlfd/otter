@@ -32,7 +32,26 @@ end
 Book.destroy_all
 puts "Creating Books"
 
-url_books = "https://www.googleapis.com/books/v1/volumes?q=war"
+url_books = "https://www.googleapis.com/books/v1/volumes?q=Yotam%20Ottolenghi%20inpublisher:hachette&key=AIzaSyDyW21hCshvMzC8eV_DQVO1ehDO5p5XoNk"
+books = JSON.parse(URI.open(url_books).read)
+
+
+books["items"].each do |book|
+  if book["volumeInfo"]["imageLinks"]
+    book = Book.new(
+      title: book["volumeInfo"]['title'],
+      author: book["volumeInfo"]['authors'],
+      description: book["volumeInfo"]['description'],
+      photo_url: book["volumeInfo"]["imageLinks"]["thumbnail"],
+      year: book["volumeInfo"]['publishedDate'],
+      pages_number: book["volumeInfo"]['pageCount']
+    )
+    book.save
+    puts "creating book #{book.id}, #{book.title}"
+  end
+end
+
+url_books = "https://www.googleapis.com/books/v1/volumes?q=feminism"
 books = JSON.parse(URI.open(url_books).read)
 
 books["items"].each do |book|
@@ -48,11 +67,11 @@ books["items"].each do |book|
   puts "creating book #{book.id}, #{book.title}"
 end
 
-
-url_books = "https://www.googleapis.com/books/v1/volumes?q=cats"
+url_books = "https://www.googleapis.com/books/v1/volumes?q=inpublisher:Actes%20Sud&key=AIzaSyDyW21hCshvMzC8eV_DQVO1ehDO5p5XoNk"
 books = JSON.parse(URI.open(url_books).read)
 
 books["items"].each do |book|
+  if book["volumeInfo"]["imageLinks"]
   book = Book.new(
     title: book["volumeInfo"]['title'],
     author: book["volumeInfo"]['authors'],
@@ -63,9 +82,10 @@ books["items"].each do |book|
   )
   book.save
   puts "creating book #{book.id}, #{book.title}"
+  end
 end
 
-  url_books = "https://www.googleapis.com/books/v1/volumes?q=seals"
+url_books = "https://www.googleapis.com/books/v1/volumes?q=jean-michel%20basquiat"
 books = JSON.parse(URI.open(url_books).read)
 
 books["items"].take(3).each do |book|
