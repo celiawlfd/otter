@@ -81,3 +81,62 @@ books["items"].take(3).each do |book|
   puts "creating book #{book.id}, #{book.title}"
 end
 puts "done"
+
+
+require "podcast_api"
+
+api_key = ENV["LISTEN_API_KEY"]
+client = PodcastApi::Client.new(api_key: api_key)
+
+Podcast.destroy_all
+puts "Creating Podcasts"
+
+response = client.search(q: 'startup', type: 'podcasts')
+podcasts = JSON.parse(response.body)
+
+podcasts["results"].each do |podcast|
+  podcast = Podcast.new(
+    title: podcast["title_original"],
+    publisher: podcast["publisher_original"],
+    description: podcast["description_original"],
+    image_url: podcast["image"],
+    lenght: podcast["audio_length_sec"],
+    link: podcast["website"]
+  )
+  podcast.save
+  puts "creating podcast #{podcast.id}, #{podcast.title}"
+end
+
+response = client.search(q: 'environment', type: 'podcasts')
+podcasts = JSON.parse(response.body)
+
+podcasts["results"].each do |podcast|
+  podcast = Podcast.new(
+    title: podcast["title_original"],
+    publisher: podcast["publisher_original"],
+    description: podcast["description_original"],
+    image_url: podcast["image"],
+    lenght: podcast["audio_length_sec"],
+    link: podcast["website"]
+  )
+  podcast.save
+  puts "creating podcast #{podcast.id}, #{podcast.title}"
+end
+
+response = client.search(q: 'love', type: 'podcasts')
+podcasts = JSON.parse(response.body)
+
+
+podcasts["results"].each do |podcast|
+  podcast = Podcast.new(
+    title: podcast["title_original"],
+    publisher: podcast["publisher_original"],
+    description: podcast["description_original"],
+    image_url: podcast["image"],
+    lenght: podcast["audio_length_sec"],
+    link: podcast["website"]
+  )
+  podcast.save
+  puts "creating podcast #{podcast.id}, #{podcast.title}"
+end
+puts "done"
