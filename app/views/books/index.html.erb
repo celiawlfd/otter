@@ -1,17 +1,15 @@
-<div class="container">
-  <h1 class="text-center mb-5 mt-3">Books</h1>
-  <div class="book-cards">
-    <% sum = 0 %>
-    <% @books.each do |book| %>
-      <% sum +=1 %>
-      <% sum = 1 if sum > 20 %>
-      <div class="div<%= sum %>">
-        <div class="row text-center">
-          <div class="card book-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path book.photo_url, crop: :fill %>')">
-            <%= link_to book.title, book_path(book) %>
-          </div>
+<h1 class="text-center mb-5 mt-3">Books</h1>
+<div class="book-cards">
+  <% sum = 0 %>
+  <% @books.each do |book| %>
+    <% sum +=1 %>
+    <% sum = 1 if sum > 20 %>
+    <div class="div<%= sum %>">
+      <div class="row text-center">
+        <div class="card book-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path book.photo_url, crop: :fill %>')">
+          <%= link_to book.title, book_path(book) %>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

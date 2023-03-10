@@ -18,7 +18,7 @@ class PodcastsController < ApplicationController
   private
 
   def podcast_params
-    params.require(:podcast).permit(:title, :description, :photo_url, :publisher, :episodes_number)
+    params.require(:podcast).permit(:title, :description, :image_url, :length, :publisher, :link)
   end
 
   # def rating_average(reviews)
