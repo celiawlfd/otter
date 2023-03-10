@@ -39,8 +39,8 @@
     <div>
       <h4>Reviews</h4>
       <% if @reviews.size >= 1 %>
-        <%= render "books/stars_average", rating: @rating_av, data: {insert_review_target: "stars"} %>
-        <%= render "books/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
+        <%= render "shared/stars_average", rating: @rating_av%>
+        <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews%>
       <% else %>
         <%= "Be the first one to review this book ! " %>
       <% end %>
@@ -50,7 +50,7 @@
 
     <% if @myreview %>
       <h5>Your review</h5>
-      <p><%= render "movies/stars_average", rating:  @myreview.rating %></p>
+      <p><%= render "shared/stars_average", rating:  @myreview.rating %></p>
       <p><%= @myreview.content %></p>
       <p class="text-end"><%= link_to "Delete my review",
       book_review_path(@myreview),
