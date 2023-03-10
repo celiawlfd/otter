@@ -119,7 +119,7 @@ podcasts["results"].each do |podcast|
     title: podcast["title_original"],
     publisher: podcast["publisher_original"],
     description: podcast["description_original"],
-    image_url: podcast["image"],
+    photo_url: podcast["image"],
     lenght: podcast["audio_length_sec"],
     link: podcast["website"]
   )
@@ -135,7 +135,7 @@ podcasts["results"].each do |podcast|
     title: podcast["title_original"],
     publisher: podcast["publisher_original"],
     description: podcast["description_original"],
-    image_url: podcast["image"],
+    photo_url: podcast["image"],
     lenght: podcast["audio_length_sec"],
     link: podcast["website"]
   )
@@ -146,13 +146,12 @@ end
 response = client.search(q: 'love', type: 'podcasts')
 podcasts = JSON.parse(response.body)
 
-
 podcasts["results"].each do |podcast|
   podcast = Podcast.new(
     title: podcast["title_original"],
     publisher: podcast["publisher_original"],
     description: podcast["description_original"],
-    image_url: podcast["image"],
+    photo_url: podcast["image"],
     lenght: podcast["audio_length_sec"],
     link: podcast["website"]
   )
