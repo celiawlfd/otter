@@ -2,7 +2,7 @@ class PodcastReviewsController < ApplicationController
   def create
     @podcast_review = PodcastReview.new(review_params)
     @podcast_review.user = current_user
-    @podcast = Podcast.fin(params[:podcast_id])
+    @podcast = Podcast.find(params[:podcast_id])
     @podcast_review.podcast = @podcast
     @list = List.last
     @list_podcast = ListPodcast.new
@@ -29,7 +29,7 @@ class PodcastReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:podcast_review).permis(:content, :rating)
+    params.require(:podcast_review).permit(:content, :rating)
   end
 
   def rating_average(reviews)
@@ -39,5 +39,5 @@ class PodcastReviewsController < ApplicationController
     end
 
     ratings.sum.fdiv(ratings.size).round(2)
-  end 
+  end
 end
