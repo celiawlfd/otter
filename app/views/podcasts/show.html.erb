@@ -1,0 +1,64 @@
+<div class="pictures">
+  <%= image_tag @podcast.photo_url, width: 350, class:"cover" %>
+  <%= image_tag @podcast.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x" %>
+</div>
+<div class="info">
+  <h1> <%= @podcast.title %> <small> ( <%= @podcast.publisher %> ) </small> </h1>
+  <p> <%= @podcast.description %> </p>
+  <% if ListPodcast.find_by(list: params[:format], podcast: @podcast) %>
+    <h5>Your comment</h5>
+    <p> <%= ListPodcast.find_by(list: params[:format], podcast: @podcast).comment %> </p>
+    <p class="text-end"> <%= link_to "Delete podcast from list",
+    list_podcast_path(ListPodcast.find_by(list: params[:format], podcast: @podcast)),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    %> </p>
+  <% end %>
+</div>
+
+<div class="title">
+  <hr>
+  <h4>Add this podcast to a list</h4>
+  <%= simple_form_for [@list, @list_podcast]  do |f| %>
+    <%= f.hidden_field :podcast_id, value: params[:id] %>
+    <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: {required: true}, :class => "border border-primary" %>
+    <%= f.input :comment %>
+    <%= f.submit 'Add', :class => "button-full" %>
+  <% end %>
+  <hr>
+  <div>
+    <% unless PodcastReview.find_by(podcast: @podcast, user: current_user) %>
+      <h4>Add a review</h4>
+      <%= render "podcasts/form_review", podcast: @podcast, podcast_review: @podcast_review %>
+      <hr>
+    <% end %>
+
+    <div>
+      <h4>Reviews</h4>
+      <% if @reviews.size >= 1 %>
+        <%= render "podcasts/stars_average", rating: @rating_av, data: {insert_review_target: "stars"} %>
+        <%= render "podcasts/average_rating", rating_av: @rating_av, reviews: @reviews, data: {insert_review_target: "average"} %>
+      <% else %>
+        <%= "Be the first one to review this podcast !" %>
+      <% end %>
+      <hr>
+    </div>
+    <% if @myreview %>
+      <h5>Your review</h5>
+      <p> <%= render "movies/stars_average", rating: @myreview.rating %> </p>
+      <p> <%= @myreview.content %> </p>
+      <p class="text-end"> <%= link_to "Delete my review",
+      podcast_review_path(@myreview),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> </p>
+      <hr>
+    <% end %>
+
+    <h5>What other people think about it</h5>
+    <div>
+      <% @reviews.each do |review| %>
+      <% if !review.content.empty? %>
+        <%= render "podcasts/review", review: review %>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>
