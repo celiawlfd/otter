@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def home
     movies = Movie.all
     books = Book.all
-    @culturales = [movies, books].flatten.sample(20)
+    podcasts = Podcast.all
+    @culturales = [movies, podcasts, books].flatten.sample(20)
   end
 end
