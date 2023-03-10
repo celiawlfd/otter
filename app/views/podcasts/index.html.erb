@@ -7,11 +7,9 @@
     <div class="div<%= sum %>">
       <div class="row text-center">
         <%= link_to podcast_path(podcast) do %>
-          <%= render "pages/card", culturale: podcast, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)"%>
+          <%= render "pages/card", culturale: podcast, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
         <% end %>
       </div>
     </div>
   <% end %>
 </div>
-
-
