@@ -8,7 +8,7 @@
     <% sum = 1 if sum > 20 %>
     <div class="div<%= sum %>">
       <div class="row text-center">
-        <%= link_to podcast_path(movie) do %>
+        <%= link_to movie_path(movie) do %>
           <%= render "pages/card", culturale: movie, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
         <% end %>
       </div>
