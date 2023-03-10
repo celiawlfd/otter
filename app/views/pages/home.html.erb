@@ -21,15 +21,15 @@
         <div class="row text-center">
           <% if culturale.is_a?(Movie) %>
             <%= link_to movie_path(culturale) do %>
-              <%= render "pages/card", culturale: culturale, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)"%>
+              <%= render "pages/card", culturale: culturale, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
             <% end %>
           <% elsif culturale.is_a?(Book) %>
             <%= link_to book_path(culturale) do %>
-              <%= render "pages/card", culturale: culturale, categorie: "Book", color: "rgba(205, 76, 236, 0.8)"%>
+              <%= render "pages/card", culturale: culturale, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
             <% end %>
           <% elsif culturale.is_a?(Podcast) %>
             <%= link_to podcast_path(culturale) do %>
-              <%= render "pages/card", culturale: culturale, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)"%>
+              <%= render "pages/card", culturale: culturale, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
             <% end %>
           <% end %>
         </div>
