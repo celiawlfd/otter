@@ -1,0 +1,15 @@
+<h1 class="text-center mb-5 mt-3">Podcasts</h1>
+<div class="podcast-cards">
+  <% sum = 0 %>
+  <% @podcasts.each do |podcast| %>
+    <% sum += 1 %>
+    <% sum = 1 if sum > 20 %>
+    <div class="div<%= sum %>">
+      <div class="row text-center">
+        <div class="card book-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path podcast.image_url, crop: :fill %>')">
+          <%= link_to podcast.title, podcast_path(podcast) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
