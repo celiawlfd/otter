@@ -4,7 +4,7 @@
     <% sum = 0 %>
     <% @books.each do |book| %>
       <% sum +=1 %>
-      <% sum = 1 if sum > 10 %>
+      <% sum = 1 if sum > 20 %>
       <div class="div<%= sum %>">
         <div class="row text-center">
           <div class="card book-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path book.photo_url, crop: :fill %>')">
