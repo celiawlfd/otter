@@ -5,10 +5,12 @@ Rails.application.routes.draw do
   resources :lists do
     resources :list_movies, only: [:create]
     resources :list_books, only: [:create]
+    resources :list_podcasts, only: [:create]
   end
 
   resources :list_movies, only: [:destroy]
   resources :list_books, only: [:destroy]
+  resources :list_podcasts, only: [:destroy]
 
 
   resources :movies, except: [:destroy, :edit, :update] do
@@ -17,11 +19,18 @@ Rails.application.routes.draw do
 
 
   resources :movie_reviews, only: [:destroy]
- 
+
   resources :books, except: [:destroy, :edit, :update] do
     resources :book_reviews, only: [:create]
   end
-  
+
   resources :book_reviews, only: [:destroy]
+
+
+  resources :podcasts, except: [:destroy, :edit, :update] do
+    resources :podcast_reviews, only: [:create]
+  end
+
+  resources :podcast_reviews, only: [:destroy]
 
 end
