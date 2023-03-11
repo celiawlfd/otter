@@ -1,16 +1,10 @@
-<div class="d-flex justify-content-between">
-  <div class="mx-4"></div>
-  <h1 class="text-center mb-5 mt-3">Otter</h1>
-  <div class="nav-item-dropdown mb-5 mt-3">
-    <small class="dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">More</small>
-    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-      <%= link_to "Movies", movies_path, class: "dropdown-item" %>
-      <%= link_to "Books", books_path, class: "dropdown-item" %>
-      <%= link_to "Podcasts", podcasts_path, class: "dropdown-item" %>
-    </div>
-  </div>
-</div>
+<h1 class="text-center mb-5 mt-3">Otter</h1>
 
+<div>
+  <%= link_to "Movies", movies_path, class: "button-full" %>
+  <%= link_to "Books", books_path, class: "button-full" %>
+  <%= link_to "Podcasts", podcasts_path, class: "button-full" %>
+</div>
 
   <div class="feed-cards">
     <% sum = 0 %>
