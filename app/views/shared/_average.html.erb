@@ -7,6 +7,10 @@
   <% culturale.book_reviews.each do |review| %>
     <% ratings << review.rating %>
   <% end %>
+<% elsif culturale.is_a?(Podcast) %>
+  <% culturale.podcast_reviews.each do |review| %>
+    <% ratings << review.rating %>
+  <% end %>
 <% end %>
 
 <% if ratings.length > 0 %>
