@@ -8,6 +8,7 @@
 
 require "json"
 require "open-uri" # GEM to parse data from web
+require 'rspotify'
 
 url_movies = "https://tmdb.lewagon.com/movie/top_rated"
 movies = JSON.parse(URI.open(url_movies).read)
@@ -53,62 +54,71 @@ end
 
 puts "done"
 
-# require "podcast_api"
 
-# api_key = ENV["LISTEN_API_KEY"]
-# client = PodcastApi::Client.new(api_key: api_key)
+url = 'https://api.spotify.com/v1/search?q=table&type=show&market=BE'
+headers = {
+  'Accept' => 'application/json',
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer BQChNFkcrL2KcbjHGH7m6KLAj_TmkqSamC_JutBb-aD0P87acbimQ9-7lKjwEjdBnUEPueJliHKxhLOq1-qf6ujsC07oYe0kNu6qnnu4LI6sHWHR4bgSftHJJVgpRJkNlfF93uyqYHfyVP_ZGB9eNcCxHHy6nR4S0r-pvmbeGSINgsXA'
+}
+
+response = URI.open(url, headers).read
+podcasts = JSON.parse(response)
 
 Podcast.destroy_all
 puts "Creating Podcasts"
 
-# response = client.search(q: 'startup', type: 'podcasts')
-# podcasts = JSON.parse(response.body)
 
-# podcasts["results"].each do |podcast|
-#   podcast = Podcast.new(
-#     title: podcast["title_original"],
-#     publisher: podcast["publisher_original"],
-#     description: podcast["description_original"],
-#     photo_url: podcast["image"],
-#     lenght: podcast["audio_length_sec"],
-#     link: podcast["website"]
-#   )
-#   podcast.save
-#   puts "creating podcast #{podcast.id}, #{podcast.title}"
-# end
+podcasts["shows"]["items"].each do |podcast|
+  podcast = Podcast.new(
+    title: podcast["name"],
+    publisher: podcast["publisher"],
+    description: podcast["description"],
+    photo_url: podcast["images"].first["url"],
+    episode_count: podcast["total_episodes"],
+    link: podcast["external_urls"]["spotify"]
+  )
+  podcast.save
+  puts "creating podcast #{podcast.id}, #{podcast.title}"
+end
+puts "done"
 
-# response = client.search(q: 'environment', type: 'podcasts')
-# podcasts = JSON.parse(response.body)
+url_environment = 'https://api.spotify.com/v1/search?q=environment&type=show&market=BE'
+response = URI.open(url_environment, headers).read
+podcasts = JSON.parse(response)
 
-# podcasts["results"].each do |podcast|
-#   podcast = Podcast.new(
-#     title: podcast["title_original"],
-#     publisher: podcast["publisher_original"],
-#     description: podcast["description_original"],
-#     photo_url: podcast["image"],
-#     lenght: podcast["audio_length_sec"],
-#     link: podcast["website"]
-#   )
-#   podcast.save
-#   puts "creating podcast #{podcast.id}, #{podcast.title}"
-# end
+podcasts["shows"]["items"].each do |podcast|
+  podcast = Podcast.new(
+    title: podcast["name"],
+    publisher: podcast["publisher"],
+    description: podcast["description"],
+    photo_url: podcast["images"].first["url"],
+    episode_count: podcast["total_episodes"],
+    link: podcast["external_urls"]["spotify"]
+  )
+  podcast.save
+  puts "creating podcast #{podcast.id}, #{podcast.title}"
+end
+puts "done"
 
-# response = client.search(q: 'love', type: 'podcasts')
-# podcasts = JSON.parse(response.body)
+url_startup = 'https://api.spotify.com/v1/search?q=startup&type=show&market=BE'
+response = URI.open(url_startup, headers).read
+podcasts = JSON.parse(response)
 
-# podcasts["results"].each do |podcast|
-#   podcast = Podcast.new(
-#     title: podcast["title_original"],
-#     publisher: podcast["publisher_original"],
-#     description: podcast["description_original"],
-#     photo_url: podcast["image"],
-#     lenght: podcast["audio_length_sec"],
-#     link: podcast["website"]
-#   )
-#   podcast.save
-#   puts "creating podcast #{podcast.id}, #{podcast.title}"
-# end
-# puts "done"
+podcasts["shows"]["items"].each do |podcast|
+  podcast = Podcast.new(
+    title: podcast["name"],
+    publisher: podcast["publisher"],
+    description: podcast["description"],
+    photo_url: podcast["images"].first["url"],
+    episode_count: podcast["total_episodes"],
+    link: podcast["external_urls"]["spotify"]
+  )
+  podcast.save
+  puts "creating podcast #{podcast.id}, #{podcast.title}"
+end
+puts "done"
+
 
 Podcast.create(
   title: "Docteur en psychologie de l'enfant",
