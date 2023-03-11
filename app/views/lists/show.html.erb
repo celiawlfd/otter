@@ -10,23 +10,30 @@
     %>
     </div>
   </div>
-    <% if @list.movies.empty? && @list.books.empty? %>
+    <% if @list.movies.empty? && @list.books.empty? && @list.podcasts.empty?%>
       <%= link_to "Find inspo", root_path, class: "button-full"%>
     <% else %>
       <h1 class="text-center mb-5 mt-3"> <%= @list.name %> </h1>
       <div class="movie-cards">
         <% @list.movies.each do |movie| %>
           <div class="row text-center">
-            <div class="card movie-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('<%= image_path movie.photo_url, crop: :fill %>')">
-              <%= link_to movie.title, movie_path(movie, @list) %>
-            </div>
+            <%= link_to movie_path(movie) do %>
+              <%= render "pages/card", culturale: movie, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
+            <% end %>
           </div>
         <% end %>
         <% @list.books.each do |book| %>
           <div class="row text-center">
-            <div class="card book-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('<%= image_path book.photo_url, crop: :fill %>')">
-              <%= link_to book.title, book_path(book, @list) %>
-            </div>
+            <%= link_to book_path(book) do %>
+              <%= render "pages/card", culturale: book, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
+            <% end %>
+          </div>
+        <% end %>
+        <% @list.podcasts.each do |podcast| %>
+          <div class="row text-center">
+            <%= link_to podcast_path(podcast) do %>
+              <%= render "pages/card", culturale: podcast, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
+            <% end %>
           </div>
         <% end %>
       </div>

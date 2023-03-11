@@ -6,9 +6,9 @@
     <% sum = 1 if sum > 20 %>
     <div class="div<%= sum %>">
       <div class="row text-center">
-        <div class="card podcast-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path podcast.photo_url, crop: :fill %>')">
-          <%= link_to podcast.title, podcast_path(podcast) %>
-        </div>
+        <%= link_to podcast_path(podcast) do %>
+          <%= render "pages/card", culturale: podcast, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
+        <% end %>
       </div>
     </div>
   <% end %>

@@ -8,6 +8,10 @@ class List < ApplicationRecord
   has_many :list_books, dependent: :destroy
   has_many :books, through: :list_books
 
+  has_many :list_podcasts, dependent: :destroy
+  has_many :podcasts, through: :list_podcasts
+
+
   validates :name, presence: true
   validates :photo, presence: true
 

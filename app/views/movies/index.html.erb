@@ -8,12 +8,9 @@
     <% sum = 1 if sum > 20 %>
     <div class="div<%= sum %>">
       <div class="row text-center">
-        <div class="card movie-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= image_path movie.photo_url, crop: :fill %>')">
-          <%= link_to movie.title, movie_path(movie) %>
-          <div class="index-rating">
-            <%= render "movies/average", movie: movie %>
-          </div>
-        </div>
+        <%= link_to movie_path(movie) do %>
+          <%= render "pages/card", culturale: movie, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
+        <% end %>
       </div>
     </div>
   <% end %>
