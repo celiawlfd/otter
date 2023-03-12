@@ -5,6 +5,6 @@ class PagesController < ApplicationController
     movies = Movie.all
     books = Book.all
     podcasts = Podcast.all
-    @culturales = [movies, podcasts, books].flatten.sample(20)
+    @culturales = [movies, podcasts, books].flatten.shuffle
   end
 end
