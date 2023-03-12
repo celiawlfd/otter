@@ -36,12 +36,13 @@
       <h4>Reviews</h4>
       <% if @reviews.size >= 1 %>
         <%= render "shared/stars_average", rating: @rating_av %>
-        <%= render "shared/average_rating", rating_av: @rating_av%>
+        <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews%>
       <% else %>
         <%= "Be the first one to review this podcast !" %>
       <% end %>
       <hr>
     </div>
+
     <% if @myreview %>
       <h5>Your review</h5>
       <p> <%= render "shared/stars_average", rating: @myreview.rating %> </p>
@@ -56,7 +57,7 @@
     <div>
       <% @reviews.each do |review| %>
       <% if !review.content.empty? %>
-        <%= render "podcasts/review", review: review %>
+        <%= render "shared/review", review: review %>
       <% end %>
     <% end %>
     </div>
