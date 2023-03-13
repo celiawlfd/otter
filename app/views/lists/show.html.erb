@@ -14,7 +14,7 @@
       <%= link_to "Find inspo", root_path, class: "button-full"%>
     <% else %>
       <h1 class="text-center mb-5 mt-3"> <%= @list.name %> </h1>
-      <div class="movie-cards">
+      <div class="basic-grid">
         <% @list.movies.each do |movie| %>
           <div class="row text-center">
             <%= link_to movie_path(movie, @list) do %>

@@ -1,15 +1,19 @@
 <h1 class="text-center mb-5 mt-3">Books</h1>
-<div class="book-cards">
+<div class="massonery-grid">
   <% sum = 0 %>
+  <% a = 1 %>
+  <% b = 3 %>
+
   <% @books.each do |book| %>
     <% sum +=1 %>
-    <% sum = 1 if sum > 20 %>
-    <div class="div<%= sum %>">
+    <div class="div<%= sum %>" style="grid-row: <%= a %> / <%= b %>; grid-column: <%= sum%2 == 0 ? "1/2" : "2/3"%>">
       <div class="row text-center">
         <%= link_to book_path(book) do %>
           <%= render "shared/card", culturale: book, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
         <% end %>
       </div>
     </div>
+    <% a += 1 %>
+    <% b += 1 %>
   <% end %>
 </div>
