@@ -43,7 +43,6 @@
 }
 
 
-
 .list-card > a {
   color: white;
   text-decoration: none;
@@ -54,13 +53,12 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin: 0 10px 0 10px;
+  margin: 0 10px 0 15%;
+
 }
 
 .followers {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   p {
     size: 6px;
   }
