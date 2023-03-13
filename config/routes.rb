@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   get "search", to: "pages#search"
+  get "search_api", to: "pages#search_api"
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -37,7 +38,7 @@ Rails.application.routes.draw do
 
   resources :podcast_reviews, only: [:destroy]
 
-  resources :users, only: [:index, :show] do
+  resources :users, only: [:show] do
     member do
       post :follow
       post :unfollow

@@ -1,11 +1,4 @@
-<div class="infos-top">
-  <%= link_to root_path do %>
-  <i class="fa-solid fa-angles-left"></i>
-  <% end %>
-
-  <div class="title">
-    <h1>Your library</h1>
-  </div>
+<div class="infos-top d-flex align-items-center">
 
   <div class="nav-item-dropdown">
     <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
@@ -15,9 +8,39 @@
     </div>
   </div>
 
+  <div>
+    <div class="title text-center">
+      <% if @user == current_user %>
+        <h1>Your library</h1>
+      <% else %>
+        <h1><%= @user.username.capitalize %>'s library</h1>
+      <% end %>
+    </div>
+
+    <div class="description">
+      <p>ajouter descripion au schema</p>
+    </div>
+
+    <div class="followers text-center px-4">
+      <div>
+        <p> Followers</p>
+        <p><%= @user.followers.count %></p>
+      </div>
+      <div>
+        <p>Followings</p>
+        <p><%= @user.following.count %></p>
+      </div>
+    </div>
+  </div>
 </div>
 
-<%= link_to "New list", new_list_path, :class=>"button-full" %>
+<% if @user == current_user %>
+  <%= link_to "New list", new_list_path, :class=>"button-full" %>
+<% elsif current_user.is_following?(@user.id) %>
+  <%= link_to "Unfollow", unfollow_user_path(@user.id), data: {turbo_method: :post}, :class=>"button-full"%>
+<% else %>
+  <%= link_to "Follow", follow_user_path(@user.id), data: {turbo_method: :post}, :class=>"button-full"%>
+<% end %>
 
 <hr>
 
