@@ -3,6 +3,25 @@ i {
   size: 14px;
 }
 
+.pictures {
+  a{
+    display: flex;
+    justify-content: end;
+    margin-bottom: -36px;
+    margin-right: 14px;
+    position: relative;
+    z-index: 1;
+    font-size: 18px;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  i {
+    box-shadow: 1px 10px 30px rgba(255, 255, 255, 0.9);
+  }
+}
 .cover {
   object-fit: cover;
   width: 100%;
@@ -12,6 +31,7 @@ i {
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
   opacity: .7;
 }
+
 
 .poster {
   position: absolute;
@@ -23,33 +43,48 @@ i {
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+.show-title {
+  margin-top: 100px;
+  margin-bottom: 30px;
+  text-align: center;
+  color: rgb(33, 33, 33);
+}
+
 .info {
-  margin-top: 80px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  margin-top: 20px;
   border: 1px solid black;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
 
-  h1 {
-    color: $secondary;
-  }
   h5 {
     margin-top: 15px;
-    color: $secondary;
+    color: rgb(33, 33, 33);
   }
 }
 
-.title h4 {
-  margin-top: 20px;
-  text-align: center;
-  color: $secondary;
+.comment {
+  padding: 20px 0;
+  i {
+    padding-top: 0;
+    padding-right: 8px;
+    font-size: 20px;
+  }
 }
 
-hr {
-  margin: 5px 0;
+#movie_review_content {
+  height: 30px;
 }
 
 p {
   margin-bottom: 0px;
+}
+
+.reviews {
+  margin: 40px 0;
+
+  .small-text {
+    padding-bottom: 20px;
+  }
 }
