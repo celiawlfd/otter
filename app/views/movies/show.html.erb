@@ -8,7 +8,7 @@
   <%= image_tag @movie.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x"  %>
 </div>
 
-<div class="info mb-5">
+<div class="info mb-4">
   <h1> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h1>
   <p> <%= @movie.description %> </p>
   <% if ListMovie.find_by(list: params[:format], movie: @movie) %>
