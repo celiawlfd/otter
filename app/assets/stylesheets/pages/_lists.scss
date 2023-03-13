@@ -1,7 +1,7 @@
 .infos-top{
   display: flex;
-  justify-content: space-between;
-  margin: 30px 0px;
+  // justify-content: space-between;
+  // margin: 30px 0px;
   i {
     color: $main
   }
@@ -59,7 +59,8 @@
 
 .followers {
   display: flex;
+  justify-content: space-between;
   p {
-    size: 6px;
+    font-size: 13px;
   }
 }
