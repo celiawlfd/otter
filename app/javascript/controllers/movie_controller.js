@@ -38,11 +38,11 @@ static targets = ["input", "results"]
   }
 
   insertBooks(data) {
-    data["items"].Search.forEach((result) => {
+    data["items"].forEach((result) => {
       console.log(result);
-      const bookTag =`<div class="feed-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url('${result.Poster}, crop: :fill')">
+      const bookTag =`<div class="feed-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url('${result.volumeInfo.imageLinks.thumbnail}, crop: :fill')">
       <div>
-        <p class="card-titre">${result.Title} </p>
+        <p class="card-titre">${result.volumeInfo.title} </p>
       </div>
     </div>`
       this.resultsTarget.insertAdjacentHTML("beforeend", bookTag)
@@ -53,14 +53,11 @@ static targets = ["input", "results"]
 
 
 
-  search(event) {
+  Search(event) {
     console.log(this.event)
     event.preventDefault()
     this.resultsTarget.innerHTML = ""
     // this.fetchMovies(this.inputTarget.value)
     this.fetchBooks(this.inputTarget.value)
   }
-
-
-
 }
