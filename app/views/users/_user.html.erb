@@ -1,8 +1,8 @@
 <li data-user=<%= user.id %>>
   <%= user.email %>
   <% if current_user.is_following?(user.id) %>
-    <%= link_to "Unfollow", unfollow_user_path(user.id), method: :post%>
+    <%= link_to "Unfollow", unfollow_user_path(user.id), data: {turbo_method: :post}%>
   <% else %>
-    <%= link_to "Follow", follow_user_path(user.id), method: :post%>
+    <%= link_to "Follow", follow_user_path(user.id), data: {turbo_method: :post}%>
   <% end %>
 </li>

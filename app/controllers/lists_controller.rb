@@ -29,7 +29,7 @@ class ListsController < ApplicationController
   def update
     @list.update(list_params)
     respond_to do |format|
-      format.html { redirect_to lists_path }
+      format.html { redirect_to user_path(current_user) }
       format.text { render partial: "movie_info", locals: { list: @list}, formats: :html }
     end
   end
