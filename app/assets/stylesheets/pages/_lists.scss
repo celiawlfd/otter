@@ -20,41 +20,48 @@
   grid-row-gap: 10px;
 }
 
-  .list-card{
+.list-card{
+  width:150px;
+  height: 150px;
+  margin: auto;
+  border-radius: 20px;
+  display:flex;
+  background-color: $tertiary;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-decoration: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
 
-      width:150px;
-      height: 150px;
-      margin: auto;
-      border-radius: 20px;
-      display:flex;
-      background-color: $tertiary;
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-decoration: none;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
-    }
-
-    .fa-pencil{
-      color: white;
-      align-self: baseline;
-    }
+.fa-pencil{
+  color: white;
+  align-self: baseline;
+}
 
 
 
-    .list-card > a {
-      color: white;
-      text-decoration: none;
-    }
+.list-card > a {
+  color: white;
+  text-decoration: none;
+}
 
-    .nav-item-dropdown > img {
+.nav-item-dropdown > img {
+  vertical-align: middle;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 10px 0 10px;
+}
 
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    }
+.followers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  p {
+    size: 6px;
+  }
+}
