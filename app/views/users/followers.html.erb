@@ -1,5 +1,5 @@
-<h1>Followers</h1>
-
+<h1 class="text-center">Followers</h1>
+<hr>
 <% @user.followers.each do |follower| %>
 <%= cl_image_tag follower.photo.key, class:"avatar" %>
 <%= link_to follower.username.capitalize, user_path(follower.id), :class=>"px-2"%>

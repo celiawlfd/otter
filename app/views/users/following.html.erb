@@ -1,6 +1,6 @@
-<h1>Followed accounts</h1>
+<h1 class="text-center">Followed accounts</h1>
+<hr>
 <% @user.following.each do |following| %>
-
 <%= cl_image_tag following.photo.key, class:"avatar" %>
   <%= link_to following.username.capitalize, user_path(following.id), :class=>"px-2"%>
   <hr>
