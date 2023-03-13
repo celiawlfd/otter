@@ -8,23 +8,23 @@
 
   <div class="feed-cards">
     <% sum = 0 %>
-    <% a = 1 %> 
+    <% a = 1 %>
     <% b = 3 %>
     <% @culturales.each do |culturale| %>
       <% sum +=1  %>
       <div class="div<%= sum %>" style="grid-row: <%= a %> / <%= b %>; grid-column: <%= sum%2 == 0 ? "1/2" : "2/3"%>">
         <div class="row text-center">
-          <% if culturale.is_a?(Movie) %>
-            <%= link_to movie_path(culturale) do %>
-              <%= render "pages/card", culturale: culturale, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
+          <% if culturale.is_a?(ListMovie) %>
+            <%= link_to movie_path(culturale.movie) do %>
+              <%= render "pages/card_feed", user: culturale.list.user, culturale: culturale.movie, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
             <% end %>
-          <% elsif culturale.is_a?(Book) %>
-            <%= link_to book_path(culturale) do %>
-              <%= render "pages/card", culturale: culturale, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
+          <% elsif culturale.is_a?(ListBook) %>
+            <%= link_to book_path(culturale.book) do %>
+              <%= render "pages/card_feed", user: culturale.list.user, culturale: culturale.book, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
             <% end %>
-          <% elsif culturale.is_a?(Podcast) %>
-            <%= link_to podcast_path(culturale) do %>
-              <%= render "pages/card", culturale: culturale, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
+          <% elsif culturale.is_a?(ListPodcast) %>
+            <%= link_to podcast_path(culturale.podcast) do %>
+              <%= render "pages/card_feed", user: culturale.list.user, culturale: culturale.podcast, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
             <% end %>
           <% end %>
         </div>

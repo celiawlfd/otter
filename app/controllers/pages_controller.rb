@@ -3,9 +3,10 @@ class PagesController < ApplicationController
   # skip_before_action :authenticate_user!, only: [ :home ]
 
   def home
-    movies = Movie.all
-    books = Book.all
-    podcasts = Podcast.all
+    movies = current_user.following.map(&:lists).flatten.map(&:list_movies).flatten
+    books = current_user.following.map(&:lists).flatten.map(&:list_books).flatten
+    podcasts = current_user.following.map(&:lists).flatten.map(&:list_podcasts).flatten
+
     @culturales = [movies, podcasts, books].flatten.shuffle
   end
 

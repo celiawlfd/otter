@@ -15,7 +15,21 @@
   padding: 10px;
   position:relative;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: end;
+
+  .informations {
+    display: flex;
+    align-items: start;
+    width: 100%;
+  }
+
+  .card-avatar {
+    border-radius: 50%;
+    border: 1px solid white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;;
+  }
 }
 
 .card-rating {
@@ -38,7 +52,7 @@
 
 .card-titre {
   text-align: start;
-  text-shadow: 3px 4px 7px rgba(81,67,21,0.8);
+  text-shadow: 3px 4px 7px rgba(0, 0, 0, 0.8);
 }
 
 ////// display ///////
