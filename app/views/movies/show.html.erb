@@ -49,8 +49,6 @@
         <hr>
     </div>
 
-    <div data-insert-review-target="reviews">
-
     <% if @myreview %>
       <h5>Your review</h5>
       <p><%= render "shared/stars_average", rating:  @myreview.rating %></p>
@@ -61,13 +59,12 @@
       <hr>
     <% end %>
 
-      <h5>What other people think about</h5>
-      <% @reviews.each do |review| %>
-        <%# ++ sort first the review of your friends %>
-        <% if !review.content.empty? %>
-            <%= render "movies/review", review:review %>
-        <% end %>
+    <h5>What other people think about</h5>
+    <% @reviews.each do |review| %>
+      <%# ++ sort first the review of your friends %>
+      <% if !review.content.empty? %>
+        <%= render "shared/review", review:review %>
       <% end %>
-    </div>
+    <% end %>
   </div>
 </div>

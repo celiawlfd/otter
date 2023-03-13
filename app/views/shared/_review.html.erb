@@ -1,0 +1,9 @@
+<div>
+  <div class="d-flex justify-content-between">
+    <strong><%= review.user.username %></strong>
+    <div>
+      <%= render "shared/stars_average", rating: review.rating %>
+    </div>
+  </div>
+  <p><%= review.content %></p>
+</div>

@@ -1,7 +1,3 @@
-<%# <%= link_to :back do %>
-  <%# <i class="fa-solid fa-angles-left"></i> %>
-<%# <% end %>
-
 <div class="pictures">
   <%= image_tag @book.photo_url, width: 350, class:"cover" %>
   <%= image_tag @book.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x" %>
@@ -47,7 +43,6 @@
       <hr>
     </div>
 
-
     <% if @myreview %>
       <h5>Your review</h5>
       <p><%= render "shared/stars_average", rating:  @myreview.rating %></p>
@@ -62,10 +57,10 @@
     <h5>What other people think about</h5>
     <div>
       <% @reviews.each do |review| %>
-      <% if !review.content.empty? %>
-        <%= render "books/review", review: review %>
+        <% if !review.content.empty? %>
+          <%= render "shared/review", review: review %>
+        <% end %>
       <% end %>
-    <% end %>
     </div>
   </div>
 </div>
