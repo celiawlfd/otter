@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
+
+  get "search", to: "pages#search"
+
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :lists do
     resources :list_movies, only: [:create]
@@ -32,5 +36,7 @@ Rails.application.routes.draw do
   end
 
   resources :podcast_reviews, only: [:destroy]
+
+
 
 end
