@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get "search", to: "pages#search"
 
-  
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :lists do
     resources :list_movies, only: [:create]
@@ -39,8 +39,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show] do
     member do
-      get :follow
-      get :unfollow
+      post :follow
+      post :unfollow
     end
   end
 
