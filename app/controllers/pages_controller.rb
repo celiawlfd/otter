@@ -7,4 +7,16 @@ class PagesController < ApplicationController
     podcasts = Podcast.all
     @culturales = [movies, podcasts, books].flatten.shuffle
   end
+
+  def search
+    movies = Movie.all
+    books = Book.all
+    podcasts = Podcast.all
+    PgSearch::Multisearch.rebuild(Movie)
+    PgSearch::Multisearch.rebuild(Book)
+    PgSearch::Multisearch.rebuild(Podcast)
+
+    @results = PgSearch.multisearch(params[:query])
+  end
+
 end
