@@ -1,4 +1,4 @@
-<div class="infos-top d-flex align-items-center">
+<div class="infos-top">
 
   <div class="nav-item-dropdown">
     <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
@@ -17,22 +17,25 @@
       <% end %>
     </div>
 
-    <div class="description">
-      <p><%= @user.bio %></p>
-    </div>
-
     <div class="followers text-center">
       <div>
-        <p class="mx-3"> Followers</p>
         <p><%= @user.followers.count %></p>
+        <p class="pe-2">Followers</p>
       </div>
       <div>
-        <p class="mx-3">Followings</p>
         <p><%= @user.following.count %></p>
+        <p class="px-2">Followings</p>
+      </div>
+      <div>
+        <p><%= @user.lists.count %></p>
+        <p class="px-2">Lists</p>
       </div>
     </div>
   </div>
+</div>
 
+<div class="description">
+  <p class="pt-2 ps-3"><%= @user.bio %></p>
 </div>
 
 <% if @user == current_user %>
