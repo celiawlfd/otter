@@ -59,7 +59,8 @@ url = 'https://api.spotify.com/v1/search?q=table&type=show&market=BE'
 headers = {
   'Accept' => 'application/json',
   'Content-Type' => 'application/json',
-  'Authorization' => 'Bearer BQChNFkcrL2KcbjHGH7m6KLAj_TmkqSamC_JutBb-aD0P87acbimQ9-7lKjwEjdBnUEPueJliHKxhLOq1-qf6ujsC07oYe0kNu6qnnu4LI6sHWHR4bgSftHJJVgpRJkNlfF93uyqYHfyVP_ZGB9eNcCxHHy6nR4S0r-pvmbeGSINgsXA'
+  'Authorization' => 'Bearer BQAv3mUWVVk2oKeA8A4JuR98oawMKShvU67ra_idRvTqYwqCah4hvkM-XQsR5k0T5FpJVcdd7JQanHnkrXyVZ48_JNwx6wZJXOH1q7-fUMQnBBVahiUdmUvjElarYthb2QMRm9Bh5O2O0Ba6DCj1UOGV0a0bhh5AKkB3NR7A-774fNSa'
+
 }
 
 response = URI.open(url, headers).read
