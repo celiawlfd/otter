@@ -2,17 +2,20 @@
   display: flex;
   // justify-content: space-between;
   // margin: 30px 0px;
+  .info-text {
+    flex-grow: 1;
+  }
   i {
     color: $main
   }
 }
 
 .display-lists{
-    margin: 16px 8px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-row-gap: 8px;
-  }
+  margin: 16px 8px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 8px;
+}
 
 .display-lists-default {
   display: grid;
