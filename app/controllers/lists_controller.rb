@@ -1,10 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
-  def index
-    @lists = List.where(user: current_user).order(created_at: :desc)
-    # @lists = List.order(created_at: :desc)
-
-  end
+  before_action :set_list, only: [:show, :update, :destroy]
 
   def show
   end
@@ -23,20 +18,17 @@ class ListsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     @list.update(list_params)
     respond_to do |format|
-      format.html { redirect_to lists_path }
+      format.html { redirect_to user_path(current_user) }
       format.text { render partial: "movie_info", locals: { list: @list}, formats: :html }
     end
   end
 
   def destroy
     @list.destroy
-    redirect_to lists_path, status: :see_other
+    redirect_to user_path(current_user), status: :see_other
   end
 
   private

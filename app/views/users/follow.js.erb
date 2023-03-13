@@ -1,0 +1,11 @@
+<script>
+
+function renderUser(userHTML) {
+  const user = document.querySelector("[data-user='<%= @user.id %>']");
+  user.outerHTML = userHTML;
+  console.log("hello")
+}
+
+renderUser('<%=  j render @user%>')
+
+</script>
