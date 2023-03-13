@@ -36,7 +36,7 @@
       <h4>Reviews</h4>
       <% if @reviews.size >= 1 %>
         <%= render "shared/stars_average", rating: @rating_av %>
-        <%= render "shared/average_rating", rating_av: @rating_av%>
+        <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews%>
       <% else %>
         <%= "Be the first one to review this podcast !" %>
       <% end %>
