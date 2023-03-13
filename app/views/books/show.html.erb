@@ -16,15 +16,22 @@
 </div>
 
 <div class="title">
-  <hr>
-  <h4>Add this book to a list</h4>
-  <%= simple_form_for [@list, @list_book] do |f| %>
-    <%= f.hidden_field :book_id, value: params[:id] %>
-    <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: {required: true}, :class => "border border-primary" %>
-    <%= f.input :comment %>
-    <%= f.submit 'Add', :class => "button-full" %>
-  <% end %>
-  <hr>
+  <div data-controller="show-formlist">
+    <button data-action="click->show-formlist#showform" data-show-formlist-target="btn", class="button-full my-5">Add to a list</button>
+
+    <div data-show-formlist-target="divform", class="d-none">
+      <h4>Add this book to a list</h4>
+      <%= simple_form_for [@list, @list_book], html: { data: { show_formlist_target: "form", action: "submit->show-formlist#hideform"}} do |f| %>
+        <%= f.hidden_field :book_id, value: params[:id] %>
+        <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true },  :class => "border border-primary" %>
+        <%= f.input :comment %>
+        <%= f.submit 'Add', :class => "button-full" %>
+      <% end %>
+    </div>
+  </div>
+
+
+
   <div>
     <% unless BookReview.find_by(book: @book, user: current_user) %>
       <h4>Add a review</h4>

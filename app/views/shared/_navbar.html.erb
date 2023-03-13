@@ -4,12 +4,14 @@
       <h3>O.</h3>
     <% end %>
 
-    <%= link_to "#", class: "navbar-brand" do %>
+    <%= link_to search_path, class: "navbar-brand" do %>
       <i class="fa-solid fa-magnifying-glass"></i>
     <% end %>
 
-    <%= link_to user_path(current_user), class: "navbar-brand" do %>
-      <i class="fa-regular fa-bookmark"></i>
+    <% if user_signed_in? %>
+      <%= link_to user_path(current_user), class: "navbar-brand" do %>
+        <i class="fa-regular fa-bookmark"></i>
+      <% end %>
     <% end %>
   </div>
 </div>

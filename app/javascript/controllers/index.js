@@ -7,14 +7,17 @@ import { application } from "./application"
 import EditListController from "./edit_list_controller"
 application.register("edit-list", EditListController)
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import FormController from "./form_controller"
 application.register("form", FormController)
 
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
+
 import InsertReviewController from "./insert_review_controller"
 application.register("insert-review", InsertReviewController)
+
+import ShowFormlistController from "./show_formlist_controller"
+application.register("show-formlist", ShowFormlistController)
 
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)
