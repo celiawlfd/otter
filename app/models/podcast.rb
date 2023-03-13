@@ -3,4 +3,8 @@ class Podcast < ApplicationRecord
   has_many :lists, through: :list_podcasts
   has_many :podcast_reviews, dependent: :destroy
   validates :title, :description, presence: true
+
+  include PgSearch::Model
+  multisearchable against: [:title, :description]
+
 end

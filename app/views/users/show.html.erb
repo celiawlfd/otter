@@ -8,8 +8,8 @@
     </div>
   </div>
 
-  <div>
-    <div class="title text-center">
+  <div class="mx-4">
+    <div class="library">
       <% if @user == current_user %>
         <h1>Your library</h1>
       <% else %>
@@ -18,20 +18,21 @@
     </div>
 
     <div class="description">
-      <p>ajouter descripion au schema</p>
+      <p><%= @user.bio %></p>
     </div>
 
-    <div class="followers text-center px-4">
+    <div class="followers text-center">
       <div>
-        <p> Followers</p>
+        <p class="mx-3"> Followers</p>
         <p><%= @user.followers.count %></p>
       </div>
       <div>
-        <p>Followings</p>
+        <p class="mx-3">Followings</p>
         <p><%= @user.following.count %></p>
       </div>
     </div>
   </div>
+
 </div>
 
 <% if @user == current_user %>
