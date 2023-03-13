@@ -1,7 +1,7 @@
 <div class="infos-top">
 
   <div class="nav-item-dropdown">
-    <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+    <%= cl_image_tag @user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
       <%= link_to "Edit your profil", edit_user_registration_path, class: "dropdown-item" %>
       <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
@@ -20,15 +20,15 @@
     <div class="followers text-center">
       <div>
         <p><%= @user.followers.count %></p>
-        <p class="pe-2">Followers</p>
+        <p><%= link_to "Follower".pluralize(@user.followers.size), followers_user_path, :class=>"px-2"%></p>
       </div>
       <div>
         <p><%= @user.following.count %></p>
-        <p class="px-2">Followings</p>
+        <p><%= link_to "Following", following_user_path, :class=>"px-2"%></p>
       </div>
       <div>
         <p><%= @user.lists.count %></p>
-        <p class="px-2">Lists</p>
+        <p class="px-2"><%= "List".pluralize(@lists.size) %></p>
       </div>
     </div>
   </div>
@@ -46,9 +46,6 @@
   <%= link_to "Follow", follow_user_path(@user.id), data: {turbo_method: :post}, :class=>"button-full"%>
 <% end %>
 
-<hr>
-
-<p class="text-center mt-2"><%= pluralize @lists.size, "List" %></p>
 
 <%# Theese are the default list not allowed to modify or edit %>
 <div class="display-lists">
