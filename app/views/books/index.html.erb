@@ -7,7 +7,7 @@
     <div class="div<%= sum %>">
       <div class="row text-center">
         <%= link_to book_path(book) do %>
-          <%= render "pages/card", culturale: book, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
+          <%= render "shared/card", culturale: book, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
         <% end %>
       </div>
     </div>

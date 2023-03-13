@@ -18,21 +18,21 @@
         <% @list.movies.each do |movie| %>
           <div class="row text-center">
             <%= link_to movie_path(movie, @list) do %>
-              <%= render "pages/card", culturale: movie, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
+              <%= render "shared/card", culturale: movie, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
             <% end %>
           </div>
         <% end %>
         <% @list.books.each do |book| %>
           <div class="row text-center">
             <%= link_to book_path(book, @list) do %>
-              <%= render "pages/card", culturale: book, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
+              <%= render "shared/card", culturale: book, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
             <% end %>
           </div>
         <% end %>
         <% @list.podcasts.each do |podcast| %>
           <div class="row text-center">
             <%= link_to podcast_path(podcast, @list) do %>
-              <%= render "pages/card", culturale: podcast, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
+              <%= render "shared/card", culturale: podcast, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
             <% end %>
           </div>
         <% end %>

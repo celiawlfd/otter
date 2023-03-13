@@ -1,0 +1,42 @@
+.culturale-card a {
+  color: white;
+  text-decoration: none;
+}
+
+.culturale-card {
+  width:170px;
+  height: 240px;
+  margin: auto;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  position:relative;
+  display: flex;
+  align-items: end;
+}
+
+.card-rating {
+  background-color: rgba(51, 145, 134, 0.7);
+  padding: 0 5px;
+  border-radius: 5px;
+  border: 1px solid rgb(51, 145, 134);
+  font-size: 12px;
+  i {
+    padding-top: 0;
+  }
+}
+
+.card-categorie {
+  padding: 0 5px;
+  border-radius: 5px;
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+.card-titre {
+  text-align: start;
+  text-shadow: 3px 4px 7px rgba(81,67,21,0.8);
+}
