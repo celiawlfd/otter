@@ -2,7 +2,7 @@
   <%= image_tag @book.photo_url, width: 350, class:"cover" %>
   <%= image_tag @book.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x" %>
 </div>
-<div class="info mb-5">
+<div class="info mb-4">
   <h1> <%= @book.title %> <small> (<%= @book.year %>) </small> </h1>
   <p> <%= @book.description %> </p>
   <% if ListBook.find_by(list: params[:format], book: @book) %>
