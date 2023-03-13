@@ -2,7 +2,7 @@
   <%= image_tag @podcast.photo_url, width: 350, class:"cover" %>
   <%= image_tag @podcast.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x" %>
 </div>
-<div class="info mb-5">
+<div class="info mb-4">
   <h1> <%= @podcast.title %> <small> ( <%= @podcast.publisher %> ) </small> </h1>
   <p> <%= @podcast.description %> </p>
   <% if ListPodcast.find_by(list: params[:format], podcast: @podcast) %>
