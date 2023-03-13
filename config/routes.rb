@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   get "search", to: "pages#search"
+  get "search_api", to: "pages#search_api"
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
