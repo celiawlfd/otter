@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   resources :podcast_reviews, only: [:destroy]
 
-  resources :users, only: [:index, :show] do
+  resources :users, only: [:show] do
     member do
       post :follow
       post :unfollow
