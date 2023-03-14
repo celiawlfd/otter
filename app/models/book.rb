@@ -3,6 +3,8 @@ class Book < ApplicationRecord
   has_many :lists, through: :list_books
   has_many :book_reviews, dependent: :destroy
   validates :title, :description, presence: true
+  validates :title, uniqueness: true
+
 
   include PgSearch::Model
   multisearchable against: [:title, :description]
