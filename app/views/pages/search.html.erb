@@ -9,6 +9,17 @@
 
   <div class="basic-grid pt-4">
     <% @results.each do |result| %>
+      <% if result.searchable.is_a?(User) %>
+        <div class="d-flex search-users">
+          <%= cl_image_tag result.searchable.photo.key, class:"avatar" %>
+          <%= link_to result.searchable.username.capitalize, user_path(result.searchable_id), :class=>"px-2"%>          </div>
+      <% end %>
+    <% end %>
+  </div>
+
+
+  <div class="basic-grid pt-4">
+    <% @results.each do |result| %>
       <div class="row text-center">
         <% if result.searchable.is_a?(Movie) %>
           <%= link_to movie_path(result.searchable_id) do %>
@@ -22,13 +33,8 @@
           <%= link_to podcast_path(result.searchable_id) do %>
             <%= render "shared/card", culturale: result.searchable, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
           <% end %>
-        <% elsif result.searchable.is_a?(User) %>
-          <div class="d-flex search-users">
-            <%= cl_image_tag result.searchable.photo.key, class:"avatar" %>
-            <%= link_to result.searchable.username.capitalize, user_path(result.searchable_id), :class=>"px-2"%>
-          </div>
         <% end %>
-      </div>
+    </div>
     <% end %>
   </div>
   <% if @results.any? %>
