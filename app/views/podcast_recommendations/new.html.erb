@@ -1,0 +1,11 @@
+<%= link_to podcast_path(@podcast) do %>
+  <i class="fa-solid fa-angles-left"></i>
+<% end %>
+
+<h1 class="text-center">Recommend <%= @podcast.title %> to your friends</h1>
+
+<%= simple_form_for [@podcast, @podcastreco]  do |f| %>
+  <%= f.association :receiver, collection: current_user.following.map(&:username), prompt: "Please choose one of your friends", :class => "border border-primary", label: "Friend"  %>
+  <%= f.input :message %>
+  <%= f.submit "send", class: "button-full" %>
+<% end %>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :followers, :following, :follow, :unfollow]
+  before_action :set_user, only: [:show, :followers, :following, :follow, :unfollow, :recommendations]
 
   def index
     @users = User.where.not(id: current_user.id)
@@ -25,6 +25,14 @@ class UsersController < ApplicationController
         format.js { render action: :follow }
       end
     end
+  end
+
+  def recommendations
+    movierecos = @user.received_movierecommendations
+    bookrecos = @user.received_bookrecommendations
+    podcastrecos = @user.received_podcastrecommendations
+    
+    @recommendations = [movierecos, bookrecos, podcastrecos].flatten
   end
 
   private

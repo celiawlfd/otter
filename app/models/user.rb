@@ -21,6 +21,16 @@ class User < ApplicationRecord
 
   after_create :default_lists
 
+
+  has_many :received_movierecommendations, foreign_key: :receiver_id, class_name: 'MovieRecommendation'
+  has_many :given_movierecommendations, foreign_key: :giver_id, class_name: 'MovieRecommendation'
+
+  has_many :received_bookrecommendations, foreign_key: :receiver_id, class_name: 'BookRecommendation'
+  has_many :given_bookrecommendations, foreign_key: :giver_id, class_name: 'BookRecommendation'
+
+  has_many :received_podcastrecommendations, foreign_key: :receiver_id, class_name: 'PodcastRecommendation'
+  has_many :given_podcastrecommendations, foreign_key: :giver_id, class_name: 'PodcastRecommendation'
+
   include PgSearch::Model
   multisearchable against: [:username]
 

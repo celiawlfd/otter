@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_14_093410) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_14_142510) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_093410) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "book_recommendations", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.integer "giver_id", null: false
+    t.integer "receiver_id", null: false
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_book_recommendations_on_book_id"
+    t.index ["giver_id"], name: "index_book_recommendations_on_giver_id"
+    t.index ["receiver_id"], name: "index_book_recommendations_on_receiver_id"
   end
 
   create_table "book_reviews", force: :cascade do |t|
@@ -112,6 +124,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_093410) do
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
+  create_table "movie_recommendations", force: :cascade do |t|
+    t.bigint "movie_id", null: false
+    t.integer "giver_id", null: false
+    t.integer "receiver_id", null: false
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["giver_id"], name: "index_movie_recommendations_on_giver_id"
+    t.index ["movie_id"], name: "index_movie_recommendations_on_movie_id"
+    t.index ["receiver_id"], name: "index_movie_recommendations_on_receiver_id"
+  end
+
   create_table "movie_reviews", force: :cascade do |t|
     t.integer "rating"
     t.text "content"
@@ -139,6 +163,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_093410) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
+  end
+
+  create_table "podcast_recommendations", force: :cascade do |t|
+    t.bigint "podcast_id", null: false
+    t.integer "giver_id", null: false
+    t.integer "receiver_id", null: false
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["giver_id"], name: "index_podcast_recommendations_on_giver_id"
+    t.index ["podcast_id"], name: "index_podcast_recommendations_on_podcast_id"
+    t.index ["receiver_id"], name: "index_podcast_recommendations_on_receiver_id"
   end
 
   create_table "podcast_reviews", force: :cascade do |t|
@@ -179,6 +215,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_093410) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "book_recommendations", "books"
   add_foreign_key "book_reviews", "books"
   add_foreign_key "book_reviews", "users"
   add_foreign_key "list_books", "books"
@@ -188,8 +225,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_093410) do
   add_foreign_key "list_podcasts", "lists"
   add_foreign_key "list_podcasts", "podcasts"
   add_foreign_key "lists", "users"
+  add_foreign_key "movie_recommendations", "movies"
   add_foreign_key "movie_reviews", "movies"
   add_foreign_key "movie_reviews", "users"
+  add_foreign_key "podcast_recommendations", "podcasts"
   add_foreign_key "podcast_reviews", "podcasts"
   add_foreign_key "podcast_reviews", "users"
 end

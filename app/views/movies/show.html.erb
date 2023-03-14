@@ -12,9 +12,13 @@
   <% end %>
   <%= image_tag @movie.photo_url, width: 350, class:"cover"  %>
   <%= image_tag @movie.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x"  %>
+  <%= link_to new_movie_movie_recommendation_path(@movie) do %>
+    <i class="fa-regular fa-paper-plane"></i>
+  <% end %>
 </div>
 
 <h1 class="show-title"> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h1>
+
 
 <div class="my-3" data-controller="show-formlist">
 
