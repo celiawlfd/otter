@@ -1,14 +1,19 @@
 <div class="infos-top">
 
   <div class="nav-item-dropdown">
+  <% if @user == current_user %>
     <%= cl_image_tag @user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
       <%= link_to "Edit your profil", edit_user_registration_path, class: "dropdown-item" %>
       <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
     </div>
+  <% else %>
+    <%= cl_image_tag @user.photo.key %>
+  <% end %>
   </div>
 
-  <div class="mx-4">
+  <div class="info-text mx-4">
+
     <div class="library">
       <% if @user == current_user %>
         <h1>Your library</h1>
@@ -20,11 +25,11 @@
     <div class="followers text-center">
       <div>
         <p><%= @user.followers.count %></p>
-        <p><%= link_to "Follower".pluralize(@user.followers.size), followers_user_path, :class=>"px-2"%></p>
+        <p><%= link_to "Follower".pluralize(@user.followers.size), followers_user_path %></p>
       </div>
       <div>
         <p><%= @user.following.count %></p>
-        <p><%= link_to "Following", following_user_path, :class=>"px-2"%></p>
+        <p><%= link_to "Following", following_user_path %></p>
       </div>
       <div>
         <p><%= @user.lists.count %></p>
