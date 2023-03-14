@@ -1,78 +1,85 @@
 <div class="pictures">
+  <% if  ListPodcast.find_by(list: params[:format], podcast: @podcast) %>
+    <%= link_to list_podcast_path(ListPodcast.find_by(list: params[:format], podcast: @podcast)),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{@podcast.title.capitalize} from #{List.find(params[:format]).name}?"} do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
+  <% end %>
   <%= image_tag @podcast.photo_url, width: 350, class:"cover" %>
   <%= image_tag @podcast.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x" %>
 </div>
-<div class="info mb-4">
-  <h1> <%= @podcast.title %> <small> ( <%= @podcast.publisher %> ) </small> </h1>
-  <p> <%= @podcast.description %> </p>
-  <% if ListPodcast.find_by(list: params[:format], podcast: @podcast) %>
-    <h5>Your comment</h5>
-    <p> <%= ListPodcast.find_by(list: params[:format], podcast: @podcast).comment %> </p>
-    <p class="text-end"> <%= link_to "Delete podcast from list",
-    list_podcast_path(ListPodcast.find_by(list: params[:format], podcast: @podcast)),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    %> </p>
+
+<h1 class="show-title"> <%= @podcast.title %> <small> ( <%= @podcast.publisher %> ) </small> </h1>
+
+<div class="my-3" data-controller="show-formlist">
+
+  <button data-action="click->show-formlist#showform" data-show-formlist-target="btn", class="button-full mb-4 mt-4"><%= @podcast.lists.where(user_id: current_user).empty? ? "Add to a list" : "Add to another list" %></button>
+
+  <div data-show-formlist-target="divform", class="d-none">
+    <h4>Add this podcast to a list</h4>
+    <%= simple_form_for [@list, @list_podcast], html: { data: { show_formlist_target: "form", action: "submit->show-formlist#hideform"}} do |f| %>
+      <%= f.hidden_field :podcast_id, value: params[:id] %>
+      <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true },  :class => "border border-primary" %>
+      <%= f.input :comment %>
+      <%= f.submit 'Add', :class => "button-full" %>
+    <% end %>
+  </div>
+
+  <% unless @podcast.lists.where(user_id: current_user).empty? %>
+    <div class="d-flex flex-column align-items-center">
+      <small>You already saved this podcast in :</small>
+      <small class="d-block"><%= @podcast.lists.where(user_id: current_user).map(&:name).join(', ')%></small>
+    </div>
   <% end %>
 </div>
 
-<div class="title">
-  <div data-controller="show-formlist">
-
-    <% unless @podcast.lists.where(user_id: current_user).empty? %>
-      <div class="d-flex flex-column align-items-center">
-        <small>You already saved this movie in :</small>
-        <small class="d-block"><%= @podcast.lists.where(user_id: current_user).map(&:name).join(', ')%></small>
-      </div>
-    <% end %>
-
-    <button data-action="click->show-formlist#showform" data-show-formlist-target="btn", class="button-full mb-5 mt-4"><%= @podcast.lists.where(user_id: current_user).empty? ? "Add to a list" : "Add to another list" %></button>
-
-    <div data-show-formlist-target="divform", class="d-none">
-      <h4>Add this podcast to a list</h4>
-      <%= simple_form_for [@list, @list_podcast], html: { data: { show_formlist_target: "form", action: "submit->show-formlist#hideform"}} do |f| %>
-        <%= f.hidden_field :podcast_id, value: params[:id] %>
-        <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true },  :class => "border border-primary" %>
-        <%= f.input :comment %>
-        <%= f.submit 'Add', :class => "button-full" %>
-      <% end %>
+<div class="info">
+  <p> <%= @podcast.description %> </p>
+  <% if ListPodcast.find_by(list: params[:format], podcast: @podcast) && ListPodcast.find_by(list: params[:format], podcast: @podcast).comment != ""  %>
+    <div class="d-flex align-items-center comment">
+      <i class="fa-solid fa-quote-left"></i>
+      <p><%= ListPodcast.find_by(list: params[:format], podcast: @podcast).comment %></p>
     </div>
-  </div>
+  <% end  %>
+</div>
+
+
+<div class="reviews">
+  <% unless PodcastReview.find_by(podcast: @podcast, user: current_user) %>
+    <h4 class="mt-4 text-center">Add a review</h4>
+    <% if @reviews.size == 0 %>
+      <small class="d-block text-center small-text">Be the first one to review this podcast !</small>
+    <% end %>
+    <%= render "podcasts/form_review", podcast: @podcast, podcast_review: @podcast_review %>
+  <% end %>
 
   <div>
-    <% unless PodcastReview.find_by(podcast: @podcast, user: current_user) %>
-      <h4>Add a review</h4>
-      <%= render "podcasts/form_review", podcast: @podcast, podcast_review: @podcast_review %>
-      <hr>
+    <h4>Reviews</h4>
+    <% if @reviews.size >= 1 %>
+      <%= render "shared/stars_average", rating: @rating_av %>
+      <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews%>
+    <% else %>
+      <%= "Be the first one to review this podcast !" %>
     <% end %>
+    <hr>
+  </div>
 
-    <div>
-      <h4>Reviews</h4>
-      <% if @reviews.size >= 1 %>
-        <%= render "shared/stars_average", rating: @rating_av %>
-        <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews%>
-      <% else %>
-        <%= "Be the first one to review this podcast !" %>
-      <% end %>
-      <hr>
-    </div>
+  <% if @myreview %>
+    <h5>Your review</h5>
+    <p> <%= render "shared/stars_average", rating: @myreview.rating %> </p>
+    <p> <%= @myreview.content %> </p>
+    <p class="text-end"> <%= link_to "Delete my review",
+    podcast_review_path(@myreview),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> </p>
+    <hr>
+  <% end %>
 
-    <% if @myreview %>
-      <h5>Your review</h5>
-      <p> <%= render "shared/stars_average", rating: @myreview.rating %> </p>
-      <p> <%= @myreview.content %> </p>
-      <p class="text-end"> <%= link_to "Delete my review",
-      podcast_review_path(@myreview),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> </p>
-      <hr>
+  <h5>What other people think about it</h5>
+  <div>
+    <% @reviews.each do |review| %>
+    <% if !review.content.empty? %>
+      <%= render "shared/review", review: review %>
     <% end %>
-
-    <h5>What other people think about it</h5>
-    <div>
-      <% @reviews.each do |review| %>
-      <% if !review.content.empty? %>
-        <%= render "shared/review", review: review %>
-      <% end %>
-    <% end %>
-    </div>
+  <% end %>
   </div>
 </div>

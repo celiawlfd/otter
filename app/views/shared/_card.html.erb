@@ -1,7 +1,7 @@
 <div class="culturale-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url('<%= image_path culturale.photo_url, crop: :fill %>')">
   <div>
     <div class="d-flex align-items-center card-stickers">
-      <small class="card-categorie" style="background-color: <%= color %>; border: 1px solid <%= color %>"><%= categorie %></small>
+      <small class="card-categorie" style="background-color: <%= color %>; border: 1px solid <%= border %>"><%= categorie %></small>
       <%= render "shared/average", culturale: culturale %>
     </div>
     <p class="card-titre"><%= culturale.title %></p>
