@@ -16,9 +16,11 @@ class PagesController < ApplicationController
     movies = Movie.all
     books = Book.all
     podcasts = Podcast.all
+    users = User.all
     PgSearch::Multisearch.rebuild(Movie)
     PgSearch::Multisearch.rebuild(Book)
     PgSearch::Multisearch.rebuild(Podcast)
+    PgSearch::Multisearch.rebuild(User)
 
     @results = PgSearch.multisearch(params[:query])
   end

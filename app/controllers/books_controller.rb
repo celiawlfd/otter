@@ -14,6 +14,15 @@ class BooksController < ApplicationController
     @list_book = ListBook.new
   end
 
+  def create
+    @book = Book.new(book_params)
+    if @book.save
+      redirect_to book_path(@book)
+    else
+      render "pages/search_api", status: :unprocessable_entity
+    end
+  end
+
   private
 
   def book_params

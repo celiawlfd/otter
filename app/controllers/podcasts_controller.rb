@@ -15,6 +15,15 @@ class PodcastsController < ApplicationController
     @list_podcast = ListPodcast.new
   end
 
+  def create
+    @podcast = Podcast.new(podcast_params)
+    if @podcast.save
+      redirect_to podcast_path(@podcast)
+    else
+      render "pages/search_api", status: :unprocessable_entity
+    end
+  end
+
   private
 
   def podcast_params

@@ -61,7 +61,9 @@
     <% if list.name == "To recommand" || list.name == "To discover" %>
       <div class= "list-card">
         <%= link_to list_path(list) do %>
-          <h6><%= list.name%></h6>
+          <h6 class="mb-0"><%= list.name%></h6>
+            <% pins = (list.list_movies.size) + (list.list_books.size) + (list.list_podcasts.size) %>
+            <p><%= pluralize(pins, "Pin") %></p>
         <% end %>
       </div>
     <% end %>

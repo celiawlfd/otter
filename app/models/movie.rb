@@ -4,9 +4,12 @@ class Movie < ApplicationRecord
   has_many :movie_reviews, dependent: :destroy
   has_many :movie_recommendations
   validates :title, presence: true
+  validates :title, uniqueness: true
   validates :description, presence: true
 
   include PgSearch::Model
   multisearchable against: [:title, :description]
+
+
 
 end

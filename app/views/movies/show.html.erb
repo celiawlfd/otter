@@ -43,7 +43,7 @@
 </div>
 
 <div class="info">
-  <p class="text-center"> <%= @movie.description %> </p>
+  <p> <%= @movie.description %> </p>
   <% if ListMovie.find_by(list: params[:format], movie: @movie) && ListMovie.find_by(list: params[:format], movie: @movie).comment != ""  %>
     <div class="d-flex align-items-center comment">
       <i class="fa-solid fa-quote-left"></i>
