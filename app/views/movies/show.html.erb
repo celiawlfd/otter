@@ -55,7 +55,7 @@
     <% if @reviews.size == 0 %>
       <small class="d-block text-center small-text">Be the first one to review this movie !</small>
     <% end %>
-    <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
+    <p><%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %></p>
   <% end %>
 
   <% if @reviews.size > 0 %>
@@ -63,18 +63,14 @@
     <%= render "shared/stars_average", rating: @rating_av%>
     <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews %>
     <% if @myreview %>
+
+    <div class="d-flex justify-content-between">
       <p><strong>Your review - <%= @myreview.rating %></strong> <i class="fa-solid fa-star"></i></p>
-      <p><%= @myreview.content %></p>
-      <div class="d-flex justify-content-between">
-      <%# <% raise %> %>
-        <p>Created <%= (DateTime.now.iso8601 - @myreview.created_at.iso8601) %></p>
-
-
-
-        <p class="text-end"><%= link_to "",
+      <p><%= link_to "",
         movie_review_path(@myreview),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"fa-solid fa-trash-can" %></p>
-      </div>
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"fa-solid fa-trash-can text-end" %></p>
+    </div>
+      <p><%= @myreview.content %></p>
       <hr>
     <% end %>
 
