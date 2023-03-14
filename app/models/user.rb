@@ -21,7 +21,8 @@ class User < ApplicationRecord
 
   after_create :default_lists
 
-
+  include PgSearch::Model
+  multisearchable against: [:username]
 
   def default_lists
     require "open-uri"

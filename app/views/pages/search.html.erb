@@ -2,7 +2,7 @@
   <%= text_field_tag :query,
     params[:query],
     class: "form-control",
-    placeholder: "Find a movie, a book or a podcast"
+    placeholder: "Find a movie, a book, a podcast or a friend"
   %>
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
@@ -11,18 +11,25 @@
     <% @results.each do |result| %>
         <div class="row text-center">
           <% if result.searchable.is_a?(Movie) %>
-            <%= link_to movie_path(result) do %>
+            <%= link_to movie_path(result.searchable_id) do %>
               <%= render "shared/card", culturale: result.searchable, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
             <% end %>
           <% elsif result.searchable.is_a?(Book) %>
-            <%= link_to book_path(result) do %>
+            <%= link_to book_path(result.searchable_id) do %>
               <%= render "shared/card", culturale: result.searchable, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
             <% end %>
           <% elsif result.searchable.is_a?(Podcast) %>
-            <%= link_to podcast_path(result) do %>
+            <%= link_to podcast_path(result.searchable_id) do %>
               <%= render "shared/card", culturale: result.searchable, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
             <% end %>
+
+          <% elsif result.searchable.is_a?(User) %>
+          <div class="d-flex">
+            <%= cl_image_tag result.searchable.photo.key, class:"avatar" %>
+            <%= link_to result.searchable.username.capitalize, user_path(result.searchable_id), :class=>"px-2"%>
+          </div>
           <% end %>
+
         </div>
     <% end %>
   </div>
