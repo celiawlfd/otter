@@ -14,18 +14,11 @@
   <%= image_tag @movie.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x"  %>
 </div>
 
-<h2 class="show-title"> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h2>
+<h1 class="show-title"> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h1>
 
 <div class="my-3" data-controller="show-formlist">
 
   <button data-action="click->show-formlist#showform" data-show-formlist-target="btn", class="button-full mt-4 my-4"><%= @movie.lists.where(user_id: current_user).empty? ? "Add to a list" : "Add to another list" %></button>
-
-  <% unless @movie.lists.where(user_id: current_user).empty? %>
-    <div class="d-flex flex-column align-items-center">
-      <small>You already saved this movie in :</small>
-      <small class="d-block"><%= @movie.lists.where(user_id: current_user).map(&:name).join(', ')%></small>
-    </div>
-  <% end %>
 
   <div data-show-formlist-target="divform", class="d-none">
     <h4>Add this movie to a list</h4>
@@ -36,6 +29,13 @@
       <%= f.submit 'Add', :class => "button-full" %>
     <% end %>
   </div>
+  
+  <% unless @movie.lists.where(user_id: current_user).empty? %>
+    <div class="d-flex flex-column align-items-center">
+      <small>You already saved this movie in :</small>
+      <small class="d-block"><%= @movie.lists.where(user_id: current_user).map(&:name).join(', ')%></small>
+    </div>
+  <% end %>
 </div>
 
 <div class="info">
@@ -47,6 +47,7 @@
     </div>
   <% end  %>
 </div>
+
 
 <div class="reviews">
   <% unless MovieReview.find_by(movie: @movie, user: current_user) %>

@@ -1,63 +1,62 @@
 <div class="pictures">
+  <% if  ListBook.find_by(list: params[:format], book: @book) %>
+    <%= link_to list_book_path(ListBook.find_by(list: params[:format], book: @book)),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{@book.title.capitalize} from #{List.find(params[:format]).name}?"} do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
+  <% end %>
   <%= image_tag @book.photo_url, width: 350, class:"cover" %>
   <%= image_tag @book.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x" %>
 </div>
-<div class="info mb-4">
-  <h1> <%= @book.title %> <small> (<%= @book.year %>) </small> </h1>
-  <p> <%= @book.description %> </p>
-  <% if ListBook.find_by(list: params[:format], book: @book) %>
-    <h5>Your comment</h5>
-    <p> <%= ListBook.find_by(list: params[:format], book: @book).comment %> </p>
-    <p class="text-end"> <%= link_to "Delete book from list",
-    list_book_path(ListBook.find_by(list: params[:format], book: @book)),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    %> </p>
+
+<h1 class="show-title"> <%= @book.title %> <small> (<%= @book.year %>) </small> </h1>
+
+<div data-controller="show-formlist">
+
+  <button data-action="click->show-formlist#showform" data-show-formlist-target="btn", class="button-full mb-4 mt-4"><%= @book.lists.where(user_id: current_user).empty? ? "Add to a list" : "Add to another list" %></button>
+
+  <div data-show-formlist-target="divform", class="d-none">
+    <h4>Add this book to a list</h4>
+    <%= simple_form_for [@list, @list_book], html: { data: { show_formlist_target: "form", action: "submit->show-formlist#hideform"}} do |f| %>
+      <%= f.hidden_field :book_id, value: params[:id] %>
+      <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true },  :class => "border border-primary" %>
+      <%= f.input :comment %>
+      <%= f.submit 'Add', :class => "button-full" %>
+    <% end %>
+  </div>
+  
+  <% unless @book.lists.where(user_id: current_user).empty? %>
+    <div class="d-flex flex-column align-items-center">
+      <small>You already saved this book in :</small>
+      <small class="d-block"><%= @book.lists.where(user_id: current_user).map(&:name).join(', ')%></small>
+    </div>
   <% end %>
 </div>
 
-<div class="title">
-  <div data-controller="show-formlist">
-
-    <% unless @book.lists.where(user_id: current_user).empty? %>
-      <div class="d-flex flex-column align-items-center">
-        <small>You already saved this movie in :</small>
-        <small class="d-block"><%= @book.lists.where(user_id: current_user).map(&:name).join(', ')%></small>
-      </div>
-    <% end %>
-
-    <button data-action="click->show-formlist#showform" data-show-formlist-target="btn", class="button-full mb-5 mt-4"><%= @book.lists.where(user_id: current_user).empty? ? "Add to a list" : "Add to another list" %></button>
-
-    <div data-show-formlist-target="divform", class="d-none">
-      <h4>Add this book to a list</h4>
-      <%= simple_form_for [@list, @list_book], html: { data: { show_formlist_target: "form", action: "submit->show-formlist#hideform"}} do |f| %>
-        <%= f.hidden_field :book_id, value: params[:id] %>
-        <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true },  :class => "border border-primary" %>
-        <%= f.input :comment %>
-        <%= f.submit 'Add', :class => "button-full" %>
-      <% end %>
+<div class="info">
+  <p class="text-center"> <%= @book.description %> </p>
+  <% if ListBook.find_by(list: params[:format], book: @book) && ListBook.find_by(list: params[:format], book: @book).comment != ""%>
+    <div class="d-flex align-items-center comment">
+      <i class="fa-solid fa-quote-left"></i>
+      <p><%= ListBook.find_by(list: params[:format], book: @book).comment %></p>
     </div>
-  </div>
+  <% end %>
+</div>
 
-
-
-  <div>
-    <% unless BookReview.find_by(book: @book, user: current_user) %>
-      <h4>Add a review</h4>
-      <%= render "books/form_review", book: @book, book_review: @book_review %>
-      <hr>
+<div class ="reviews">
+  <% unless BookReview.find_by(book: @book, user: current_user) %>
+    <h4 class="mt-4 text-center">Add a review</h4>
+    <% if @reviews.size == 0 %>
+      <small class="d-block text-center small-text">Be the first one to review this book !</small>
     <% end %>
+    <%= render "books/form_review", book: @book, book_review: @book_review %>
+    <hr>
+  <% end %>
 
-    <div>
-      <h4>Reviews</h4>
-      <% if @reviews.size >= 1 %>
-        <%= render "shared/stars_average", rating: @rating_av%>
-        <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews%>
-      <% else %>
-        <%= "Be the first one to review this book ! " %>
-      <% end %>
-      <hr>
-    </div>
-
+  <% if @reviews.size > 0 %>
+    <h4 class="text-center">Reviews</h4>
+    <%= render "shared/stars_average", rating: @rating_av%>
+    <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews%>
     <% if @myreview %>
       <h5>Your review</h5>
       <p><%= render "shared/stars_average", rating:  @myreview.rating %></p>
@@ -68,7 +67,6 @@
       <hr>
     <% end %>
 
-
     <h5>What other people think about</h5>
     <div>
       <% @reviews.each do |review| %>
@@ -77,5 +75,5 @@
         <% end %>
       <% end %>
     </div>
-  </div>
+  <% end %>
 </div>
