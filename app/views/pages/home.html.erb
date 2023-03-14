@@ -4,7 +4,19 @@
   <%= link_to "Podcasts", podcasts_path, class: "button-outline  mx-2" %>
 </div>
 
-<h1 class="text-center my-4">Otter</h1>
+<% if @culturales.empty? %>
+  <h1 class="text-center my-4">Welcome to, Otter</h1>
+<% else %>
+  <h1 class="text-center my-4">Otter</h1>
+<% end %>
+
+<% if @culturales.empty? %>
+ <%= cl_image_tag src="http://res.cloudinary.com/dtdr8cuym/image/upload/iox09pmfhkxyvzl95jpa3diokg35", class:"photo-feed"  %>
+  <div class="text-emply-feed pb-5">
+        <h2 class="emplty-feed">Your feed is empty</h2>
+        <%= link_to "Add your friends", search_path, class: "button-full add-friends"%>
+      </div>
+<% else %>
 
   <div class="massonery-grid">
     <% sum = 0 %>
@@ -33,3 +45,4 @@
       <% b += 1 %>
     <% end %>
   </div>
+  <% end %>
