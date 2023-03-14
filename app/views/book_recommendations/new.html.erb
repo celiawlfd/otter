@@ -1,6 +1,6 @@
-<h1>Recommend <%= @movie.title %> to your friends</h1>
+<h1>Recommend <%= @book.title %> to your friends</h1>
 
-<%= simple_form_for [@movie, @moviereco]  do |f| %>
+<%= simple_form_for [@book, @bookreco]  do |f| %>
   <%= f.association :receiver, collection: current_user.following.map(&:username), prompt: "Please choose one of your friends", :class => "border border-primary", label: "Friend"  %>
   <%= f.input :message %>
   <%= f.submit "send", class: "button-full" %>

@@ -25,12 +25,16 @@ Rails.application.routes.draw do
 
   resources :books, except: [:destroy, :edit, :update] do
     resources :book_reviews, only: [:create]
+    resources :book_recommendations, only: [:new, :create]
+
   end
 
   resources :book_reviews, only: [:destroy]
 
   resources :podcasts, except: [:destroy, :edit, :update] do
     resources :podcast_reviews, only: [:create]
+    resources :podcast_recommendations, only: [:new, :create]
+
   end
 
   resources :podcast_reviews, only: [:destroy]

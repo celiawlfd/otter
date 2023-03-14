@@ -27,3 +27,4 @@ class MovieRecommendationsController < ApplicationController
     @movie = Movie.find(params[:movie_id])
   end
 end
+ 

@@ -28,8 +28,11 @@ class UsersController < ApplicationController
   end
 
   def recommendations
-    raise
-    @movierecos = @user.received_movierecommendations
+    movierecos = @user.received_movierecommendations
+    bookrecos = @user.received_bookrecommendations
+    podcastrecos = @user.received_podcastrecommendations
+    
+    @recommendations = [movierecos, bookrecos, podcastrecos].flatten
   end
 
   private

@@ -11,6 +11,5 @@ class CreateMovieRecommendations < ActiveRecord::Migration[7.0]
 
     add_index :movie_recommendations, :giver_id
     add_index :movie_recommendations, :receiver_id
-    add_index :movie_recommendations, [:receiver_id, :giver_id], unique: true
   end
 end
