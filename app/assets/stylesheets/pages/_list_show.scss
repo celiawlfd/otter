@@ -11,20 +11,20 @@
 
 
 .text-emply-list {
-  margin-top: -150px;
+  margin-top: -130px;
+
 
   .find-inspo {
-    font-size: 20px;
-    border: 1px solid $secondary;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    padding: 3px 5px;
-    margin: 15px auto;
-    background-color: $secondary;
-    color: white;
+    font-size: 17px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    opacity: .9;
+    width: 40%;
   }
 
   .emplty-list {
     text-align: center;
+    opacity: .9;
   }
 }
