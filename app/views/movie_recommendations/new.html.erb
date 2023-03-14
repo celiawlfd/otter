@@ -1,4 +1,8 @@
-<h1>Recommend <%= @movie.title %> to your friends</h1>
+<%= link_to movie_path(@movie) do %>
+  <i class="fa-solid fa-angles-left"></i>
+<% end %>
+
+<h1 class="text-center">Recommend <%= @movie.title %> to your friends</h1>
 
 <%= simple_form_for [@movie, @moviereco]  do |f| %>
   <%= f.association :receiver, collection: current_user.following.map(&:username), prompt: "Please choose one of your friends", :class => "border border-primary", label: "Friend"  %>
