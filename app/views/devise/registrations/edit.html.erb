@@ -32,13 +32,13 @@
                 required: true %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+  <div class="form-actions mt-5">
+    <%= f.button :submit, "Update", class:"btn button-full" %>
   </div>
 <% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
+<div class="col-6 btn button-outline mb-5">
 <%= link_to "Back", :back %>
+</div>
+
+<br>
+<div class="mt-5"><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
