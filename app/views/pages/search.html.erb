@@ -4,10 +4,10 @@
     class: "form-control",
     placeholder: "Find a movie, a book, a podcast or a friend"
   %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
+    <button class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 <% end %>
 
-  <div class="basic-grid">
+  <div class="basic-grid pt-4">
     <% @results.each do |result| %>
         <div class="row text-center">
           <% if result.searchable.is_a?(Movie) %>
@@ -32,3 +32,6 @@
         </div>
     <% end %>
   </div>
+  <% if @results.any? %>
+   <a class="btn button-outline mt-5 btn-sm" href="search_api">Get more</a>
+   <% end %>

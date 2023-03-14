@@ -24,7 +24,6 @@
       <%= f.submit 'Add', :class => "button-full" %>
     <% end %>
   </div>
-  
   <% unless @book.lists.where(user_id: current_user).empty? %>
     <div class="d-flex flex-column align-items-center">
       <small>You already saved this book in :</small>
@@ -34,7 +33,7 @@
 </div>
 
 <div class="info">
-  <p class="text-center"> <%= @book.description %> </p>
+  <p> <%= @book.description %> </p>
   <% if ListBook.find_by(list: params[:format], book: @book) && ListBook.find_by(list: params[:format], book: @book).comment != ""%>
     <div class="d-flex align-items-center comment">
       <i class="fa-solid fa-quote-left"></i>
