@@ -1,0 +1,7 @@
+<h1>send to your friends</h1>
+
+<%= simple_form_for [@movie, @moviereco]  do |f| %>
+  <%= f.association :receiver, collection: current_user.following.map(&:username), prompt: "Please choose one of your friends", :class => "border border-primary" %>
+  <%= f.input :message %>
+  <%= f.submit "send", class: "button-full" %>
+<% end %>

@@ -16,11 +16,10 @@ Rails.application.routes.draw do
   resources :list_books, only: [:destroy]
   resources :list_podcasts, only: [:destroy]
 
-
   resources :movies, except: [:destroy, :edit, :update] do
     resources :movie_reviews, only: [:create]
+    resources :movie_recommendations, only: [:new, :create]
   end
-
 
   resources :movie_reviews, only: [:destroy]
 
@@ -29,7 +28,6 @@ Rails.application.routes.draw do
   end
 
   resources :book_reviews, only: [:destroy]
-
 
   resources :podcasts, except: [:destroy, :edit, :update] do
     resources :podcast_reviews, only: [:create]
@@ -43,6 +41,7 @@ Rails.application.routes.draw do
       post :unfollow
       get :followers
       get :following
+      get :recommendations
     end
   end
 

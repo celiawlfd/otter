@@ -16,6 +16,10 @@
 
 <h1 class="show-title"> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h1>
 
+<%= link_to new_movie_movie_recommendation_path(@movie) do %>
+  <i class="fa-regular fa-paper-plane"></i>
+<% end %>
+
 <div class="my-3" data-controller="show-formlist">
 
   <button data-action="click->show-formlist#showform" data-show-formlist-target="btn", class="button-full mt-4 my-4"><%= @movie.lists.where(user_id: current_user).empty? ? "Add to a list" : "Add to another list" %></button>
@@ -29,7 +33,7 @@
       <%= f.submit 'Add', :class => "button-full" %>
     <% end %>
   </div>
-  
+
   <% unless @movie.lists.where(user_id: current_user).empty? %>
     <div class="d-flex flex-column align-items-center">
       <small>You already saved this movie in :</small>

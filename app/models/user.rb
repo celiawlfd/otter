@@ -21,6 +21,9 @@ class User < ApplicationRecord
 
   after_create :default_lists
 
+  has_many :received_movierecommendations, foreign_key: :receiver_id, class_name: 'MovieRecommendation'
+
+  has_many :given_movierecommendations, foreign_key: :giver_id, class_name: 'MovieRecommendation'
 
 
   def default_lists

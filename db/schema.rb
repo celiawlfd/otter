@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_14_093410) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_14_110221) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -112,6 +112,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_093410) do
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
+  create_table "movie_recommendations", force: :cascade do |t|
+    t.bigint "movie_id", null: false
+    t.integer "giver_id", null: false
+    t.integer "receiver_id", null: false
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["giver_id"], name: "index_movie_recommendations_on_giver_id"
+    t.index ["movie_id"], name: "index_movie_recommendations_on_movie_id"
+    t.index ["receiver_id", "giver_id"], name: "index_movie_recommendations_on_receiver_id_and_giver_id", unique: true
+    t.index ["receiver_id"], name: "index_movie_recommendations_on_receiver_id"
+  end
+
   create_table "movie_reviews", force: :cascade do |t|
     t.integer "rating"
     t.text "content"
@@ -188,6 +201,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_093410) do
   add_foreign_key "list_podcasts", "lists"
   add_foreign_key "list_podcasts", "podcasts"
   add_foreign_key "lists", "users"
+  add_foreign_key "movie_recommendations", "movies"
   add_foreign_key "movie_reviews", "movies"
   add_foreign_key "movie_reviews", "users"
   add_foreign_key "podcast_reviews", "podcasts"
