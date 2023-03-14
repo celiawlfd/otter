@@ -4,17 +4,33 @@
     <p><%= link_to "", :back, :class => "fa-solid fa-angles-left"%></p>
     </div>
     <div class="col-6 text-end">
-    <%= link_to "Delete list",
-      list_path(@list),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    %>
+
+    <% unless @list.name == "To recommand" || @list.name == "To discover"%>
+      <% if @list.user == current_user %>
+        <%= link_to "Delete list",
+          list_path(@list),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+        %>
+      <% end %>
+    <% end %>
+
     </div>
   </div>
+
+    <h1 class="text-center mb-5 mt-3"> <%= @list.name %> </h1>
+
     <% if @list.movies.empty? && @list.books.empty? && @list.podcasts.empty?%>
-      <%= link_to "Find inspo", root_path, class: "button-full"%>
+        <%= cl_image_tag @list.photo.key, class:"photo-list"  %>
+      <div class="text-emply-list">
+        <h2 class="emplty-list">Your list is empty</h2>
+        <%= link_to "Find inspo", root_path, class: "button-full find-inspo"%>
+      </div>
+
     <% else %>
+
       <h1 class="text-center mb-5 mt-3"> <%= @list.name %> </h1>
-      <div class="movie-cards">
+      <div class="basic-grid">
+
         <% @list.movies.each do |movie| %>
           <div class="row text-center">
             <%= link_to movie_path(movie, @list) do %>

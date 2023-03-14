@@ -21,9 +21,7 @@ movies["results"].each do |movie|
     title: movie['original_title'],
     description: movie['overview'],
     photo_url: "https://image.tmdb.org/t/p/original/#{movie['poster_path']}",
-    year: movie['release_date'],
-    duration: "",
-    director: ""
+    year: movie['release_date']
   )
   movie.save!
 

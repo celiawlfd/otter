@@ -6,7 +6,7 @@ static targets = ["input", "results"]
   connect() {
   }
 
-  // MOVIES
+  //MOVIES
 
    fetchMovies(query) {
      fetch(`http://www.omdbapi.com/?s=${query}&apikey=adf1f2d7`)
@@ -16,6 +16,7 @@ static targets = ["input", "results"]
    }
    insertMovies(data) {
      data.Search.forEach((result) => {
+
        const movieTag = `<div class="culturale-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url('${result.Poster}, crop: :fill %>')">
        <div>
          <div class="d-flex align-items-center card-stickers">
@@ -24,12 +25,15 @@ static targets = ["input", "results"]
          <p class="card-titre"> ${result.Title}</p>
          </div>
        </div>`
+
        this.resultsTarget.insertAdjacentHTML("beforeend", movieTag)
      })
    }
 
 
+
   // // BOOKS
+
   fetchBooks(query) {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`)
       .then(response => response.json())
@@ -40,6 +44,7 @@ static targets = ["input", "results"]
     data["items"].forEach((result) => {
       console.log(result);
 
+
       const bookTag = `<div class="culturale-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url('${result.volumeInfo.imageLinks.thumbnail}, crop: :fill %>')">
       <div>
         <div class="d-flex align-items-center card-stickers">
@@ -48,9 +53,11 @@ static targets = ["input", "results"]
         <p class="card-titre"> ${result.volumeInfo.title}</p>
         </div>
       </div>`
+
       this.resultsTarget.insertAdjacentHTML("beforeend", bookTag)
     })
   }
+
 
   //PODCAST
   fetchPodcasts(query) {
@@ -84,6 +91,7 @@ static targets = ["input", "results"]
 
 
 
+
   Search(event) {
     console.log(this.event)
     event.preventDefault()
@@ -91,5 +99,6 @@ static targets = ["input", "results"]
     this.fetchMovies(this.inputTarget.value)
     this.fetchBooks(this.inputTarget.value)
     this.fetchPodcasts(this.inputTarget.value)
+
   }
 }

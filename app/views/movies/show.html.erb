@@ -4,64 +4,64 @@
 <%# <% end %>
 
 <div class="pictures">
+  <% if  ListMovie.find_by(list: params[:format], movie: @movie) %>
+    <%= link_to list_movie_path(ListMovie.find_by(list: params[:format], movie: @movie)),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{@movie.title.capitalize} from #{List.find(params[:format]).name}?"} do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
+  <% end %>
   <%= image_tag @movie.photo_url, width: 350, class:"cover"  %>
   <%= image_tag @movie.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x"  %>
 </div>
 
-<div class="info mb-4">
-  <h1> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h1>
-  <p> <%= @movie.description %> </p>
-  <% if ListMovie.find_by(list: params[:format], movie: @movie) %>
-    <h5>Your comment</h5>
-    <p><%= ListMovie.find_by(list: params[:format], movie: @movie).comment %></p>
-    <p class="text-end"><%= link_to "Delete movie from list",
-    list_movie_path(ListMovie.find_by(list: params[:format], movie: @movie)),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    %></p>
+<h1 class="show-title"> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h1>
+
+<div class="my-3" data-controller="show-formlist">
+
+  <button data-action="click->show-formlist#showform" data-show-formlist-target="btn", class="button-full mt-4 my-4"><%= @movie.lists.where(user_id: current_user).empty? ? "Add to a list" : "Add to another list" %></button>
+
+  <div data-show-formlist-target="divform", class="d-none">
+    <h4>Add this movie to a list</h4>
+    <%= simple_form_for [@list, @list_movie], html: { data: { show_formlist_target: "form", action: "submit->show-formlist#hideform"}} do |f| %>
+      <%= f.hidden_field :movie_id, value: params[:id] %>
+      <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true },  :class => "border border-primary" %>
+      <%= f.input :comment %>
+      <%= f.submit 'Add', :class => "button-full" %>
+    <% end %>
+  </div>
+  
+  <% unless @movie.lists.where(user_id: current_user).empty? %>
+    <div class="d-flex flex-column align-items-center">
+      <small>You already saved this movie in :</small>
+      <small class="d-block"><%= @movie.lists.where(user_id: current_user).map(&:name).join(', ')%></small>
+    </div>
+  <% end %>
+</div>
+
+<div class="info">
+  <p class="text-center"> <%= @movie.description %> </p>
+  <% if ListMovie.find_by(list: params[:format], movie: @movie) && ListMovie.find_by(list: params[:format], movie: @movie).comment != ""  %>
+    <div class="d-flex align-items-center comment">
+      <i class="fa-solid fa-quote-left"></i>
+      <p><%= ListMovie.find_by(list: params[:format], movie: @movie).comment %></p>
+    </div>
   <% end  %>
 </div>
 
-<div class="title">
-  <div data-controller="show-formlist">
 
-    <% unless @movie.lists.where(user_id: current_user).empty? %>
-      <div class="d-flex flex-column align-items-center">
-        <small>You already saved this movie in :</small>
-        <small class="d-block"><%= @movie.lists.where(user_id: current_user).map(&:name).join(', ')%></small>
-      </div>
+<div class="reviews">
+  <% unless MovieReview.find_by(movie: @movie, user: current_user) %>
+    <h4 class="mt-4 text-center">Add a review</h4>
+    <% if @reviews.size == 0 %>
+      <small class="d-block text-center small-text">Be the first one to review this movie !</small>
     <% end %>
+    <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
+  <% end %>
 
-    <button data-action="click->show-formlist#showform" data-show-formlist-target="btn", class="button-full mb-5 mt-4"><%= @movie.lists.where(user_id: current_user).empty? ? "Add to a list" : "Add to another list" %></button>
-
-    <div data-show-formlist-target="divform", class="d-none">
-      <h4>Add this movie to a list</h4>
-      <%= simple_form_for [@list, @list_movie], html: { data: { show_formlist_target: "form", action: "submit->show-formlist#hideform"}} do |f| %>
-        <%= f.hidden_field :movie_id, value: params[:id] %>
-        <%= f.association :list, collection: current_user.lists, prompt: "Please choose one of your lists", input_html: { required: true },  :class => "border border-primary" %>
-        <%= f.input :comment %>
-        <%= f.submit 'Add', :class => "button-full" %>
-      <% end %>
-    </div>
-  </div>
-
-  <div>
-    <% unless MovieReview.find_by(movie: @movie, user: current_user) %>
-      <h4 class="mt-4">Add a review</h4>
-      <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
-      <hr>
-    <% end %>
-
-    <div>
-      <h4>Reviews</h4>
-        <% if @reviews.size >= 1 %>
-          <%= render "shared/stars_average", rating: @rating_av%>
-          <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews %>
-        <% else %>
-          <%= "Be the first one to review this movie !"%>
-        <% end %>
-        <hr>
-    </div>
-
+  <% if @reviews.size > 0 %>
+    <h4 class="text-center">Reviews</h4>
+    <%= render "shared/stars_average", rating: @rating_av%>
+    <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews %>
     <% if @myreview %>
       <h5>Your review</h5>
       <p><%= render "shared/stars_average", rating:  @myreview.rating %></p>
@@ -79,5 +79,5 @@
         <%= render "shared/review", review:review %>
       <% end %>
     <% end %>
-  </div>
+  <% end %>
 </div>
