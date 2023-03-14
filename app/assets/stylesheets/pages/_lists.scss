@@ -29,7 +29,8 @@
   margin: auto;
   border-radius: 20px;
   display:flex;
-  background-color: $tertiary;
+  background: rgb(180,88,177);
+  background: linear-gradient(56deg, rgba(180,88,177,1) 1%, rgba(114,177,176,1) 63%, rgba(164,233,149,1) 100%);
   background-size: cover;
   background-position: center;
   color: white;
