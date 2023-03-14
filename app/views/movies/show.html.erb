@@ -55,7 +55,7 @@
     <% if @reviews.size == 0 %>
       <small class="d-block text-center small-text">Be the first one to review this movie !</small>
     <% end %>
-    <p><%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %></p>
+    <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
   <% end %>
 
   <% if @reviews.size > 0 %>
