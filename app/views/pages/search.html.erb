@@ -4,8 +4,7 @@
     class: "form-control",
     placeholder: "Find a movie, a book or a podcast"
   %>
-    <i class="fa-solid fa-magnifying-glass"></i>
-
+    <button class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 <% end %>
 
   <div class="basic-grid pt-4">
@@ -27,4 +26,6 @@
         </div>
     <% end %>
   </div>
+  <% if @results.any? %>
    <a class="btn button-outline mt-5 btn-sm" href="search_api">Get more</a>
+   <% end %>
