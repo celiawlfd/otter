@@ -24,7 +24,7 @@ class PagesController < ApplicationController
   def search_api
     respond_to do |format|
       format.html
-      format.json {render partial: 'pages/card', locals: { culturale: results }, format: :html}
+      format.json {render partial: 'shared/card', locals: { culturale: results }, format: :html}
     end
   end
 end
