@@ -9,4 +9,6 @@ class Movie < ApplicationRecord
   include PgSearch::Model
   multisearchable against: [:title, :description]
 
+
+
 end
