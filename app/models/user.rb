@@ -62,3 +62,4 @@ class User < ApplicationRecord
     return true if relationship
   end
 end
+
