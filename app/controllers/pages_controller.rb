@@ -26,9 +26,10 @@ class PagesController < ApplicationController
   def search_api
     respond_to do |format|
       format.html
-      format.json { render partial: 'pages/card', locals: { culturale: result } }
+      format.json {render partial: 'shared/card', locals: { culturale: results }, format: :html}
     end
   end
+
 
   private
 
@@ -73,4 +74,5 @@ class PagesController < ApplicationController
     end
     uniq_podcasts
   end
+
 end

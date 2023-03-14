@@ -1,6 +1,7 @@
 <div data-controller="movie">
   <h1>Search_api</h1>
-  <%= form_with method: :get, html:{class: "d-flex", data: {action: "submit->movie#Search"}} do %>
+  <hr>
+  <%= form_with method: :get, html: { class: "d-flex", data: {action: "submit->movie#Search"} } do %>
     <%= text_field_tag :query,
       params[:query],
       class: "form-control",
@@ -9,6 +10,6 @@
     %>
     <%= submit_tag "Search", class: "btn btn-primary" %>
   <% end %>
-  <div class="feed-cards", data-movie-target="results">
-  </div>
+    <div class="basic-grid", data-movie-target="results">
+    </div>
 </div>
