@@ -28,6 +28,22 @@ movies["results"].each do |movie|
   puts "creating movie #{movie.id}, #{movie.title}"
 end
 
+movie_key = ENV["TMDB_KEY"]
+
+url_movies2 = "https://api.themoviedb.org/3/movie/popular?api_key=#{movie_key}"
+movies2 = JSON.parse(URI.open(url_movies2).read)
+movies2["results"].each do |movie|
+  movie = Movie.new(
+    title: movie['original_title'],
+    description: movie['overview'],
+    photo_url: "https://image.tmdb.org/t/p/original/#{movie['poster_path']}",
+    year: movie['release_date']
+  )
+  movie.save
+
+  puts "creating movie #{movie.id}, #{movie.title}"
+end
+
 Book.destroy_all
 puts "Creating Books"
 
