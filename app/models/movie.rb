@@ -3,6 +3,7 @@ class Movie < ApplicationRecord
   has_many :lists, through: :list_movies
   has_many :movie_reviews, dependent: :destroy
   validates :title, presence: true
+  validates :title, uniqueness: true
   validates :description, presence: true
 
   include PgSearch::Model
