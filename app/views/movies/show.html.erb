@@ -29,7 +29,7 @@
       <%= f.submit 'Add', :class => "button-full" %>
     <% end %>
   </div>
-  
+
   <% unless @movie.lists.where(user_id: current_user).empty? %>
     <div class="d-flex flex-column align-items-center">
       <small>You already saved this movie in :</small>
@@ -49,7 +49,7 @@
 </div>
 
 
-<div class="reviews">
+<div class="reviews" data-controller="timeago">
   <% unless MovieReview.find_by(movie: @movie, user: current_user) %>
     <h4 class="mt-4 text-center">Add a review</h4>
     <% if @reviews.size == 0 %>
@@ -63,20 +63,28 @@
     <%= render "shared/stars_average", rating: @rating_av%>
     <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews %>
     <% if @myreview %>
-      <h5>Your review</h5>
-      <p><%= render "shared/stars_average", rating:  @myreview.rating %></p>
+      <p><strong>Your review - <%= @myreview.rating %></strong> <i class="fa-solid fa-star"></i></p>
       <p><%= @myreview.content %></p>
-      <p class="text-end"><%= link_to "Delete my review",
-      movie_review_path(@myreview),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></p>
+      <div class="d-flex justify-content-between">
+      <%# <% raise %> %>
+        <p>Created <%= (DateTime.now.iso8601 - @myreview.created_at.iso8601) %></p>
+
+
+
+        <p class="text-end"><%= link_to "",
+        movie_review_path(@myreview),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"fa-solid fa-trash-can" %></p>
+      </div>
       <hr>
     <% end %>
 
     <h5>What other people think about</h5>
     <% @reviews.each do |review| %>
       <%# ++ sort first the review of your friends %>
-      <% if !review.content.empty? %>
-        <%= render "shared/review", review:review %>
+      <% if review.user_id != current_user.id %>
+        <% if !review.content.empty? ||  %>
+          <%= render "shared/review", review:review %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
