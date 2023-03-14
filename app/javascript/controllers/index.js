@@ -16,6 +16,9 @@ application.register("hello", HelloController)
 import InsertReviewController from "./insert_review_controller"
 application.register("insert-review", InsertReviewController)
 
+import MovieController from "./movie_controller"
+application.register("movie", MovieController)
+
 import ShowFormlistController from "./show_formlist_controller"
 application.register("show-formlist", ShowFormlistController)
 
