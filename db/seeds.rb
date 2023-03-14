@@ -57,7 +57,7 @@ url = 'https://api.spotify.com/v1/search?q=table&type=show&market=BE'
 headers = {
   'Accept' => 'application/json',
   'Content-Type' => 'application/json',
-  'Authorization' => 'Bearer BQAv3mUWVVk2oKeA8A4JuR98oawMKShvU67ra_idRvTqYwqCah4hvkM-XQsR5k0T5FpJVcdd7JQanHnkrXyVZ48_JNwx6wZJXOH1q7-fUMQnBBVahiUdmUvjElarYthb2QMRm9Bh5O2O0Ba6DCj1UOGV0a0bhh5AKkB3NR7A-774fNSa'
+  'Authorization' => 'Bearer BQC1GfNfLbcoqW7U-q_uT2_EcMAqdyKX3g-pSimyyqSV5RwgmG5XJ_E37BXcHhoa5Sbd3mJ8JPUn_p9hOwLAKRdGzTX2pvfgQDgVi4CLcTnAJ_qQIN56zro3_QYASCNdugLWbs6HXjNqhXkcweupmjhsfp4NEnLxCaySn8yz6dVw'
 
 }
 
