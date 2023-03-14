@@ -4,12 +4,12 @@
   <%= form_with method: :get, html: { class: "d-flex", data: {action: "submit->movie#Search"} } do %>
     <%= text_field_tag :query,
       params[:query],
-      class: "form-control",
+      class: "form-control form",
       placeholder: "Find a movie, a book or a podcast",
       data: {movie_target: "input"}
     %>
     <%= submit_tag "Search", class: "btn btn-primary" %>
   <% end %>
-    <div class="basic-grid", data-movie-target="results">
+    <div class="basic-grid pt-4", data-movie-target="results">
     </div>
 </div>
