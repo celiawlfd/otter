@@ -99,7 +99,7 @@ static targets = ["input", "results"]
       headers : {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization' : 'Bearer BQCFhNxBMWTcuqW3PasTyi0DJaRpx9-44_8Cy96OqJYPyzvtqCM9Mj7oB4s6RK5jSGNxiIxTM4pTm0t3qnyxSqHIzM9U6QlZYjdea08WWkkNw3U3DaVU'
+        'Authorization' : 'Bearer BQDepC5Ejb0FO-_LtvUqx5CkkxGjZveztsUmZPTl2MsdMxhhTkTj4OByCv4WZfZzu3M17rgx6GRdMG3rlUSNRIcsEU9ik2Yrw-Pf2k9jhIeMcvOL4UTK'
 
       }
     })
