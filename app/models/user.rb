@@ -47,7 +47,7 @@ class User < ApplicationRecord
     to_discover.photo.attach(io: file, filename: "color.png", content_type: "image/png")
     to_discover.save
 
-    to_recommend = List.new(name: "To recommEnd")
+    to_recommend = List.new(name: "To recommend")
     to_recommend.user = self
     to_recommend.photo.attach(io: file, filename: "color.png", content_type: "image/png")
     to_recommend.save
