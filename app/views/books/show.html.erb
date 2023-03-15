@@ -59,7 +59,7 @@
     <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews%>
     <% if @myreview %>
     <div class="d-flex justify-content-between">
-      <p><strong>Your review - <%= @myreview.rating %> </strong> <i class="fa-solid fa-star"></i></p>
+      <p><strong>Your review - <%= @myreview.rating %> </strong> <i class="fa-solid fa-star"></i><small class="text-muted"> <%= (@myreview.created_at.strftime("%d %b %Y")) %></small></p>
       <p class="text-end"><%= link_to "",
         book_review_path(@myreview),
         data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},  class:"fa-solid fa-trash-can text-end"%></p>
@@ -70,34 +70,30 @@
 
     <h5>What other people think about</h5>
     <div>
-<%# instance variable that holds that holds friends review qu'on va iterer %>
+
     <% @reviews.each do |review| %>
 
       <% if current_user.is_following?(review.user_id) %>
-        <% friends_reviews = [] %>
-        <% friends_reviews << review %>
-        <% friends_reviews.each do |review| %>
-          <% if !review.content.empty? %>
-            <%= render "shared/review", review: review %>
-          <% end %>
-        <% end %>
-
+        <% @friends_reviews << review %>
       <% else %>
-      <% others_reviews = [] %>
-        <% others_reviews << review %>
-        <% others_reviews.each do |review| %>
-          <% if review.user_id != current_user.id %>
-            <% if !review.content.empty? %>
-              <%= render "shared/review", review: review %>
-            <% end %>
-          <% end %>
+        <% @others_reviews << review %>
+      <% end %>
+
+    <% end %>
+
+    <% @friends_reviews.each do |review| %>
+      <% if !review.content.empty? %>
+        <%= render "shared/review", review: review %>
+      <% end %>
+    <% end %>
+
+    <% @others_reviews.each do |review| %>
+      <% if review.user_id != current_user.id %>
+        <% if !review.content.empty? %>
+          <%= render "shared/review", review: review %>
         <% end %>
       <% end %>
     <% end %>
 
   <% end %>
-<%# autre array avec les autres reviews %>
-
-
-  </div>
 </div>

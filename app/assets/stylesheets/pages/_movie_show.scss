@@ -85,6 +85,16 @@ p {
   margin: 40px 0;
 
   .small-text {
-    padding-bottom: 20px;
+    padding-bottom: 15px;
   }
+}
+
+.friends {
+  color: rgba(255, 187, 43, 0.8);
+  -webkit-text-stroke: 1px rgba(255, 187, 43, 1);
+}
+
+.fa-star {
+  vertical-align: 15%;
+  font-size: 11px
 }

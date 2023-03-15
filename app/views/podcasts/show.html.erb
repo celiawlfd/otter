@@ -66,7 +66,7 @@
 
   <% if @myreview %>
   <div class="d-flex justify-content-between">
-    <p><strong>Your review - <%= @myreview.rating %></strong><i class="fa-solid fa-star"></i></p>
+    <p><strong>Your review - <%= @myreview.rating %></strong><i class="fa-solid fa-star"></i> <small class="text-muted"> <%= (@myreview.created_at.strftime("%d %b %Y")) %></small></p>
     <p class="text-end"> <%= link_to "",
       podcast_review_path(@myreview),
       data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"fa-solid fa-trash-can text-end" %> </p>
@@ -76,13 +76,32 @@
   <% end %>
 
   <h5>What other people think about it</h5>
-  <div>
+
+
     <% @reviews.each do |review| %>
-    <% if review.user_id != current_user.id %>
+
+      <% if current_user.is_following?(review.user_id) %>
+        <% @friends_reviews << review %>
+      <% else %>
+        <% @others_reviews << review %>
+      <% end %>
+
+    <% end %>
+
+    <% @friends_reviews.each do |review| %>
       <% if !review.content.empty? %>
+        <%= render "shared/review", review: review %>
+      <% end %>
+    <% end %>
+
+    <% @others_reviews.each do |review| %>
+      <% if review.user_id != current_user.id %>
+        <% if !review.content.empty? %>
           <%= render "shared/review", review: review %>
         <% end %>
+      <% end %>
     <% end %>
+
   <% end %>
-  </div>
+
 </div>
