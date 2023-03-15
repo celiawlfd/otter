@@ -1,3 +1,7 @@
+<% content_for :meta_title, "#{@podcast.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @podcast.description %>
+<% content_for :meta_image, cl_image_path(@podcast.photo.key) if @podcast.photo.attached? %>
+
 <div class="pictures">
   <% if  ListPodcast.find_by(list: params[:format], podcast: @podcast) %>
     <%= link_to list_podcast_path(ListPodcast.find_by(list: params[:format], podcast: @podcast)),
