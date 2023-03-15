@@ -8,9 +8,8 @@ static targets = ["input", "results"]
 
   //MOVIES
 
-
-  fetchMovies(query) {
-     fetch(`http://www.omdbapi.com/?s=${query}&apikey=18ecedbb`)
+   fetchMovies(query) {
+     fetch(`http://www.omdbapi.com/?s=${query}&apikey=adf1f2d7`)
        .then(response => response.json())
        .then(data => this.insertMovies(data))
    }
