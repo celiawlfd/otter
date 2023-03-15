@@ -13,16 +13,12 @@ class PagesController < ApplicationController
   end
 
   def search
-    movies = Movie.all
-    books = Book.all
-    podcasts = Podcast.all
-    users = User.all
-    PgSearch::Multisearch.rebuild(Movie)
-    PgSearch::Multisearch.rebuild(Book)
-    PgSearch::Multisearch.rebuild(Podcast)
-    PgSearch::Multisearch.rebuild(User)
+    @movies = Movie.search_by_title(params[:query])
+    @books = Book.search_by_title(params[:query])
+    @podcasts = Podcast.search_by_title(params[:query])
+    @users = User.search_by_title(params[:query])
 
-    @results = PgSearch.multisearch(params[:query])
+    @results = [@movies, @books, @podcasts, @users].flatten
   end
 
   def search_api

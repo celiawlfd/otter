@@ -1,6 +1,5 @@
 <% content_for :meta_title, "#{@book.title} is on #{DEFAULT_META["meta_product_name"]}" %>
 <% content_for :meta_description, @book.description %>
-<% content_for :meta_image, cl_image_path(@book.photo.key) if @book.photo.attached? %>
 
 
 <div class="pictures">
@@ -12,9 +11,12 @@
   <% end %>
   <%= image_tag @book.photo_url, width: 350, class:"cover" %>
   <%= image_tag @book.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x" %>
-  <%= link_to new_book_book_recommendation_path(@book) do %>
-    <i class="fa-regular fa-paper-plane"></i>
-  <% end %>
+  <div class= "d-flex justify-content-between">
+    <p><i class="fa-solid fa-thumbtack"></i> <%= @book.list_books.size %></p>
+    <%= link_to new_book_book_recommendation_path(@book) do %>
+      <i class="fa-regular fa-paper-plane"></i>
+    <% end %>
+  </div>
 </div>
 
 <h1 class="show-title"> <%= @book.title %> <small> (<%= @book.year %>) </small> </h1>

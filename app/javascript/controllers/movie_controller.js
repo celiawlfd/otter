@@ -15,32 +15,40 @@ static targets = ["input", "results"]
    }
    insertMovies(data) {
     data.Search.forEach((result) => {
-    const movieTag = `
 
-    <div>
-      <form class="simple_form new_movie" id="${result.imdbID}" novalidate="novalidate" action="/movies" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="b9brpM_3fEkQR9iRK2tkBKsOslAu0LrhAY8VYAnlFB5XjAlI_kujodjFrwnkrgIaRsHk8iveDfe8zQK3V2pu9Q" autocomplete="off" />
-        <div class="mb-3 movie_title"><input class="form-control" type="hidden" name="movie[title]" id="movie_title" value="${result.Title}"/></div>
-        <div class="mb-3 movie_description"><textarea class="form-control" style="display:none;" name="movie[description]" id="movie_description" >look at Imdb to have more information.</textarea></div>
-        <div class="mb-3 movie_year"><input class="form-control" type="hidden" step="1" name="movie[year]" id="movie_year" value="${result.Year}"/></div>
-        <div class="mb-3 movie_photo_url"><input class="form-control" type="hidden" name="movie[photo_url]" id="movie_photo_url" value="${result.Poster}"/></div>
-      </form>
+    fetch(`http://www.omdbapi.com/?i=${result.imdbID}&plot=full&apikey=adf1f2d7`)
+      .then(response => response.json())
+      .then(data => {const plot = data.Plot
+        const movieTag = `
 
-
-      <button type="submit" form="${result.imdbID}" class="card-btn">
-        <div class="culturale-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url('${result.Poster}, crop: :fill')">
         <div>
-          <div class="d-flex align-items-center card-stickers">
-            <small class="card-categorie" style="background-color: rgba(255, 187, 43, 0.8); border: 1px solid rgb(255, 187, 43)">Movie</small>
-          </div>
-          <p class="card-titre"> ${result.Title}</p>
-          </div>
-        </div>
-      </button>
-    </div>`
+          <form class="simple_form new_movie" id="${result.imdbID}" novalidate="novalidate" action="/movies" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="b9brpM_3fEkQR9iRK2tkBKsOslAu0LrhAY8VYAnlFB5XjAlI_kujodjFrwnkrgIaRsHk8iveDfe8zQK3V2pu9Q" autocomplete="off" />
+            <div class="mb-3 movie_title"><input class="form-control" type="hidden" name="movie[title]" id="movie_title" value="${result.Title}"/></div>
+            <div class="mb-3 movie_description"><textarea class="form-control" style="display:none;" name="movie[description]" id="movie_description" >${plot}</textarea></div>
+            <div class="mb-3 movie_year"><input class="form-control" type="hidden" step="1" name="movie[year]" id="movie_year" value="${result.Year}"/></div>
+            <div class="mb-3 movie_photo_url"><input class="form-control" type="hidden" name="movie[photo_url]" id="movie_photo_url" value="${result.Poster}"/></div>
+          </form>
 
-       this.resultsTarget.insertAdjacentHTML("beforeend", movieTag)
+
+          <button type="submit" form="${result.imdbID}" class="card-btn">
+            <div class="culturale-card" style="width: 100%, height: 100%; background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url('${result.Poster}, crop: :fill')">
+            <div>
+              <div class="d-flex align-items-center card-stickers">
+                <small class="card-categorie" style="background-color: rgba(255, 187, 43, 0.8); border: 1px solid rgb(255, 187, 43)">Movie</small>
+              </div>
+              <p class="card-titre"> ${result.Title}</p>
+              </div>
+            </div>
+          </button>
+        </div>`
+
+           this.resultsTarget.insertAdjacentHTML("beforeend", movieTag)
+      })
+
+
      })
    }
+
 
 
 
@@ -92,6 +100,7 @@ static targets = ["input", "results"]
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization' : 'Bearer BQCFhNxBMWTcuqW3PasTyi0DJaRpx9-44_8Cy96OqJYPyzvtqCM9Mj7oB4s6RK5jSGNxiIxTM4pTm0t3qnyxSqHIzM9U6QlZYjdea08WWkkNw3U3DaVU'
+
       }
     })
       .then(response => response.json())
@@ -126,10 +135,6 @@ static targets = ["input", "results"]
       this.resultsTarget.insertAdjacentHTML("beforeend", podcastTag)
     })
   }
-
-
-
-
 
 
   Search(event) {
