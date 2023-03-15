@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :username, uniqueness: true
+  validates :username, uniqueness: { case_sensitive: false }
   validates :username, presence: true
   validates :username, length: { minimum: 3 }
   has_many :lists, dependent: :destroy
@@ -66,4 +66,3 @@ class User < ApplicationRecord
     return true if relationship
   end
 end
-
