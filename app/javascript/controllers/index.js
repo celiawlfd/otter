@@ -10,6 +10,9 @@ application.register("edit-list", EditListController)
 import FormController from "./form_controller"
 application.register("form", FormController)
 
+import GetMoreController from "./get_more_controller"
+application.register("get-more", GetMoreController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
@@ -18,6 +21,9 @@ application.register("movie", MovieController)
 
 import ShowFormlistController from "./show_formlist_controller"
 application.register("show-formlist", ShowFormlistController)
+
+import ShowMoreController from "./show_more_controller"
+application.register("show-more", ShowMoreController)
 
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)

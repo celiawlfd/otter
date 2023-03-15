@@ -18,7 +18,9 @@ class PagesController < ApplicationController
     @podcasts = Podcast.search_by_title(params[:query])
     @users = User.search_by_title(params[:query])
 
+
     @results = [@movies, @books, @podcasts, @users].flatten
+
   end
 
   def search_api
