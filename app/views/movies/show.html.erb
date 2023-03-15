@@ -54,7 +54,7 @@
 </div>
 
 
-<div class="reviews" data-controller="timeago">
+<div class="reviews">
   <% unless MovieReview.find_by(movie: @movie, user: current_user) %>
     <h4 class="mt-4 text-center">Add a review</h4>
     <% if @reviews.size == 0 %>
