@@ -23,6 +23,7 @@ class PagesController < ApplicationController
     PgSearch::Multisearch.rebuild(User)
 
     @results = PgSearch.multisearch(params[:query])
+
   end
 
   def search_api
