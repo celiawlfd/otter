@@ -31,8 +31,8 @@ class UsersController < ApplicationController
     movierecos = @user.received_movierecommendations
     bookrecos = @user.received_bookrecommendations
     podcastrecos = @user.received_podcastrecommendations
-    
-    @recommendations = [movierecos, bookrecos, podcastrecos].flatten
+
+    @recommendations = [movierecos, bookrecos, podcastrecos].flatten.sort_by {|obj| obj.created_at}.reverse
   end
 
   private

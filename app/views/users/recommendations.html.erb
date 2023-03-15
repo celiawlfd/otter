@@ -4,14 +4,19 @@
   <div class="m-3 p-2">
     <div class = "d-flex align-items-center">
       <%= cl_image_tag recommendation.giver.photo.key, height: 40, width: 40, crop: :fill, class: "avatar me-3" %>
-      <p class="me-2"><%= recommendation.giver.username.capitalize%> recommended</p>
-      <% if recommendation.is_a?(MovieRecommendation) %>
-        <strong><%= link_to recommendation.movie.title, movie_path(recommendation.movie) %></strong>
-      <% elsif recommendation.is_a?(BookRecommendation) %>
-        <strong><%= link_to recommendation.book.title, book_path(recommendation.book) %></strong>
-      <% elsif recommendation.is_a?(PodcastRecommendation) %>
-        <strong><%= link_to recommendation.podcast.title, podcast_path(recommendation.podcast) %></strong>
-      <% end %>
+      <div class="w-100">
+        <div class="d-flex justify-content-between">
+          <p><%= recommendation.giver.username.capitalize%> recommended</p>
+          <small class="text-muted"><%= recommendation.created_at.strftime("%d %b %Y") %></small class="text-muted">
+        </div>
+        <% if recommendation.is_a?(MovieRecommendation) %>
+          <strong><%= link_to recommendation.movie.title, movie_path(recommendation.movie) %></strong>
+        <% elsif recommendation.is_a?(BookRecommendation) %>
+          <strong><%= link_to recommendation.book.title, book_path(recommendation.book) %></strong>
+        <% elsif recommendation.is_a?(PodcastRecommendation) %>
+          <strong><%= link_to recommendation.podcast.title, podcast_path(recommendation.podcast) %></strong>
+        <% end %>
+      </div>
     </div>
     <% if recommendation.message != "" %>
       <p class="message"><i class="fa-regular fa-comment-dots me-2"></i><%= recommendation.message %></p>

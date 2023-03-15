@@ -16,7 +16,7 @@ static targets = ["input", "results"]
    insertMovies(data) {
     data.Search.forEach((result) => {
 
-    fetch(`http://www.omdbapi.com/?i=${result.imdbID}&plot=full&apikey=adf1f2d7`)
+    fetch(`https://www.omdbapi.com/?i=${result.imdbID}&plot=full&apikey=adf1f2d7`)
       .then(response => response.json())
       .then(data => {const plot = data.Plot
         const movieTag = `
