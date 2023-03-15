@@ -3,6 +3,7 @@ class MovieRecommendationsController < ApplicationController
 
   def new
     @moviereco = MovieRecommendation.new
+    @friends = current_user.following.map { |follow| follow.username if follow.is_following?(current_user) }.compact
   end
 
   def create
@@ -27,4 +28,3 @@ class MovieRecommendationsController < ApplicationController
     @movie = Movie.find(params[:movie_id])
   end
 end
- 

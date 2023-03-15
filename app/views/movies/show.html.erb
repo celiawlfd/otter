@@ -1,7 +1,6 @@
-
-<%# <%= link_to :back do %>
-  <%# <i class="fa-solid fa-angles-left"></i> %>
-<%# <% end %>
+<% content_for :meta_title, "#{@movie.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @movie.description %>
+<% content_for :meta_image, cl_image_path(@movie.photo.key) if @movie.photo.attached? %>
 
 <div class="pictures">
   <% if  ListMovie.find_by(list: params[:format], movie: @movie) %>
