@@ -13,9 +13,6 @@ application.register("form", FormController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import InsertReviewController from "./insert_review_controller"
-application.register("insert-review", InsertReviewController)
-
 import MovieController from "./movie_controller"
 application.register("movie", MovieController)
 
@@ -24,3 +21,6 @@ application.register("show-formlist", ShowFormlistController)
 
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)
+
+import Timeago from "./timeago_controller"
+application.register('timeago', Timeago)

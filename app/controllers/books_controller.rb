@@ -9,6 +9,8 @@ class BooksController < ApplicationController
     @book_review = BookReview.new
     @reviews = @book.book_reviews
     @rating_av = rating_average(@reviews)
+    @friends_reviews = []
+    @others_reviews = []
 
     @list = List.last
     @list_book = ListBook.new

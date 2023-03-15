@@ -54,13 +54,13 @@
 </div>
 
 
-<div class="reviews">
+<div class="reviews" data-controller="timeago">
   <% unless MovieReview.find_by(movie: @movie, user: current_user) %>
     <h4 class="mt-4 text-center">Add a review</h4>
     <% if @reviews.size == 0 %>
       <small class="d-block text-center small-text">Be the first one to review this movie !</small>
     <% end %>
-    <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
+    <p><%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %></p>
   <% end %>
 
   <% if @reviews.size > 0 %>
@@ -68,21 +68,42 @@
     <%= render "shared/stars_average", rating: @rating_av%>
     <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews %>
     <% if @myreview %>
-      <h5>Your review</h5>
-      <p><%= render "shared/stars_average", rating:  @myreview.rating %></p>
+
+    <div class="d-flex justify-content-between">
+      <p><strong>Your review - <%= @myreview.rating %></strong> <i class="fa-solid fa-star"></i><small class="text-muted"> <%= (@myreview.created_at.strftime("%d %b %Y")) %></small></p>
+      <p><%= link_to "",
+        movie_review_path(@myreview),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"fa-solid fa-trash-can text-end" %></p>
+    </div>
       <p><%= @myreview.content %></p>
-      <p class="text-end"><%= link_to "Delete my review",
-      movie_review_path(@myreview),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></p>
       <hr>
     <% end %>
 
     <h5>What other people think about</h5>
+
     <% @reviews.each do |review| %>
-      <%# ++ sort first the review of your friends %>
+
+      <% if current_user.is_following?(review.user_id) %>
+        <% @friends_reviews << review %>
+      <% else %>
+        <% @others_reviews << review %>
+      <% end %>
+
+    <% end %>
+
+    <% @friends_reviews.each do |review| %>
       <% if !review.content.empty? %>
-        <%= render "shared/review", review:review %>
+        <%= render "shared/review", review: review %>
       <% end %>
     <% end %>
+
+    <% @others_reviews.each do |review| %>
+      <% if review.user_id != current_user.id %>
+        <% if !review.content.empty? %>
+          <%= render "shared/review", review: review %>
+        <% end %>
+      <% end %>
+    <% end %>
+
   <% end %>
 </div>

@@ -10,6 +10,8 @@ class PodcastsController < ApplicationController
     @podcast_review = PodcastReview.new
     @reviews = @podcast.podcast_reviews
     @rating_av = rating_average(@reviews)
+    @friends_reviews = []
+    @others_reviews = []
 
     @list = List.last
     @list_podcast = ListPodcast.new
