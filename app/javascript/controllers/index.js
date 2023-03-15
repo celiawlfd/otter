@@ -16,8 +16,5 @@ application.register("hello", HelloController)
 import MovieController from "./movie_controller"
 application.register("movie", MovieController)
 
-import ShowMoreController from "./show_more_controller"
-application.register("show-more", ShowMoreController)
-
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)
