@@ -10,6 +10,8 @@ class MoviesController < ApplicationController
     @movie_review = MovieReview.new
     @reviews = @movie.movie_reviews
     @rating_av = rating_average(@reviews)
+    @friends_reviews = []
+    @others_reviews = []
 
     @list = List.last
     @list_movie = ListMovie.new
@@ -24,7 +26,7 @@ class MoviesController < ApplicationController
     if @movie.save
       redirect_to movie_path(@movie)
     else
-      render :new, status: :unprocessable_entity
+      redirect_to movie_path(Movie.find_by(title: @movie.title))
     end
   end
 

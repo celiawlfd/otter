@@ -1,8 +1,0 @@
-<h1>Create a movie</h1>
-<%=  simple_form_for @movie do |f|%>
-  <%= f.input :title %>
-  <%= f.input :description %>
-  <%= f.input :year %>
-  <%= f.input :photo_url, hint: 'We need the Url of the movie poster', required: true %>
-  <%= f.submit %>
-<% end %>

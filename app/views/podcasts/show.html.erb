@@ -1,3 +1,6 @@
+<% content_for :meta_title, "#{@podcast.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @podcast.description %>
+
 <div class="pictures">
   <% if  ListPodcast.find_by(list: params[:format], podcast: @podcast) %>
     <%= link_to list_podcast_path(ListPodcast.find_by(list: params[:format], podcast: @podcast)),
@@ -7,9 +10,12 @@
   <% end %>
   <%= image_tag @podcast.photo_url, width: 350, class:"cover" %>
   <%= image_tag @podcast.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x" %>
-  <%= link_to new_podcast_podcast_recommendation_path(@podcast) do %>
-    <i class="fa-regular fa-paper-plane"></i>
-  <% end %>
+  <div class= "d-flex justify-content-between">
+    <p><i class="fa-solid fa-thumbtack"></i> <%= @book.list_books.size %></p>
+    <%= link_to new_podcast_podcast_recommendation_path(@podcast) do %>
+      <i class="fa-regular fa-paper-plane"></i>
+    <% end %>
+  </div>
 </div>
 
 <h1 class="show-title"> <%= @podcast.title %> <small> ( <%= @podcast.publisher %> ) </small> </h1>
@@ -68,21 +74,43 @@
   </div>
 
   <% if @myreview %>
-    <h5>Your review</h5>
-    <p> <%= render "shared/stars_average", rating: @myreview.rating %> </p>
-    <p> <%= @myreview.content %> </p>
-    <p class="text-end"> <%= link_to "Delete my review",
-    podcast_review_path(@myreview),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> </p>
+  <div class="d-flex justify-content-between">
+    <p><strong>Your review - <%= @myreview.rating %></strong><i class="fa-solid fa-star"></i> <small class="text-muted"> <%= (@myreview.created_at.strftime("%d %b %Y")) %></small></p>
+    <p class="text-end"> <%= link_to "",
+      podcast_review_path(@myreview),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"fa-solid fa-trash-can text-end" %> </p>
+    </div>
+    <p><%= @myreview.content %></p>
     <hr>
   <% end %>
 
   <h5>What other people think about it</h5>
-  <div>
+
+
     <% @reviews.each do |review| %>
-    <% if !review.content.empty? %>
-      <%= render "shared/review", review: review %>
+
+      <% if current_user.is_following?(review.user_id) %>
+        <% @friends_reviews << review %>
+      <% else %>
+        <% @others_reviews << review %>
+      <% end %>
+
     <% end %>
+
+    <% @friends_reviews.each do |review| %>
+      <% if !review.content.empty? %>
+        <%= render "shared/review", review: review %>
+      <% end %>
+    <% end %>
+
+    <% @others_reviews.each do |review| %>
+      <% if review.user_id != current_user.id %>
+        <% if !review.content.empty? %>
+          <%= render "shared/review", review: review %>
+        <% end %>
+      <% end %>
+    <% end %>
+
   <% end %>
-  </div>
+
 </div>

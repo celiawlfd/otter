@@ -1,7 +1,5 @@
-
-<%# <%= link_to :back do %>
-  <%# <i class="fa-solid fa-angles-left"></i> %>
-<%# <% end %>
+<% content_for :meta_title, "#{@movie.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @movie.description %>
 
 <div class="pictures">
   <% if  ListMovie.find_by(list: params[:format], movie: @movie) %>
@@ -12,9 +10,12 @@
   <% end %>
   <%= image_tag @movie.photo_url, width: 350, class:"cover"  %>
   <%= image_tag @movie.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x"  %>
-  <%= link_to new_movie_movie_recommendation_path(@movie) do %>
-    <i class="fa-regular fa-paper-plane"></i>
-  <% end %>
+  <div class= "d-flex justify-content-between">
+    <p><i class="fa-solid fa-thumbtack"></i> <%= @movie.list_movies.size %></p>
+    <%= link_to new_movie_movie_recommendation_path(@movie) do %>
+      <i class="fa-regular fa-paper-plane"></i>
+    <% end %>
+  </div>
 </div>
 
 <h1 class="show-title"> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h1>
@@ -59,7 +60,7 @@
     <% if @reviews.size == 0 %>
       <small class="d-block text-center small-text">Be the first one to review this movie !</small>
     <% end %>
-    <%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %>
+    <p><%= render "movies/form_review", movie: @movie, movie_review: @movie_review  %></p>
   <% end %>
 
   <% if @reviews.size > 0 %>
@@ -67,21 +68,42 @@
     <%= render "shared/stars_average", rating: @rating_av%>
     <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews %>
     <% if @myreview %>
-      <h5>Your review</h5>
-      <p><%= render "shared/stars_average", rating:  @myreview.rating %></p>
+
+    <div class="d-flex justify-content-between">
+      <p><strong>Your review - <%= @myreview.rating %></strong> <i class="fa-solid fa-star"></i><small class="text-muted"> <%= (@myreview.created_at.strftime("%d %b %Y")) %></small></p>
+      <p><%= link_to "",
+        movie_review_path(@myreview),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"fa-solid fa-trash-can text-end" %></p>
+    </div>
       <p><%= @myreview.content %></p>
-      <p class="text-end"><%= link_to "Delete my review",
-      movie_review_path(@myreview),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></p>
       <hr>
     <% end %>
 
     <h5>What other people think about</h5>
+
     <% @reviews.each do |review| %>
-      <%# ++ sort first the review of your friends %>
+
+      <% if current_user.is_following?(review.user_id) %>
+        <% @friends_reviews << review %>
+      <% else %>
+        <% @others_reviews << review %>
+      <% end %>
+
+    <% end %>
+
+    <% @friends_reviews.each do |review| %>
       <% if !review.content.empty? %>
-        <%= render "shared/review", review:review %>
+        <%= render "shared/review", review: review %>
       <% end %>
     <% end %>
+
+    <% @others_reviews.each do |review| %>
+      <% if review.user_id != current_user.id %>
+        <% if !review.content.empty? %>
+          <%= render "shared/review", review: review %>
+        <% end %>
+      <% end %>
+    <% end %>
+
   <% end %>
 </div>

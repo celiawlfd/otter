@@ -1,3 +1,7 @@
+<% content_for :meta_title, "#{@book.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @book.description %>
+
+
 <div class="pictures">
   <% if  ListBook.find_by(list: params[:format], book: @book) %>
     <%= link_to list_book_path(ListBook.find_by(list: params[:format], book: @book)),
@@ -7,9 +11,12 @@
   <% end %>
   <%= image_tag @book.photo_url, width: 350, class:"cover" %>
   <%= image_tag @book.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x" %>
-  <%= link_to new_book_book_recommendation_path(@book) do %>
-    <i class="fa-regular fa-paper-plane"></i>
-  <% end %>
+  <div class= "d-flex justify-content-between">
+    <p><i class="fa-solid fa-thumbtack"></i> <%= @book.list_books.size %></p>
+    <%= link_to new_book_book_recommendation_path(@book) do %>
+      <i class="fa-regular fa-paper-plane"></i>
+    <% end %>
+  </div>
 </div>
 
 <h1 class="show-title"> <%= @book.title %> <small> (<%= @book.year %>) </small> </h1>
@@ -60,22 +67,42 @@
     <%= render "shared/stars_average", rating: @rating_av%>
     <%= render "shared/average_rating", rating_av: @rating_av, reviews: @reviews%>
     <% if @myreview %>
-      <h5>Your review</h5>
-      <p><%= render "shared/stars_average", rating:  @myreview.rating %></p>
+    <div class="d-flex justify-content-between">
+      <p><strong>Your review - <%= @myreview.rating %> </strong> <i class="fa-solid fa-star"></i><small class="text-muted"> <%= (@myreview.created_at.strftime("%d %b %Y")) %></small></p>
+      <p class="text-end"><%= link_to "",
+        book_review_path(@myreview),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},  class:"fa-solid fa-trash-can text-end"%></p>
+      </div>
       <p><%= @myreview.content %></p>
-      <p class="text-end"><%= link_to "Delete my review",
-      book_review_path(@myreview),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></p>
       <hr>
     <% end %>
 
     <h5>What other people think about</h5>
     <div>
-      <% @reviews.each do |review| %>
+
+    <% @reviews.each do |review| %>
+
+      <% if current_user.is_following?(review.user_id) %>
+        <% @friends_reviews << review %>
+      <% else %>
+        <% @others_reviews << review %>
+      <% end %>
+
+    <% end %>
+
+    <% @friends_reviews.each do |review| %>
+      <% if !review.content.empty? %>
+        <%= render "shared/review", review: review %>
+      <% end %>
+    <% end %>
+
+    <% @others_reviews.each do |review| %>
+      <% if review.user_id != current_user.id %>
         <% if !review.content.empty? %>
           <%= render "shared/review", review: review %>
         <% end %>
       <% end %>
-    </div>
+    <% end %>
+
   <% end %>
 </div>

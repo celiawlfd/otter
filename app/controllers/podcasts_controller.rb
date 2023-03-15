@@ -10,6 +10,8 @@ class PodcastsController < ApplicationController
     @podcast_review = PodcastReview.new
     @reviews = @podcast.podcast_reviews
     @rating_av = rating_average(@reviews)
+    @friends_reviews = []
+    @others_reviews = []
 
     @list = List.last
     @list_podcast = ListPodcast.new
@@ -20,7 +22,7 @@ class PodcastsController < ApplicationController
     if @podcast.save
       redirect_to podcast_path(@podcast)
     else
-      render "pages/search_api", status: :unprocessable_entity
+      redirect_to podcast_path(Podcast.find_by(title: @podcast.title))
     end
   end
 
