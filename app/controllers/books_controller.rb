@@ -19,7 +19,8 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to book_path(@book)
     else
-      render "pages/search_api", status: :unprocessable_entity
+      redirect_to book_path(Book.find_by(title: @book.title))
+      # flash[:alert] = "Sorry, this book is already in the database"
     end
   end
 

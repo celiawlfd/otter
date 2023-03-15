@@ -1,14 +1,13 @@
 <div class= "list-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path list.photo.key, height: 180, width: 180, crop: :fill %>')">
-  <div></div>
+  <div class="d-flex justify-content-between align-items-center">
+    <p><i class="fa-solid fa-thumbtack"></i> <%= (list.list_movies.size) + (list.list_books.size) + (list.list_podcasts.size) %></p>
+    <% if @user == current_user %>
+        <i class="fa-solid fa-pencil fa-sm" data-action="click->edit-list#displayForm"></i>
+    <% else %>
+      <div></div>
+    <% end %>
+  </div>
   <%= link_to list_path(list), data: {edit_list_target: "infos"} do %>
-    <h6 class="mb-0"><%= list.name%></h6>
-    <% pins = (list.list_movies.size) + (list.list_books.size) + (list.list_podcasts.size) %>
-    <p><%= pluralize(pins, "Pin") %></p>
+    <h6 class="mb-0 text-center"><%= list.name%></h6>
   <% end %>
-  <% if @user == current_user %>
-      <i class="fa-solid fa-pencil fa-sm" data-action="click->edit-list#displayForm"></i>
-  <% else %>
-    <div></div>
-  <% end %>
-
 </div>

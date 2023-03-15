@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ['divform', 'form', 'btn']
 
   connect() {
-    console.log('hello')
   }
 
   showform() {

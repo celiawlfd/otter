@@ -6,7 +6,11 @@ class Book < ApplicationRecord
   validates :title, uniqueness: true
 
 
+  
   include PgSearch::Model
-  multisearchable against: [:title, :description]
+  pg_search_scope :search_by_title, against: [:title,:description,:author],
+  using: {
+    tsearch: { prefix: true }
+  }
 
 end
