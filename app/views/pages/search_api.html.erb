@@ -11,3 +11,7 @@
     <div class="basic-grid pt-4", data-movie-target="results">
     </div>
 </div>
+
+<% if @results.empty? %>
+  <p> Sorry, we don't have what you're looking for in our database, fortunately you can add it yourself so that other users can enjoy it too ! </p>
+<% end %>
