@@ -91,7 +91,7 @@ static targets = ["input", "results"]
       headers : {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization' : 'Bearer BQC1GfNfLbcoqW7U-q_uT2_EcMAqdyKX3g-pSimyyqSV5RwgmG5XJ_E37BXcHhoa5Sbd3mJ8JPUn_p9hOwLAKRdGzTX2pvfgQDgVi4CLcTnAJ_qQIN56zro3_QYASCNdugLWbs6HXjNqhXkcweupmjhsfp4NEnLxCaySn8yz6dVw'
+        'Authorization' : 'Bearer BQB8Q5pRi8VIQJaZKHlSOdVXMs52Bms3_gKgUELIviTyCjVWAeDBY1iUGPNeZRhFK5KAQJr51WQpGTHKDSSTYdQ9TyPInEVZF1Q6L2IrlfqW8gYnRRJlxt8axuMO1FbKMck4NDrXgUprmSt2YNg-lYtuGqJ2S9psEmvxUk7unSM1'
       }
     })
       .then(response => response.json())
@@ -126,10 +126,6 @@ static targets = ["input", "results"]
       this.resultsTarget.insertAdjacentHTML("beforeend", podcastTag)
     })
   }
-
-
-
-
 
 
   Search(event) {
