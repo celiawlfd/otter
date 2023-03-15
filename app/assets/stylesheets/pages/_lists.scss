@@ -29,22 +29,25 @@
   height: 150px;
   margin: auto;
   border-radius: 20px;
-  display:flex;
   background: rgb(180,88,177);
   background: linear-gradient(56deg, rgba(180,88,177,1) 1%, rgba(114,177,176,1) 63%, rgba(164,233,149,1) 100%);
   background-size: cover;
   background-position: center;
   color: white;
   text-decoration: none;
-  justify-content: space-around;
   align-items: center;
   padding: 10px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  h6 {
+    align-self: center;
+    margin-top: 30px
+  }
 }
 
 .fa-pencil{
   color: white;
-  align-self: baseline;
+  padding: 0;
 }
 
 

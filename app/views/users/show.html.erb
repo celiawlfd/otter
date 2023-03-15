@@ -60,10 +60,9 @@
   <% @lists.each do |list| %>
     <% if list.name == "To recommand" || list.name == "To discover" %>
       <div class= "list-card">
+        <p><i class="fa-solid fa-thumbtack"></i> <%= (list.list_movies.size) + (list.list_books.size) + (list.list_podcasts.size) %></p>
         <%= link_to list_path(list) do %>
-          <h6 class="mb-0"><%= list.name%></h6>
-            <% pins = (list.list_movies.size) + (list.list_books.size) + (list.list_podcasts.size) %>
-            <p><%= pluralize(pins, "Pin") %></p>
+          <h6 class="mb-0 text-center"><%= list.name%></h6>
         <% end %>
       </div>
     <% end %>
