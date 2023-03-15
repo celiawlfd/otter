@@ -3,6 +3,7 @@ class BookRecommendationsController < ApplicationController
 
   def new
     @bookreco = BookRecommendation.new
+    @friends = current_user.following.map { |follow| follow.username if follow.is_following?(current_user) }.compact
   end
 
   def create
