@@ -21,6 +21,10 @@ i {
   i {
     box-shadow: 1px 10px 30px rgba(255, 255, 255, 0.9);
   }
+
+  .fa-thumbtack {
+    margin-left: 14px;
+  }
 }
 .cover {
   object-fit: cover;
@@ -44,7 +48,7 @@ i {
 }
 
 .show-title {
-  margin-top: 70px;
+  margin-top: 50px;
   margin-bottom: 30px;
   text-align: center;
   color: rgb(33, 33, 33);

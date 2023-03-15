@@ -11,9 +11,12 @@
   <% end %>
   <%= image_tag @movie.photo_url, width: 350, class:"cover"  %>
   <%= image_tag @movie.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x"  %>
-  <%= link_to new_movie_movie_recommendation_path(@movie) do %>
-    <i class="fa-regular fa-paper-plane"></i>
-  <% end %>
+  <div class= "d-flex justify-content-between">
+    <p><i class="fa-solid fa-thumbtack"></i> <%= @movie.list_movies.size %></p>
+    <%= link_to new_movie_movie_recommendation_path(@movie) do %>
+      <i class="fa-regular fa-paper-plane"></i>
+    <% end %>
+  </div>
 </div>
 
 <h1 class="show-title"> <%= @movie.title %> <small> (<%= @movie.year %>)</small> </h1>
