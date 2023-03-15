@@ -1,5 +1,19 @@
-<div class="d-flex justify content-between my-2">
-  <%= link_to "Movies", movies_path, class: "button-outline  mx-2 my-0" %>
-  <%= link_to "Books", books_path, class: "button-outline  mx-2 my-0" %>
-  <%= link_to "Podcasts", podcasts_path, class: "button-outline  mx-2 my-0" %>
+<div class="display">
+  <%if  request.original_url.include?("/movies")%>
+  <%= link_to "Movies", movies_path, class: "underline mx-2 my-0 mb-5" %>
+  <%= link_to "Books", books_path, class: " mx-2 my-0 mb-5" %>
+  <%= link_to "Podcasts", podcasts_path, class: " mx-2 my-0 mb-5" %>
+  <%elsif  request.original_url.include?("/books")%>
+  <%= link_to "Movies", movies_path, class: " mx-2 my-0 mb-5" %>
+  <%= link_to "Books", books_path, class: "underline mx-2 my-0 mb-5" %>
+  <%= link_to "Podcasts", podcasts_path, class: " mx-2 my-0 mb-5" %>
+  <%elsif  request.original_url.include?("/podcasts")%>
+  <%= link_to "Movies", movies_path, class: " mx-2 my-0 mb-5" %>
+  <%= link_to "Books", books_path, class: " mx-2 my-0 mb-5" %>
+  <%= link_to "Podcasts", podcasts_path, class: "underline mx-2 my-0 mb-5" %>
+  <% else%>
+  <%= link_to "Movies", movies_path, class: "mx-2 my-0 mb-5" %>
+  <%= link_to "Books", books_path, class: "mx-2 my-0 mb-5" %>
+  <%= link_to "Podcasts", podcasts_path, class: "mx-2 my-0 mb-5" %>
+  <% end %>
 </div>
