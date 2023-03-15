@@ -47,10 +47,10 @@ class User < ApplicationRecord
     to_discover.photo.attach(io: file, filename: "color.png", content_type: "image/png")
     to_discover.save
 
-    to_recommand = List.new(name: "To recommand")
-    to_recommand.user = self
-    to_recommand.photo.attach(io: file, filename: "color.png", content_type: "image/png")
-    to_recommand.save
+    to_recommend = List.new(name: "To recommend")
+    to_recommend.user = self
+    to_recommend.photo.attach(io: file, filename: "color.png", content_type: "image/png")
+    to_recommend.save
   end
 
   def follow(user_id)
