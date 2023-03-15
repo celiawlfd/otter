@@ -20,7 +20,7 @@ class PodcastsController < ApplicationController
     if @podcast.save
       redirect_to podcast_path(@podcast)
     else
-      render "pages/search_api", status: :unprocessable_entity
+      redirect_to podcast_path(Podcast.find_by(title: @podcast.title))
     end
   end
 

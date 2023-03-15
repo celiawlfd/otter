@@ -24,7 +24,7 @@ class MoviesController < ApplicationController
     if @movie.save
       redirect_to movie_path(@movie)
     else
-      render :new, status: :unprocessable_entity
+      redirect_to movie_path(Movie.find_by(title: @movie.title))
     end
   end
 
