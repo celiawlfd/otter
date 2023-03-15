@@ -9,9 +9,8 @@ class Movie < ApplicationRecord
 
 
   include PgSearch::Model
-  multisearchable against: [:title, :description]
-  pg_search_scope :search_by_title, against: :title
-  # using: {
-  #   tsearch: { prefix: true }
-  # }
+  pg_search_scope :search_by_title, against: [:title,:description],
+  using: {
+    tsearch: { prefix: true }
+  }
 end

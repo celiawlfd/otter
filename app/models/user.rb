@@ -32,7 +32,11 @@ class User < ApplicationRecord
   has_many :given_podcastrecommendations, foreign_key: :giver_id, class_name: 'PodcastRecommendation'
 
   include PgSearch::Model
-  multisearchable against: [:username]
+  # multisearchable against: [:username]
+  pg_search_scope :search_by_title, against: :username,
+  using: {
+    tsearch: { prefix: true }
+  }
 
   def default_lists
     require "open-uri"

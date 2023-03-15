@@ -7,12 +7,13 @@
     <button class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 <% end %>
 
+
   <div class="basic-grid pt-4">
     <% @results.each do |result| %>
-      <% if result.searchable.is_a?(User) %>
+      <% if result.is_a?(User) %>
         <div class="d-flex search-users">
-          <%= cl_image_tag result.searchable.photo.key, class:"avatar" %>
-          <%= link_to result.searchable.username.capitalize, user_path(result.searchable_id), :class=>"px-2"%>          </div>
+          <%= cl_image_tag result.photo.key, class:"avatar" %>
+          <%= link_to result.username.capitalize, user_path(result.id), :class=>"px-2"%>          </div>
       <% end %>
     <% end %>
   </div>
@@ -21,17 +22,17 @@
   <div class="basic-grid pt-4">
     <% @results.each do |result| %>
       <div class="row text-center">
-        <% if result.searchable.is_a?(Movie) %>
-          <%= link_to movie_path(result.searchable_id) do %>
-            <%= render "shared/card", culturale: result.searchable, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
+        <% if result.is_a?(Movie) %>
+          <%= link_to movie_path(result.id) do %>
+            <%= render "shared/card", culturale: result, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
           <% end %>
-        <% elsif result.searchable.is_a?(Book) %>
-          <%= link_to book_path(result.searchable_id) do %>
-            <%= render "shared/card", culturale: result.searchable, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
+        <% elsif result.is_a?(Book) %>
+          <%= link_to book_path(result.id) do %>
+            <%= render "shared/card", culturale: result, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
           <% end %>
-        <% elsif result.searchable.is_a?(Podcast) %>
-          <%= link_to podcast_path(result.searchable_id) do %>
-            <%= render "shared/card", culturale: result.searchable, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
+        <% elsif result.is_a?(Podcast) %>
+          <%= link_to podcast_path(result.id) do %>
+            <%= render "shared/card", culturale: result, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
           <% end %>
         <% end %>
     </div>
@@ -39,4 +40,4 @@
   </div>
   <% if @results.any? %>
    <a class="btn button-outline mt-5 btn-sm" href="search_api">Get more</a>
-   <% end %>
+  <% end %>
