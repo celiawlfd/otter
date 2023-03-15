@@ -1,7 +1,7 @@
-<h1>New list</h1>
+<h1 class="text-center mb-4">New list</h1>
 
 <%= simple_form_for(@list) do |f| %>
   <%= f.input :name %>
   <%= f.input :photo, as: :file, required: true%>
-  <%= f.submit class: "btn btn-outline-dark" %>
+  <%= f.submit class: "btn button-full mt-5" %>
 <% end %>
