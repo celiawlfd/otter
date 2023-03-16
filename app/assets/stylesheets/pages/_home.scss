@@ -2,13 +2,12 @@
 
 .photo-feed {
   background: rgb(180,88,177);
-  background: linear-gradient(56deg, rgba(180,88,177,1) 1%, rgba(114,177,176,1) 63%, rgba(164,233,149,1) 100%);
+  background: linear-gradient(56deg, rgba(180,88,177,0.8) 1%, rgba(114,177,176,0.8) 63%, rgba(164,233,149,0.8) 100%);
   width: 100%;
   height: 150px;
   border-radius: 12px;
   margin: 5px 0px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-  opacity: .6;
   padding-top: 10px;
   margin-top: 80px;
 }
