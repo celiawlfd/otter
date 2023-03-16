@@ -8,15 +8,13 @@ class PodcastReviewsController < ApplicationController
     @list_podcast = ListPodcast.new
     @reviews = @podcast.podcast_reviews
     @rating_av = rating_average(@reviews)
+    @friends_reviews = []
+    @others_reviews = []
 
-    respond_to do |format|
-      if @podcast_review.save
-        format.html { redirect_to podcast_path(@podcast) }
-        format.json
-      else
-        format.html { render "podcasts/show", status: :unprocessable_entity }
-        format.json
-      end
+    if @podcast_review.save
+      redirect_to podcast_path(@podcast)
+    else
+      render "podcasts/show", status: :unprocessable_entity
     end
   end
 
