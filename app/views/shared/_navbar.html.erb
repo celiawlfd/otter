@@ -1,16 +1,28 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid mx-3">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <h3>O.</h3>
+    <%= link_to root_path, data: { turbo: false }, class: "navbar-brand" do %>
+      <% if current_page?(root_path) || request.original_url.end_with?("/movies") || request.original_url.end_with?("/books") || request.original_url.end_with?("/podcasts") %>
+        <i class="fa-solid fa-otter on-page"></i>
+      <% else %>
+        <i class="fa-solid fa-otter"></i>
+      <% end %>
     <% end %>
 
-    <%= link_to search_path, class: "navbar-brand" do %>
-      <i class="fa-solid fa-magnifying-glass"></i>
+    <%= link_to search_path, data: { turbo: false }, class: "navbar-brand" do %>
+      <% if current_page?(search_path) || request.original_url.include?("/search_api") %>
+        <i class="fa-solid fa-magnifying-glass on-page"></i>
+      <% else %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+      <% end %>
     <% end %>
 
     <% if user_signed_in? %>
-      <%= link_to user_path(current_user), class: "navbar-brand" do %>
-        <i class="fa-regular fa-bookmark"></i>
+      <%= link_to user_path(current_user), data: { turbo: false }, class: "navbar-brand" do %>
+        <% if current_page?(current_user) || ((request.original_url.include?("#{@list&.id}")) && (@list&.user_id == current_user.id)) %>
+          <i class="fa-regular fa-bookmark on-page"></i>
+        <% else %>
+          <i class="fa-regular fa-bookmark"></i>
+        <% end %>
       <% end %>
     <% end %>
   </div>
