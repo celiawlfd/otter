@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import Notification from 'stimulus-notification'
+application.register('notification', Notification)
+
 import EditListController from "./edit_list_controller"
 application.register("edit-list", EditListController)
 
