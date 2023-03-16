@@ -14,7 +14,6 @@ class User < ApplicationRecord
   has_many :movie_reviews, dependent: :destroy
   has_many :podcast_reviews, dependent: :destroy
 
-
   has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'
   has_many :followers, through: :follower_relationships, source: :follower
 
@@ -22,7 +21,6 @@ class User < ApplicationRecord
   has_many :following, through: :following_relationships, source: :following
 
   after_create :default_lists
-
 
   has_many :received_movierecommendations, foreign_key: :receiver_id, class_name: 'MovieRecommendation'
   has_many :given_movierecommendations, foreign_key: :giver_id, class_name: 'MovieRecommendation'

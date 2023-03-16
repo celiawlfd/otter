@@ -99,7 +99,7 @@ static targets = ["input", "results"]
       headers : {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization' : 'Bearer BQDepC5Ejb0FO-_LtvUqx5CkkxGjZveztsUmZPTl2MsdMxhhTkTj4OByCv4WZfZzu3M17rgx6GRdMG3rlUSNRIcsEU9ik2Yrw-Pf2k9jhIeMcvOL4UTK'
+        'Authorization' : 'Bearer BQAudq-V527JO_u8ilUfkHDGaHku5MVvYneWcBJNLTE5zL5SknEU2DWZfBvkQu9rNRSby8LEAGi_mhGXnzEWUVlq2O2DgEwQrnUYx7ayB8rQUr-oPPI2'
       }
     })
       .then(response => response.json())
