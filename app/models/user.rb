@@ -41,7 +41,7 @@ class User < ApplicationRecord
   def default_lists
     require "open-uri"
 
-    file = URI.open("https://www.colorhexa.com/b8e1dd.png")
+    file = URI.open("https://w0.peakpx.com/wallpaper/452/896/HD-wallpaper-colorful-background-ultra-aero-colorful-beautiful-yellow-green-abstract-color-design-light-background-colors-bright-colourful-shades-vivid-soft-blur-gradient-pale-8k-lightcolored.jpg")
     to_discover = List.new(name: "To discover")
     to_discover.user = self
     to_discover.photo.attach(io: file, filename: "color.png", content_type: "image/png")
