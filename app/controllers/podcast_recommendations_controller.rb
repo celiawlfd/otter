@@ -18,6 +18,14 @@ class PodcastRecommendationsController < ApplicationController
     end
   end
 
+  def read
+    podcastrec = PodcastRecommendation.find(params[:podcast_recommendation_id])
+    podcastrec.read = true
+    if podcastrec.save
+      redirect_to recommendations_user_path(podcastrec.receiver)
+    end
+  end
+
   private
 
   def set_params

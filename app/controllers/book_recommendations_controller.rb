@@ -18,6 +18,14 @@ class BookRecommendationsController < ApplicationController
     end
   end
 
+  def read
+    bookrec = BookRecommendation.find(params[:book_recommendation_id])
+    bookrec.read = true
+    if bookrec.save
+      redirect_to recommendations_user_path(bookrec.receiver)
+    end
+  end
+
   private
 
   def set_params

@@ -10,11 +10,20 @@
           <small class="text-muted"><%= recommendation.created_at.strftime("%d %b %Y") %></small class="text-muted">
         </div>
         <% if recommendation.is_a?(MovieRecommendation) %>
-          <strong><%= link_to recommendation.movie.title, movie_path(recommendation.movie) %></strong>
+          <div class="d-flex justify-content-between">
+            <strong><%= link_to recommendation.movie.title, movie_path(recommendation.movie) %></strong>
+            <%= render "readmovie", recommendation: recommendation %>
+          </div>
         <% elsif recommendation.is_a?(BookRecommendation) %>
-          <strong><%= link_to recommendation.book.title, book_path(recommendation.book) %></strong>
+          <div class="d-flex justify-content-between">
+            <strong><%= link_to recommendation.book.title, book_path(recommendation.book) %></strong>
+            <%= render "readbook", recommendation: recommendation %>
+          </div>
         <% elsif recommendation.is_a?(PodcastRecommendation) %>
-          <strong><%= link_to recommendation.podcast.title, podcast_path(recommendation.podcast) %></strong>
+          <div class="d-flex justify-content-between">
+            <strong><%= link_to recommendation.podcast.title, podcast_path(recommendation.podcast) %></strong>
+            <%= render "readpodcast", recommendation: recommendation %>
+          </div>
         <% end %>
       </div>
     </div>

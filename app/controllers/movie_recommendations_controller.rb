@@ -18,6 +18,14 @@ class MovieRecommendationsController < ApplicationController
     end
   end
 
+  def read
+    movierec = MovieRecommendation.find(params[:movie_recommendation_id])
+    movierec.read = true
+    if movierec.save
+      redirect_to recommendations_user_path(movierec.receiver)
+    end
+  end
+
   private
 
   def set_params

@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @lists = List.where(user: @user).order(created_at: :desc)
+    @nbrreco = recommendations.reject(&:read)
   end
 
   def follow
