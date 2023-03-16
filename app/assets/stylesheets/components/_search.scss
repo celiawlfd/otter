@@ -1,33 +1,22 @@
-// Specific CSS for your home-page
-
-.photo-feed {
+.photo-search {
   background: rgb(180,88,177);
   background: linear-gradient(56deg, rgba(180,88,177,1) 1%, rgba(114,177,176,1) 63%, rgba(164,233,149,1) 100%);
+  object-fit: cover;
   width: 100%;
-  height: 150px;
+  height: 250px;
   border-radius: 12px;
   margin: 5px 0px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
   opacity: .6;
-  padding-top: 10px;
-  margin-top: 80px;
+  padding-top: 20px;
+  margin-top: 70px;
 }
 
 
-.text-empty-feed {
-
+.text-empty-search {
   margin-top: 30px;
 
-  .add-friends {
-    font-size: 17px;
-    text-align: center;
-    display: block;
-    margin: 0 auto;
-    opacity: .9;
-    width: 40%;
-  }
-
-  .empty-feed {
+  .empty-search {
     text-align: center;
     opacity: .9;
   }
