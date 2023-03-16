@@ -3,14 +3,15 @@
 <% if @culturales.empty? %>
   <h1 class="text-center my-4">Welcome to Ottter</h1>
 <% else %>
-  <h1 class="text-center my-4">Ottter</h1>
+  <h1 class="text-center mb-4">Ottter</h1>
 <% end %>
 
 <% if @culturales.empty? %>
- <%= cl_image_tag src="http://res.cloudinary.com/dtdr8cuym/image/upload/iox09pmfhkxyvzl95jpa3diokg35", class:"photo-feed"  %>
-  <div class="text-emply-feed pb-5">
-        <h2 class="emplty-feed">Your feed is empty</h2>
+ <div class="photo-feed">
+  <div class="text-empty-feed pb-5">
+        <h2 class="empty-feed">Your feed is empty</h2>
         <%= link_to "Add your friends", search_path, class: "button-full add-friends"%>
+      </div>
       </div>
 <% else %>
 

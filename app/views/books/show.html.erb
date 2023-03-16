@@ -3,13 +3,17 @@
 
 
 <div class="pictures">
-  <% if  ListBook.find_by(list: params[:format], book: @book) %>
-    <%= link_to list_book_path(ListBook.find_by(list: params[:format], book: @book)),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{@book.title.capitalize} from #{List.find(params[:format]).name}?"} do %>
-        <i class="fa-solid fa-trash-can"></i>
-      <% end %>
-  <% end %>
-  <small class="card-categorie show" style="background-color: rgba(205, 76, 236, 0.8); border: 1px solid rgb(205, 76, 236)">Book</small>
+  <div class="top-siglet">
+  <div>
+    <small class="card-categorie" style="background-color: rgba(205, 76, 236, 0.8); border: 1px solid rgb(205, 76, 236)">Book</small>
+    </div>
+    <% if  ListBook.find_by(list: params[:format], book: @book) %>
+      <%= link_to list_book_path(ListBook.find_by(list: params[:format], book: @book)),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{@book.title.capitalize} from #{List.find(params[:format]).name}?"} do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+    <% end %>
+  </div>
   <%= image_tag @book.photo_url, width: 350, class:"cover" %>
   <%= image_tag @book.photo_url, width: 350, class:"poster position-absolute start-50 translate-middle-x" %>
   <div class= "d-flex justify-content-between">
