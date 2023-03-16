@@ -10,6 +10,8 @@ class MovieReviewsController < ApplicationController
     @list_movie = ListMovie.new
     @reviews = @movie.movie_reviews
     @rating_av = rating_average(@reviews)
+    @friends_reviews = []
+    @others_reviews = []
 
     respond_to do |format|
       if @movie_review.save

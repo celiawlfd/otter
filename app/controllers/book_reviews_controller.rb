@@ -8,6 +8,8 @@ class BookReviewsController < ApplicationController
     @list_book = ListBook.new
     @reviews = @book.book_reviews
     @rating_av = rating_average(@reviews)
+    @friends_reviews = []
+    @others_reviews = []
 
     respond_to do |format|
       if @book_review.save
