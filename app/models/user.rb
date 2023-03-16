@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :book_reviews, dependent: :destroy
   has_many :movie_reviews, dependent: :destroy
+  has_many :podcast_reviews, dependent: :destroy
+
 
   has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'
   has_many :followers, through: :follower_relationships, source: :follower
