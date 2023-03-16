@@ -1,0 +1,7 @@
+<% if recommendation.read %>
+  <i class="fa-solid fa-circle-check color-secondary"></i>
+<% else %>
+  <%= link_to podcast_recommendation_read_path(recommendation),data: {turbo_method: :post} do %>
+    <i class="fa-regular fa-circle-check"></i>
+  <% end %>
+<% end %>

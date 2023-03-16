@@ -17,8 +17,10 @@
     <div class="library d-flex justify-content-between align-items-center">
       <% if @user == current_user %>
         <h1>Your library</h1>
-        <%= link_to recommendations_user_path(@user) do %>
-          <i class="fa-solid fa-bell"></i>
+        <%= link_to recommendations_user_path(@user), class: "position-relative" do %>
+          <i class="fa-solid fa-bell ">
+          </i>
+          <span id="notif" class="position-absolute start-100 translate-middle badge rounded-pill bg-secondary"><%= @nbrreco.size %> </span>
         <% end %>
       <% else %>
         <h1><%= @user.username.capitalize %>'s library</h1>

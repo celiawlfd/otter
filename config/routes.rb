@@ -49,4 +49,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :book_recommendations do
+    post :read
+  end
+
+  resources :podcast_recommendations do
+    post :read
+  end
+
+  resources :movie_recommendations do
+    post :read
+  end
 end
