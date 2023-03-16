@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: { case_sensitive: false }
   validates :username, presence: true
+  validates :photo, presence: true
   validates :username, length: { minimum: 3 }
   has_many :lists, dependent: :destroy
   has_many :book_reviews, dependent: :destroy
