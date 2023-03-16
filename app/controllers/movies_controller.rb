@@ -23,7 +23,9 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.new(movie_params)
-    if @movie.save
+    if @movie.photo_url == "N/A"
+      render "pages/search_api", notice: "Sorry, can't add this movies without picture"
+    elsif @movie.save
       redirect_to movie_path(@movie)
     else
       redirect_to movie_path(Movie.find_by(title: @movie.title))
