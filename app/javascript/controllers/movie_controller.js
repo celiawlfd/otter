@@ -100,7 +100,6 @@ static targets = ["input", "results"]
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization' : 'Bearer BQDepC5Ejb0FO-_LtvUqx5CkkxGjZveztsUmZPTl2MsdMxhhTkTj4OByCv4WZfZzu3M17rgx6GRdMG3rlUSNRIcsEU9ik2Yrw-Pf2k9jhIeMcvOL4UTK'
-
       }
     })
       .then(response => response.json())
