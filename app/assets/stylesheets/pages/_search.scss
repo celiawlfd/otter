@@ -1,0 +1,17 @@
+.animation{
+  display: flex;
+  flex-direction: column;
+  margin-top: 150px;
+
+}
+
+.animation > img {
+  margin: 0 auto;
+
+}
+
+.animation > h5 {
+  margin: 0 auto;
+  width: 250px;
+  text-align: center;
+}
