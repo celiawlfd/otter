@@ -132,7 +132,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_16_110252) do
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "read"
+    t.boolean "read", default: false
     t.index ["giver_id"], name: "index_movie_recommendations_on_giver_id"
     t.index ["movie_id"], name: "index_movie_recommendations_on_movie_id"
     t.index ["receiver_id"], name: "index_movie_recommendations_on_receiver_id"
@@ -174,7 +174,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_16_110252) do
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "read"
+    t.boolean "read", default: false
     t.index ["giver_id"], name: "index_podcast_recommendations_on_giver_id"
     t.index ["podcast_id"], name: "index_podcast_recommendations_on_podcast_id"
     t.index ["receiver_id"], name: "index_podcast_recommendations_on_receiver_id"
