@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :username, uniqueness: true
+  validates :username, uniqueness: { case_sensitive: false }
   validates :username, presence: true
   validates :username, length: { minimum: 3 }
   has_many :lists, dependent: :destroy
@@ -47,10 +47,10 @@ class User < ApplicationRecord
     to_discover.photo.attach(io: file, filename: "color.png", content_type: "image/png")
     to_discover.save
 
-    to_recommand = List.new(name: "To recommand")
-    to_recommand.user = self
-    to_recommand.photo.attach(io: file, filename: "color.png", content_type: "image/png")
-    to_recommand.save
+    to_recommend = List.new(name: "To recommend")
+    to_recommend.user = self
+    to_recommend.photo.attach(io: file, filename: "color.png", content_type: "image/png")
+    to_recommend.save
   end
 
   def follow(user_id)
@@ -66,4 +66,3 @@ class User < ApplicationRecord
     return true if relationship
   end
 end
-

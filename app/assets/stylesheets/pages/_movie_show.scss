@@ -5,17 +5,20 @@ i {
 
 .pictures {
   a{
-    display: flex;
-    justify-content: end;
-    margin-bottom: -36px;
-    margin-right: 14px;
-    position: relative;
-    z-index: 1;
     font-size: 18px;
 
     &:hover {
       color: black;
     }
+  }
+
+  .top-siglet {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 14px -36px 14px;
+    position: relative;
+    z-index: 1;
+    align-items: center;
   }
 
   i {
@@ -34,18 +37,20 @@ i {
   margin: 5px 0px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
   opacity: .7;
-}
 
+}
 
 .poster {
   position: absolute;
-  top: 120px;
+  top: 125px;
   width: auto;
   height: 140px;
   border: 2px solid white;
   border-radius: 8px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
 }
+
+
 
 .show-title {
   margin-top: 50px;
@@ -103,9 +108,3 @@ p {
   font-size: 11px
 }
 
-.show {
-  position: relative;
-  top: 32px;
-  left: 10px;
-  z-index: 1;
-  }

@@ -5,7 +5,7 @@
     </div>
     <div class="col-6 text-end">
 
-    <% unless @list.name == "To recommand" || @list.name == "To discover"%>
+    <% unless @list.name == "To recommend" || @list.name == "To discover"%>
       <% if @list.user == current_user %>
         <%= link_to "Delete list",
           list_path(@list),
