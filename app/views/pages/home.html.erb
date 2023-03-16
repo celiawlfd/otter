@@ -23,15 +23,15 @@
       <div class="div<%= sum %>" style="grid-row: <%= a %> / <%= b %>; grid-column: <%= sum%2 == 0 ? "1/2" : "2/3"%>">
         <div class="row text-center">
           <% if culturale.is_a?(ListMovie) %>
-            <%= link_to movie_path(culturale.movie) do %>
+            <%= link_to movie_path(culturale.movie, culturale.list.user) do %>
               <%= render "pages/card_feed", user: culturale.list.user, culturale: culturale.movie, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
             <% end %>
           <% elsif culturale.is_a?(ListBook) %>
-            <%= link_to book_path(culturale.book) do %>
+            <%= link_to book_path(culturale.book, culturale.list.user) do %>
               <%= render "pages/card_feed", user: culturale.list.user, culturale: culturale.book, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
             <% end %>
           <% elsif culturale.is_a?(ListPodcast) %>
-            <%= link_to podcast_path(culturale.podcast) do %>
+            <%= link_to podcast_path(culturale.podcast, culturale.list.user) do %>
               <%= render "pages/card_feed", user: culturale.list.user, culturale: culturale.podcast, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
             <% end %>
           <% end %>
