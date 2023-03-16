@@ -17,17 +17,20 @@
     </div>
   </div>
 
-    <h1 class="text-center mb-5 mt-3"> <%= @list.name %> </h1>
 
     <% if @list.movies.empty? && @list.books.empty? && @list.podcasts.empty?%>
-      <%= cl_image_tag @list.photo.key, class:"photo-list"  %>
-      <div class="text-emply-list">
-        <h2 class="emplty-list">Your list is empty</h2>
-        <%= link_to "Find inspo", root_path, class: "button-full find-inspo"%>
-      </div>
+    <h1 class="text-center mb-5 mt-3"> <%= @list.name %> </h1>
+      <%= cl_image_tag @list.photo.key, class:"photo-list" %>
+      <% if @list.user == current_user %>
+        <div class="text-emply-list">
+          <h2 class="emplty-list">Your list is empty</h2>
+          <%= link_to "Find inspo", root_path, class: "button-full find-inspo"%>
+        </div>
+      <% end %>
 
     <% else %>
 
+    <h1 class="text-center mb-4 mt-1"> <%= @list.name %> </h1>
       <div class="basic-grid">
 
         <% @list.movies.each do |movie| %>
