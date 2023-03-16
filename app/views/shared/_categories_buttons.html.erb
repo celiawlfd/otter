@@ -1,13 +1,13 @@
 <div class="display">
-  <%if  request.original_url.include("/movies")%>
+  <%if  request.original_url.include?("/movies")%>
   <%= link_to "Movies", movies_path, class: "underline mx-2 my-0 mb-5" %>
   <%= link_to "Books", books_path, class: " mx-2 my-0 mb-5" %>
   <%= link_to "Podcasts", podcasts_path, class: " mx-2 my-0 mb-5" %>
-  <%elsif  request.original_url.include("/books")%>
+  <%elsif  request.original_url.include?("/books")%>
   <%= link_to "Movies", movies_path, class: " mx-2 my-0 mb-5" %>
   <%= link_to "Books", books_path, class: "underline mx-2 my-0 mb-5" %>
   <%= link_to "Podcasts", podcasts_path, class: " mx-2 my-0 mb-5" %>
-  <%elsif  request.original_url.include("/podcasts")%>
+  <%elsif  request.original_url.include?("/podcasts")%>
   <%= link_to "Movies", movies_path, class: " mx-2 my-0 mb-5" %>
   <%= link_to "Books", books_path, class: " mx-2 my-0 mb-5" %>
   <%= link_to "Podcasts", podcasts_path, class: "underline mx-2 my-0 mb-5" %>
