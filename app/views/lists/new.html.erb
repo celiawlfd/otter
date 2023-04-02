@@ -3,5 +3,6 @@
 <%= simple_form_for(@list) do |f| %>
   <%= f.input :name %>
   <%= f.input :photo, as: :file, required: true%>
+  <%= f.input :private %>
   <%= f.submit class: "btn button-full mt-5" %>
 <% end %>

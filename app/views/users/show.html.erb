@@ -58,7 +58,7 @@
 <% end %>
 
 
-<%# Theese are the default list not allowed to modify or edit %>
+<%# These are the default list not allowed to modify or edit %>
 <div class="display-lists">
   <% @lists.each do |list| %>
     <% if list.name == "To recommend" || list.name == "To discover" %>
@@ -75,12 +75,13 @@
 
 <div class="display-lists">
   <% @lists.each do |list| %>
-    <% unless list.name == "To recommend" || list.name == "To discover"%>
+    <% unless list.name == "To recommend" || list.name == "To discover" || (@user != current_user && list.private) %>
       <div data-controller="edit-list">
-        <%= render "movie_info", list: list %>
+        <%= render "list_card", list: list %>
         <%= simple_form_for list, html: { class: 'd-none', data: { edit_list_target: "form", action: "submit->edit_list#update" } } do |f| %>
           <%= f.input :name %>
           <%= f.input :photo, as: :file, require: true %>
+          <%= f.input :private %>
           <%= f.submit %>
         <% end %>
       </div>

@@ -18,42 +18,43 @@
   </div>
 
 
-    <% if @list.movies.empty? && @list.books.empty? && @list.podcasts.empty?%>
+  <% if @list.movies.empty? && @list.books.empty? && @list.podcasts.empty?%>
     <h1 class="text-center mb-5 mt-3"> <%= @list.name %> </h1>
-      <%= cl_image_tag @list.photo.key, class:"photo-list" %>
-      <% if @list.user == current_user %>
-        <div class="text-emply-list">
-          <h2 class="emplty-list">Your list is empty</h2>
-          <%= link_to "Find inspo", root_path, class: "button-full find-inspo"%>
-        </div>
-      <% end %>
-
-    <% else %>
-
-    <h1 class="text-center mb-4 mt-1"> <%= @list.name %> </h1>
-      <div class="basic-grid">
-
-        <% @list.movies.each do |movie| %>
-          <div class="row text-center">
-            <%= link_to movie_path(movie, @list) do %>
-              <%= render "shared/card", culturale: movie, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
-            <% end %>
-          </div>
-        <% end %>
-        <% @list.books.each do |book| %>
-          <div class="row text-center">
-            <%= link_to book_path(book, @list) do %>
-              <%= render "shared/card", culturale: book, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
-            <% end %>
-          </div>
-        <% end %>
-        <% @list.podcasts.each do |podcast| %>
-          <div class="row text-center">
-            <%= link_to podcast_path(podcast, @list) do %>
-              <%= render "shared/card", culturale: podcast, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
-            <% end %>
-          </div>
-        <% end %>
+    <%= cl_image_tag @list.photo.key, class:"photo-list" %>
+    <% if @list.user == current_user %>
+      <div class="text-emply-list">
+        <h2 class="emplty-list">Your list is empty</h2>
+        <%= link_to "Find inspo", root_path, class: "button-full find-inspo"%>
       </div>
     <% end %>
+
+  <% else %>
+
+    <h1 class="text-center mt-1"> <%= @list.name %> </h1>
+    <p class="text-center mb-4 "><small >This list is private</small></p>
+    <div class="basic-grid">
+
+      <% @list.movies.each do |movie| %>
+        <div class="row text-center">
+          <%= link_to movie_path(movie, @list) do %>
+            <%= render "shared/card", culturale: movie, categorie: "Movie", color: "rgba(255, 187, 43, 0.8)", border: "rgb(255, 187, 43)"%>
+          <% end %>
+        </div>
+      <% end %>
+      <% @list.books.each do |book| %>
+        <div class="row text-center">
+          <%= link_to book_path(book, @list) do %>
+            <%= render "shared/card", culturale: book, categorie: "Book", color: "rgba(205, 76, 236, 0.8)", border: "rgb(205, 76, 236)"%>
+          <% end %>
+        </div>
+      <% end %>
+      <% @list.podcasts.each do |podcast| %>
+        <div class="row text-center">
+          <%= link_to podcast_path(podcast, @list) do %>
+            <%= render "shared/card", culturale: podcast, categorie: "Podcast", color: "rgba(95, 227, 88, 0.8)", border: "rgb(95, 227, 88)"%>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
