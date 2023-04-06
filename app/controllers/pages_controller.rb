@@ -3,11 +3,11 @@ class PagesController < ApplicationController
   # skip_before_action :authenticate_user!, only: [ :home ]
 
   def home
-    movies = current_user.following.map(&:lists).flatten.map(&:list_movies).flatten
+    movies = current_user.following.map(&:list_movies).flatten.select { |list_movie| list_movie.list.private == false }
     uniq_movies = uniq_movies(movies)
-    books = current_user.following.map(&:lists).flatten.map(&:list_books).flatten
+    books = current_user.following.map(&:list_books).flatten.select { |list_book| list_book.list.private == false }
     uniq_books = uniq_books(books)
-    podcasts = current_user.following.map(&:lists).flatten.map(&:list_podcasts).flatten
+    podcasts = current_user.following.map(&:list_podcasts).flatten.select { |list_pod| list_pod.list.private == false }
     uniq_podcasts = uniq_podcasts(podcasts)
     @culturales = [uniq_movies, uniq_podcasts, uniq_books].flatten.shuffle
   end
@@ -17,7 +17,6 @@ class PagesController < ApplicationController
     @books = Book.search_by_title(params[:query])
     @podcasts = Podcast.search_by_title(params[:query])
     @users = User.search_by_title(params[:query])
-
 
     @results = [@movies, @books, @podcasts, @users].flatten
 

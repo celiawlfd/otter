@@ -11,6 +11,11 @@ class User < ApplicationRecord
   validates :photo, presence: true
   validates :username, length: { minimum: 3 }
   has_many :lists, dependent: :destroy
+  has_many :list_books, through: :lists
+  has_many :list_movies, through: :lists
+  has_many :list_podcasts, through: :lists
+
+
   has_many :book_reviews, dependent: :destroy
   has_many :movie_reviews, dependent: :destroy
   has_many :podcast_reviews, dependent: :destroy
